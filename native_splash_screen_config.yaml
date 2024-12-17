@@ -1,0 +1,14 @@
+flutter_native_splash:
+  android: true
+  ios: true
+  web: false
+
+  color: "#5F33E1"
+  image: "lib/core/common/assets/images/todo_splash_screen_logo_ios.png"
+
+
+  android_12:
+    color: "#5F33E1"
+    image: "lib/core/common/assets/images/todo_splash_screen_logo_android.png"
+
+#dart run flutter_native_splash:create --path=native_splash_screen_config.yaml

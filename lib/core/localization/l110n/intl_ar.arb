@@ -1,0 +1,16 @@
+{
+    "phone_number_empty": "يرجى إدخال رقم هاتف الواتساب الخاص بك",
+    "phone_invalid_number": "يرجى إدخال رقم هاتف واتساب صالح",
+    "password_empty": "الرجاء إدخال كلمة المرور الخاصة بك",
+    "password_error_lowercase": "يجب أن تحتوي كلمة المرور علي حرف صغير واحد علي الأقل",
+    "password_error_uppercase": "يجب أن تحتوي كلمة المرور علي حرف كبير واحد علي الأقل",
+    "password_error_number": "يجب أن تحتوي كلمة المرور علي رقم واحد علي الأقل",
+    "password_error_special": "يجب أن تحتوي كلمة المرور علي حرف غير أبجدي واحد علي الأقل",
+    "password_error_length": "يجب أن يكون طول كلمة المرور بين 6 و 30 حرفًا",
+    "password_verify_empty": "رجاء اعد كتابة كلمة المرور",
+    "password_verify_error": "يجب أن تكون كلمة المرور المؤكدة مطابقة لكلمة المرور",
+    "email_empty": "الرجاء إدخال بريدك الإلكتروني",
+    "invalid_email": "الرجاء إدخال عنوان بريد إلكتروني صالح.",
+    "image_picker_camera": "الكاميرا",
+    "image_picker_gallery": "المعرض"
+}

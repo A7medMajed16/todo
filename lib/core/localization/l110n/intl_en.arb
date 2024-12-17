@@ -1,0 +1,16 @@
+{
+    "phone_number_empty": "Pleas enter your phone number",
+    "phone_invalid_number": "Pleas enter valid phone number",
+    "password_empty": "Please enter your password",
+    "password_error_lowercase": "Password must contain at least one lowercase character",
+    "password_error_uppercase": "Password must contain at least one uppercase character",
+    "password_error_number": "Password must contain at least one numeric character",
+    "password_error_special": "Password must contain at least one non-alphanumeric character",
+    "password_error_length": "Password length must be between 6 and 30 characters",
+    "password_verify_empty": "Pleas reenter your password",
+    "password_verify_error": "The Verified password must equal the password.",
+    "email_empty": "Please enter your email",
+    "invalid_email": "Please enter a valid email address.",
+    "image_picker_camera": "Camera",
+    "image_picker_gallery": "Gallery"
+}

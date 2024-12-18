@@ -12,15 +12,16 @@ class ImagePickerHelper {
   File? file;
   final picker = ImagePicker();
 
-  Future<File?> imageCropper(String sourcePath) async {
+  Future<File?> imageCropper(
+      String sourcePath, String arabicTitle, String englishTitle) async {
     try {
       CroppedFile? croppedFile = await ImageCropper().cropImage(
         sourcePath: sourcePath,
         uiSettings: [
           AndroidUiSettings(
             toolbarTitle: LocalizationFunctions.isAppArabic()
-                ? "الصورة الشخصيه"
-                : "Profile Picture",
+                ? arabicTitle
+                : englishTitle,
             toolbarColor: Colors.blue, // Replace with AppColors.iconColor
             toolbarWidgetColor: Colors.white,
             lockAspectRatio: true,
@@ -33,8 +34,8 @@ class ImagePickerHelper {
           ),
           IOSUiSettings(
             title: LocalizationFunctions.isAppArabic()
-                ? "الصورة الشخصيه"
-                : "Profile Picture",
+                ? arabicTitle
+                : englishTitle,
             doneButtonTitle:
                 LocalizationFunctions.isAppArabic() ? "حفظ" : "Done",
             cancelButtonTitle:
@@ -60,12 +61,13 @@ class ImagePickerHelper {
     return null;
   }
 
-  Future<File?> getImageFromCamera() async {
+  Future<File?> getImageFromCamera(
+      String arabicTitle, String englishTitle) async {
     try {
       final XFile? imageCamera =
           await picker.pickImage(source: ImageSource.camera);
       if (imageCamera != null) {
-        return await imageCropper(imageCamera.path);
+        return await imageCropper(imageCamera.path, arabicTitle, englishTitle);
       }
     } catch (e) {
       debugPrint('Error picking image from camera: $e');
@@ -74,12 +76,13 @@ class ImagePickerHelper {
   }
 
   /// Picks an image from the gallery and crops it.
-  Future<File?> getImageFromGallery() async {
+  Future<File?> getImageFromGallery(
+      String arabicTitle, String englishTitle) async {
     try {
       final XFile? imageGallery =
           await picker.pickImage(source: ImageSource.gallery);
       if (imageGallery != null) {
-        return await imageCropper(imageGallery.path);
+        return await imageCropper(imageGallery.path, arabicTitle, englishTitle);
       }
     } catch (e) {
       debugPrint('Error picking image from gallery: $e');
@@ -88,9 +91,10 @@ class ImagePickerHelper {
   }
 
   void showPhotoPickerBottomSheet(
-    BuildContext context,
-    Future<void> Function(File? image) updateImageFunction,
-  ) {
+      BuildContext context,
+      Future<void> Function(File? image) updateImageFunction,
+      String arabicTitle,
+      String englishTitle) {
     final GoRouter router = GoRouter.of(context);
     final AppLocalizations localization = AppLocalizations.of(context)!;
     showModalBottomSheet(
@@ -102,9 +106,9 @@ class ImagePickerHelper {
             mainAxisSize: MainAxisSize.min,
             children: [
               ListTile(
-                onTap: () async =>
-                    await updateImageFunction(await getImageFromGallery())
-                        .whenComplete(
+                onTap: () async => await updateImageFunction(
+                        await getImageFromGallery(arabicTitle, englishTitle))
+                    .whenComplete(
                   () => router.pop(),
                 ),
                 splashColor: AppColors.splashColor,
@@ -116,15 +120,15 @@ class ImagePickerHelper {
                   color: Colors.blue,
                 ),
                 title: Text(
-                  ' localization.image_picker_gallery',
-                  style: Styles.textStyle16Medium,
+                  localization.image_picker_gallery,
+                  style: Styles.textStyle16Bold,
                 ),
               ),
               const SizedBox(height: 10),
               ListTile(
-                onTap: () async =>
-                    updateImageFunction(await getImageFromCamera())
-                        .whenComplete(
+                onTap: () async => updateImageFunction(
+                        await getImageFromCamera(arabicTitle, englishTitle))
+                    .whenComplete(
                   () => router.pop(),
                 ),
                 splashColor: AppColors.splashColor,
@@ -137,7 +141,7 @@ class ImagePickerHelper {
                 ),
                 title: Text(
                   localization.image_picker_camera,
-                  style: Styles.textStyle16Medium,
+                  style: Styles.textStyle16Bold,
                 ),
               ),
             ],

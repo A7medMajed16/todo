@@ -1,7 +1,7 @@
 import 'package:intl/intl.dart';
 
 /// A class that provides functions for handling localization.
-class LocalizationFunctions {
+class LocalizationHelper {
   /// Checks if the current app locale is Arabic.
   ///
   /// Returns `true` if the current locale is Arabic, `false` otherwise.

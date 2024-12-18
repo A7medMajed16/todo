@@ -13,9 +13,9 @@ abstract class AppColors {
   static const Color interactText = Color(0xff5F33E1);
   static const Color focusColor = Color(0xff5F33E1);
   static Color shadowColor = const Color(0xff000000).withValues(alpha: 0.25);
-  static const Color backgroundColor = Color(0xffFFFFFF);
+  static const Color backgroundColor = Colors.white;
   static const Color textFieldBackgroundColor = Color(0xffFFFFFF);
-  static const Color borderColor = Colors.white;
+  static const Color borderColor = Color(0xffBABABA);
   static const Color errorColor = Color(0xffF44336);
   static const Color doneColor = Color(0xff5DA400);
   static const Color iconColor = Color(0xFF24252C);

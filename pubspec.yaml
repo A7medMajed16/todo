@@ -30,6 +30,7 @@ environment:
 dependencies:
   bloc: ^8.1.4
   cached_network_image: ^3.4.1
+  country_picker: ^2.0.27
   cupertino_icons: ^1.0.8
   dartz: ^0.10.1
   dio: ^5.7.0
@@ -121,13 +122,13 @@ fonts:
 flutter_intl:
   enabled: true
 
-flutter_assets:
-  assets_path: lib/core/common/assets/images
-  output_path: lib/core/theme
-  filename: app_images.dart
-  ignore_comments: true
-  field_prefix: null
-  classname: AppImages
+# flutter_assets:
+#   assets_path: lib/core/common/assets/images
+#   output_path: lib/core/theme
+#   filename: app_images.dart
+#   ignore_comments: true
+#   field_prefix: null
+#   classname: AppImages
 
 # flutter_assets:
 #   assets_path: lib/core/common/assets/icons
@@ -136,6 +137,14 @@ flutter_assets:
 #   ignore_comments: true
 #   field_prefix: null
 #   classname: AppIcons
+
+flutter_assets:
+  assets_path: lib/core/common/assets/animations
+  output_path: lib/core/theme
+  filename: app_animations.dart
+  ignore_comments: true
+  field_prefix: null
+  classname: AppAnimations
 
 flutter_launcher_icons:
   android: "launcher_icon"

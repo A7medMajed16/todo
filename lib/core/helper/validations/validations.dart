@@ -7,7 +7,7 @@ class Validations {
     _localizations = AppLocalizations.of(context)!;
   }
 
-  static String? validateEmail(String? value, BuildContext context) {
+  static String? validateEmail(String? value) {
     if (value == null || value.isEmpty) {
       return _localizations.email_empty;
     }
@@ -55,5 +55,47 @@ class Validations {
       return _localizations.password_verify_error;
     }
     return null;
+  }
+
+  static String? validatePhoneNumber(String? value) {
+    if (value == null || value.isEmpty) {
+      return _localizations.phone_number_empty;
+    } else if (value.length < 8) {
+      return _localizations.phone_invalid_number;
+    } else {
+      return null;
+    }
+  }
+
+  static String? validateName(String? value) {
+    if (value == null || value.isEmpty) {
+      return _localizations.name_empty;
+    } else {
+      return null;
+    }
+  }
+
+  static String? validateYearsOfExperience(String? value) {
+    if (value == null || value.isEmpty) {
+      return _localizations.years_of_experience_empty;
+    } else {
+      return null;
+    }
+  }
+
+  static String? validateExperienceLevel(String? value) {
+    if (value == null || value.isEmpty) {
+      return _localizations.experience_level_empty;
+    } else {
+      return null;
+    }
+  }
+
+  static String? validateAddress(String? value) {
+    if (value == null || value.isEmpty) {
+      return _localizations.address_empty;
+    } else {
+      return null;
+    }
   }
 }

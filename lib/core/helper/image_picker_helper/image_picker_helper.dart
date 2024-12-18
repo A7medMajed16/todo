@@ -19,9 +19,8 @@ class ImagePickerHelper {
         sourcePath: sourcePath,
         uiSettings: [
           AndroidUiSettings(
-            toolbarTitle: LocalizationFunctions.isAppArabic()
-                ? arabicTitle
-                : englishTitle,
+            toolbarTitle:
+                LocalizationHelper.isAppArabic() ? arabicTitle : englishTitle,
             toolbarColor: Colors.blue, // Replace with AppColors.iconColor
             toolbarWidgetColor: Colors.white,
             lockAspectRatio: true,
@@ -33,13 +32,11 @@ class ImagePickerHelper {
             ],
           ),
           IOSUiSettings(
-            title: LocalizationFunctions.isAppArabic()
-                ? arabicTitle
-                : englishTitle,
-            doneButtonTitle:
-                LocalizationFunctions.isAppArabic() ? "حفظ" : "Done",
+            title:
+                LocalizationHelper.isAppArabic() ? arabicTitle : englishTitle,
+            doneButtonTitle: LocalizationHelper.isAppArabic() ? "حفظ" : "Done",
             cancelButtonTitle:
-                LocalizationFunctions.isAppArabic() ? "الغاء" : "Cancel",
+                LocalizationHelper.isAppArabic() ? "الغاء" : "Cancel",
             aspectRatioLockEnabled: true,
             aspectRatioPickerButtonHidden: true,
             cropStyle: CropStyle.circle,

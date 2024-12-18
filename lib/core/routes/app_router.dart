@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo/core/config/classes/account_helper.dart';
+import 'package:todo/features/auth/presentation/manager/login_cubit/login_cubit.dart';
+import 'package:todo/features/auth/presentation/views/login_view.dart';
 import 'package:todo/features/onboarding/presentation/views/onboarding_view.dart';
+import 'package:todo/features/signup/presentation/manager/signup_cubit/signup_cubit.dart';
+import 'package:todo/features/signup/presentation/views/signup_view.dart';
 import 'package:todo/main.dart';
 
 abstract class AppRouter {
   static const String kHome = '/';
   static const String kOnboarding = '/onboarding';
   static const String kLogin = '/login';
+  static const String kSignUp = '/signup';
 
   static final router = GoRouter(
     observers: [GoRouteObserver()],
@@ -22,6 +28,20 @@ abstract class AppRouter {
         path: kOnboarding,
         builder: (context, state) => const OnboardingView(),
       ),
+      GoRoute(
+        path: kLogin,
+        builder: (context, state) => BlocProvider(
+          create: (context) => LoginCubit(),
+          child: const LoginView(),
+        ),
+      ),
+      GoRoute(
+        path: kSignUp,
+        builder: (context, state) => BlocProvider(
+          create: (context) => SignupCubit(),
+          child: const SignupView(),
+        ),
+      )
     ],
   );
 }

@@ -9,7 +9,11 @@ class OnboardingView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
-      body: OnboardingViewBody(),
+      body: SafeArea(
+        left: false,
+        right: false,
+        child: OnboardingViewBody(),
+      ),
     );
   }
 }

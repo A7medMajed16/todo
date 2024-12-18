@@ -12,5 +12,8 @@
     "email_empty": "الرجاء إدخال بريدك الإلكتروني",
     "invalid_email": "الرجاء إدخال عنوان بريد إلكتروني صالح.",
     "image_picker_camera": "الكاميرا",
-    "image_picker_gallery": "المعرض"
+    "image_picker_gallery": "المعرض",
+    "onboarding_header": "إدارة المهام وقائمة المهام",
+    "onboarding_description": "صُمِّمت هذه الأداة المنتجة لمساعدتك على إدارة مهامك بشكل أفضل بطريقة سهلة ومريحة وفقًا لكل مشروع!",
+    "onboarding_button": "ابدء"
 }

@@ -75,9 +75,11 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+    - lib/core/common/assets/images/
+    - lib/core/common/assets/icons/
+    - lib/core/common/assets/animations/
+    - .env
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
   # For details regarding adding assets from package dependencies, see
@@ -118,6 +120,7 @@ fonts:
   # see https://flutter.dev/to/font-from-package
 flutter_intl:
   enabled: true
+
 flutter_assets:
   assets_path: lib/core/common/assets/images
   output_path: lib/core/theme
@@ -125,6 +128,14 @@ flutter_assets:
   ignore_comments: true
   field_prefix: null
   classname: AppImages
+
+# flutter_assets:
+#   assets_path: lib/core/common/assets/icons
+#   output_path: lib/core/theme
+#   filename: app_icons.dart
+#   ignore_comments: true
+#   field_prefix: null
+#   classname: AppIcons
 
 flutter_launcher_icons:
   android: "launcher_icon"

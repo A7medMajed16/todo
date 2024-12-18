@@ -12,5 +12,8 @@
     "email_empty": "Please enter your email",
     "invalid_email": "Please enter a valid email address.",
     "image_picker_camera": "Camera",
-    "image_picker_gallery": "Gallery"
+    "image_picker_gallery": "Gallery",
+    "onboarding_header": "Task Management & To-Do List",
+    "onboarding_description": "This productive tool is designed to help you better manage your task project-wise conveniently!",
+    "onboarding_button": "Let’s Start"
 }

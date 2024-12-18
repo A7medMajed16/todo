@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -85,7 +83,6 @@ class _CustomPhoneNumberTextFieldState
                     countryCode = value.phoneCode;
                     countryEmoji = value.flagEmoji;
                   });
-                  log(countryEmoji.toString());
                   widget.countryPhoneCodeUpdateFunction!("+$countryCode");
                 },
               ),

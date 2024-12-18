@@ -48,11 +48,10 @@ class ToDo extends StatelessWidget {
                     scaffoldBackgroundColor: AppColors.backgroundColor,
                     barBackgroundColor: AppColors.backgroundColor,
                     textTheme: CupertinoTextThemeData(
-                        // textStyle: TextStyle(
-                        //   fontFamily:
-                        //       state.langCode == 'ar' ? 'Almarai' : 'Poppins',
-                        // ),
-                        ),
+                      textStyle: TextStyle(
+                        fontFamily: 'DMSans',
+                      ),
+                    ),
                   ),
                   child: _buildMaterialApp(context, state),
                 )
@@ -77,7 +76,7 @@ class ToDo extends StatelessWidget {
       theme: ThemeData(
         scaffoldBackgroundColor: AppColors.backgroundColor,
         splashColor: AppColors.secondColor.withValues(alpha: 0.5),
-        // fontFamily: state.langCode == 'ar' ? 'Almarai' : 'Poppins',
+        fontFamily: 'DMSans',
         primaryColor: AppColors.primerColor,
         textSelectionTheme: TextSelectionThemeData(
           cursorColor: AppColors.curserColor,

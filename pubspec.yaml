@@ -87,12 +87,27 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
+fonts:
+  - family: DMSans
+    fonts:
+      - asset: lib/core/common/assets/fonts/English/DMSans-Black.ttf
+        weight: 900
+      - asset: lib/core/common/assets/fonts/English/DMSans-ExtraBold.ttf
+        weight: 800
+      - asset: lib/core/common/assets/fonts/English/DMSans-Bold.ttf
+        weight: 700
+      - asset: lib/core/common/assets/fonts/English/DMSans-SemiBold.ttf
+        weight: 600
+      - asset: lib/core/common/assets/fonts/English/DMSans-Medium.ttf
+        weight: 500
+      - asset: lib/core/common/assets/fonts/English/DMSans-Regular.ttf
+        weight: 400
+      - asset: lib/core/common/assets/fonts/English/DMSans-Light.ttf
+        weight: 300
+      - asset: lib/core/common/assets/fonts/English/DMSans-ExtraLight.ttf
+        weight: 200
+      - asset: lib/core/common/assets/fonts/English/DMSans-Thin.ttf
+        weight: 100
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf
@@ -110,3 +125,16 @@ flutter_assets:
   ignore_comments: true
   field_prefix: null
   classname: AppImages
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "lib/core/common/assets/images/app_launcher.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+  windows:
+    generate: true
+    image_path: "lib/core/common/assets/images/app_launcher.png"
+    icon_size: 48 # min:48, max:256, default: 48
+  macos:
+    generate: true
+    image_path: "lib/core/common/assets/images/app_launcher.png"

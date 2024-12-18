@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo/core/config/classes/account_helper.dart';
+import 'package:todo/features/onboarding/presentation/views/onboarding_view.dart';
 import 'package:todo/main.dart';
 
 abstract class AppRouter {
@@ -16,7 +17,12 @@ abstract class AppRouter {
         : AccountHelper().getUserLoginStats()
             ? kHome
             : kLogin,
-    routes: [],
+    routes: [
+      GoRoute(
+        path: kOnboarding,
+        builder: (context, state) => const OnboardingView(),
+      ),
+    ],
   );
 }
 

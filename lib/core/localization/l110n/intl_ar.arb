@@ -1,6 +1,6 @@
 {
-    "phone_number_empty": "يرجى إدخال رقم هاتف الواتساب الخاص بك",
-    "phone_invalid_number": "يرجى إدخال رقم هاتف واتساب صالح",
+    "phone_number_empty": "يرجى إدخال رقم هاتف الخاص بك",
+    "phone_invalid_number": "يرجى إدخال رقم هاتف صالح",
     "password_empty": "الرجاء إدخال كلمة المرور الخاصة بك",
     "password_error_lowercase": "يجب أن تحتوي كلمة المرور علي حرف صغير واحد علي الأقل",
     "password_error_uppercase": "يجب أن تحتوي كلمة المرور علي حرف كبير واحد علي الأقل",

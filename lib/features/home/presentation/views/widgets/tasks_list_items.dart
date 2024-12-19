@@ -11,17 +11,18 @@ class TasksListItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RawScrollbar(
-      thumbVisibility: true,
-      thumbColor: AppColors.primerColor.withValues(alpha: 0.3),
+      thumbColor: AppColors.primerColor.withValues(alpha: 0.8),
       padding: EdgeInsets.symmetric(horizontal: 8),
       thickness: 5,
       minThumbLength: 30,
       radius: Radius.circular(ScreenDimensions.width),
       child: ListView.separated(
-        itemCount: 40,
-        itemBuilder: (context, index) => TasksItem(
-          taskModel: tasks[index],
-        ),
+        itemCount: 41,
+        itemBuilder: (context, index) => index == 40
+            ? SizedBox(height: 65)
+            : TasksItem(
+                taskModel: tasks[index],
+              ),
         separatorBuilder: (BuildContext context, int index) =>
             SizedBox(height: 12),
       ),

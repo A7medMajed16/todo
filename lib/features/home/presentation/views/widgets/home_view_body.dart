@@ -35,7 +35,7 @@ class HomeViewBody extends StatelessWidget {
         ),
         Expanded(
           child: TasksListItems(),
-        )
+        ),
       ],
     );
   }

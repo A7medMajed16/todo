@@ -56,5 +56,7 @@
     "home_finished_tasks": "منتهية",
     "home_low": "منخفض",
     "home_medium": "متوسط",
-    "home_high": "مرتفع"
+    "home_high": "مرتفع",
+    "popup_edit": "تعديل",
+    "popup_delete": "حذف"
 }

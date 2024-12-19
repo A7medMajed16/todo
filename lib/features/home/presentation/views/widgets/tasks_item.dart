@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:todo/core/common/colors/app_colors.dart';
+import 'package:todo/core/common/size/screen_dimensions.dart';
+import 'package:todo/core/common/widgets/custom_pop_over_widget.dart';
 import 'package:todo/core/theme/app_icons.dart';
 import 'package:todo/core/theme/styles.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -19,6 +21,9 @@ class TasksItem extends StatelessWidget {
     TaskStatusDataModel taskData = getTaskData(taskModel.status ?? "Waiting",
         localizations, taskModel.importanceLevel ?? "Low");
     return ListTile(
+      onTap: () {},
+      splashColor: AppColors.splashColor.withValues(alpha: 0.05),
+      hoverColor: Colors.transparent,
       contentPadding: EdgeInsets.symmetric(
         vertical: 12,
         horizontal: 16,
@@ -108,10 +113,15 @@ class TasksItem extends StatelessWidget {
           )
         ],
       ),
-      trailing: Icon(
-        Icons.more_vert_rounded,
-        size: 28,
-        color: AppColors.iconColor,
+      trailing: InkWell(
+        onTap: () => showCustomPopOver(context),
+        splashColor: AppColors.splashColor,
+        borderRadius: BorderRadius.circular(ScreenDimensions.width),
+        child: Icon(
+          Icons.more_vert_rounded,
+          size: 28,
+          color: AppColors.iconColor,
+        ),
       ),
     );
   }

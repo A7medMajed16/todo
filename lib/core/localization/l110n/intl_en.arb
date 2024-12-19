@@ -58,5 +58,7 @@
     "home_finished_tasks": "Finished",
     "home_low": "Low",
     "home_medium": "Medium",
-    "home_high": "High"
+    "home_high": "High",
+    "popup_edit": "Edit",
+    "popup_delete": "Delete"
 }

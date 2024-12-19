@@ -9,6 +9,8 @@
     "password_error_length": "Password length must be between 6 and 30 characters",
     "password_verify_empty": "Pleas reenter your password",
     "password_verify_error": "The Verified password must equal the password.",
+    "password_login_error": "The password is incorrect",
+    "password_login_empty": "Please enter your password",
     "email_empty": "Please enter your email",
     "invalid_email": "Please enter a valid email address.",
     "image_picker_camera": "Camera",
@@ -48,5 +50,13 @@
     "set_password_2_condition": "1 Upper case letter",
     "set_password_3_condition": "1 Numeric character",
     "set_password_4_condition": "1 Special character",
-    "set_password_5_condition": "6-30 characters"
+    "set_password_5_condition": "6-30 characters",
+    "home_my_tasks": "My Tasks",
+    "home_all_tasks": "All",
+    "home_in_progress_tasks": "Inprogress",
+    "home_waiting_tasks": "Waiting",
+    "home_finished_tasks": "Finished",
+    "home_low": "Low",
+    "home_medium": "Medium",
+    "home_high": "High"
 }

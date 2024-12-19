@@ -4,6 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:todo/core/config/classes/account_helper.dart';
 import 'package:todo/features/auth/presentation/manager/login_cubit/login_cubit.dart';
 import 'package:todo/features/auth/presentation/views/login_view.dart';
+import 'package:todo/features/home/presentation/manager/home_cubit/home_cubit.dart';
+import 'package:todo/features/home/presentation/views/home_view.dart';
 import 'package:todo/features/onboarding/presentation/views/onboarding_view.dart';
 import 'package:todo/features/signup/presentation/manager/signup_cubit/signup_cubit.dart';
 import 'package:todo/features/signup/presentation/views/signup_view.dart';
@@ -27,6 +29,13 @@ abstract class AppRouter {
       GoRoute(
         path: kOnboarding,
         builder: (context, state) => const OnboardingView(),
+      ),
+      GoRoute(
+        path: kHome,
+        builder: (context, state) => BlocProvider(
+          create: (context) => HomeCubit(),
+          child: const HomeView(),
+        ),
       ),
       GoRoute(
         path: kLogin,

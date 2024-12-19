@@ -2,7 +2,7 @@ import 'dart:developer';
 import 'dart:io';
 
 void main() {
-  const String featureName = 'signup';
+  const String featureName = 'home';
   // Project path
   final projectPath = "${Directory.current.path}/lib/features/$featureName";
 

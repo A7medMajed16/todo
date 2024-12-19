@@ -57,6 +57,13 @@ class Validations {
     return null;
   }
 
+  static String? validateLoginPassword(String? value) {
+    if (value == null || value.isEmpty) {
+      return _localizations.password_login_empty;
+    }
+    return null;
+  }
+
   static String? validatePhoneNumber(String? value) {
     if (value == null || value.isEmpty) {
       return _localizations.phone_number_empty;

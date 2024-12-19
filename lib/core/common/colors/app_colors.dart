@@ -10,6 +10,7 @@ abstract class AppColors {
   static Color selectionColor = const Color(0xff007BFF).withValues(alpha: 0.1);
   static const Color mainTextColor = Color(0xFF24252C);
   static const Color hintTextColor = Color(0xFFBABABA);
+  static Color subtitleTextColor = Color(0xff24252C).withValues(alpha: 0.6);
   static const Color interactText = Color(0xff5F33E1);
   static const Color focusColor = Color(0xff5F33E1);
   static Color shadowColor = const Color(0xff000000).withValues(alpha: 0.25);

@@ -13,6 +13,7 @@ import 'package:todo/core/routes/app_router.dart';
 import 'package:todo/core/theme/app_images.dart';
 import 'package:todo/core/theme/styles.dart';
 import 'package:todo/features/auth/presentation/manager/login_cubit/login_cubit.dart';
+import 'package:todo/main.dart';
 
 class LoginViewBody extends StatelessWidget {
   LoginViewBody({super.key});
@@ -67,20 +68,27 @@ class LoginViewBody extends StatelessWidget {
                         textEditingController: loginCubit.passwordController,
                         hintText: localizations.login_password_hint,
                         title: localizations.login_password,
-                        validator: (value) => Validations.validateEmail(value),
+                        validator: (value) =>
+                            Validations.validateLoginPassword(value),
                         isPassword: true,
                       ),
                       SizedBox(
                         width: double.infinity,
                         height: 55,
                         child: CustomButton(
-                          onPressed: () {
-                            CustomSnackBar.show(
-                              context: context,
-                              message: localizations.signup_success,
-                              isDone: true,
-                            );
-                          },
+                          onPressed: () =>
+                              _loginFormKey.currentState!.validate()
+                                  ? {
+                                      sharedPreferences!
+                                          .setBool("user_logged", true),
+                                      CustomSnackBar.show(
+                                        context: context,
+                                        message: localizations.signup_success,
+                                        isDone: true,
+                                      ),
+                                      router.go(AppRouter.kHome),
+                                    }
+                                  : null,
                           title: localizations.login_button,
                         ),
                       ),

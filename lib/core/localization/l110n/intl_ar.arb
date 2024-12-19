@@ -48,5 +48,13 @@
     "set_password_2_condition": "حرف كبير واحد",
     "set_password_3_condition": "رقم واحد",
     "set_password_4_condition": "حرف خاص واحد",
-    "set_password_5_condition": "6-30 حرفًا"
+    "set_password_5_condition": "6-30 حرفًا",
+    "home_my_tasks": "مهامي",
+    "home_all_tasks": "الكل",
+    "home_in_progress_tasks": "قيد التنفيذ",
+    "home_waiting_tasks": "في الانتظار",
+    "home_finished_tasks": "منتهية",
+    "home_low": "منخفض",
+    "home_medium": "متوسط",
+    "home_high": "مرتفع"
 }

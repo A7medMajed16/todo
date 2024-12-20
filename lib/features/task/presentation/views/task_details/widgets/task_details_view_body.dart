@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 import 'package:todo/core/common/colors/app_colors.dart';
+import 'package:todo/core/common/size/screen_dimensions.dart';
 import 'package:todo/core/theme/app_icons.dart';
 import 'package:todo/core/theme/styles.dart';
 import 'package:todo/features/home/data/models/task_model.dart';
@@ -70,6 +72,18 @@ class TaskDetailsViewBody extends StatelessWidget {
               icon: AppIcons.coreCommonAssetsIconsFlag,
               isDate: false,
             ),
+            Center(
+              child: QrImageView(
+                data: taskModel.toJson().toString(),
+                version: QrVersions.auto,
+                eyeStyle: QrEyeStyle(
+                  eyeShape: QrEyeShape.square,
+                  color: AppColors.primerColor,
+                ),
+                size: ScreenDimensions.width - 44,
+              ),
+            ),
+            SizedBox(height: 16),
           ],
         ),
       ),

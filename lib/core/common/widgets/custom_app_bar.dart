@@ -8,7 +8,10 @@ import 'package:todo/core/localization/localization_functions.dart';
 import 'package:todo/core/theme/app_icons.dart';
 import 'package:todo/core/theme/styles.dart';
 
-AppBar customAppBar({required String title, required BuildContext context}) =>
+AppBar customAppBar(
+        {required String title,
+        required BuildContext context,
+        String? taskId}) =>
     AppBar(
       backgroundColor: AppColors.backgroundColor,
       scrolledUnderElevation: 0,
@@ -40,14 +43,25 @@ AppBar customAppBar({required String title, required BuildContext context}) =>
         ),
       ),
       titleSpacing: 8,
-      title: Text(
-        title,
-        style: Styles.textStyle16Bold,
+      title: InkWell(
+        splashColor: AppColors.splashColor,
+        hoverColor: Colors.transparent,
+        borderRadius: BorderRadius.circular(ScreenDimensions.width),
+        radius: ScreenDimensions.width,
+        onTap: () {
+          context.pop();
+        },
+        child: Text(
+          title,
+          style: Styles.textStyle16Bold,
+        ),
       ),
       centerTitle: false,
-      actions: [
-        CustomPopOverWidget(
-          isAppBar: true,
-        ),
-      ],
+      actions: taskId != null
+          ? [
+              CustomPopOverWidget(
+                isAppBar: true,
+              ),
+            ]
+          : null,
     );

@@ -11,7 +11,8 @@ class TaskDetailsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      appBar: customAppBar(title: "Task Details", context: context),
+      appBar: customAppBar(
+          title: "Task Details", context: context, taskId: taskModel.id),
       backgroundColor: AppColors.backgroundColor,
       body: SafeArea(
         bottom: false,

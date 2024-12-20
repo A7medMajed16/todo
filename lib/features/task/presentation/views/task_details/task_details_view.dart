@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo/core/common/colors/app_colors.dart';
+import 'package:todo/core/common/widgets/custom_app_bar.dart';
 import 'package:todo/features/home/data/models/task_model.dart';
 import 'package:todo/features/task/presentation/views/task_details/widgets/task_details_view_body.dart';
 
@@ -10,6 +11,7 @@ class TaskDetailsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
+      appBar: customAppBar(title: "Task Details", context: context),
       backgroundColor: AppColors.backgroundColor,
       body: SafeArea(
         bottom: false,

@@ -4,7 +4,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:todo/core/common/colors/app_colors.dart';
-import 'package:todo/core/common/size/screen_dimensions.dart';
 import 'package:todo/core/common/widgets/custom_pop_over_widget.dart';
 import 'package:todo/core/routes/app_router.dart';
 import 'package:todo/core/theme/app_icons.dart';
@@ -114,16 +113,7 @@ class TasksItem extends StatelessWidget {
           )
         ],
       ),
-      trailing: InkWell(
-        onTap: () => showCustomPopOver(context),
-        splashColor: AppColors.splashColor,
-        borderRadius: BorderRadius.circular(ScreenDimensions.width),
-        child: Icon(
-          Icons.more_vert_rounded,
-          size: 28,
-          color: AppColors.iconColor,
-        ),
-      ),
+      trailing: CustomPopOverWidget(),
     );
   }
 

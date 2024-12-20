@@ -1,75 +1,121 @@
 import 'package:flutter/material.dart';
-import 'package:popover/popover.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:todo/core/common/colors/app_colors.dart';
+import 'package:todo/core/localization/localization_functions.dart';
 import 'package:todo/core/theme/styles.dart';
 
-void showCustomPopOver(BuildContext context) => showPopover(
-      context: context,
-      radius: 12,
-      barrierColor: Colors.transparent,
-      arrowDxOffset: 180,
-      arrowDyOffset: -80,
-      contentDxOffset: -20,
-      backgroundColor: Colors.white,
-      width: 82,
-      arrowWidth: 20,
-      arrowHeight: 10,
-      shadow: [
-        BoxShadow(
-          color: Colors.black.withValues(alpha: 0.19),
-          blurRadius: 16,
-          spreadRadius: 0,
-          offset: Offset(1, 4),
+class CustomPopOverWidget extends StatelessWidget {
+  const CustomPopOverWidget({super.key, this.isAppBar = false});
+  final bool isAppBar;
+  @override
+  Widget build(BuildContext context) {
+    return PopupMenuButton(
+      borderRadius: BorderRadius.circular(12),
+      icon: isAppBar
+          ? Icon(
+              Icons.more_vert_rounded,
+              size: 28,
+              color: AppColors.iconColor,
+            )
+          : null,
+      shape: ArrowShape(
+        arrowWidth: 15,
+        arrowHeight: 8,
+        isArabic: !LocalizationHelper.isAppArabic(),
+      ),
+      color: AppColors.backgroundColor,
+      constraints: BoxConstraints(maxWidth: 82, minWidth: 82),
+      position: PopupMenuPosition.under,
+      shadowColor: Colors.black.withValues(alpha: 0.19),
+      popUpAnimationStyle: AnimationStyle(
+        duration: Duration(milliseconds: 350),
+        curve: Curves.easeInOut,
+      ),
+      child: isAppBar
+          ? null
+          : Icon(
+              Icons.more_vert_rounded,
+              size: 28,
+              color: AppColors.iconColor,
+            ),
+      itemBuilder: (context) => [
+        PopupMenuItem(
+          height: 36,
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Text(
+            AppLocalizations.of(context)!.popup_edit,
+            style: Styles.textStyle12Medium,
+          ),
+        ),
+        PopupMenuItem(
+          height: 2,
+          enabled: false,
+          child: Divider(color: AppColors.hintTextColor.withValues(alpha: 0.4)),
+        ),
+        PopupMenuItem(
+          height: 36,
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Text(
+            AppLocalizations.of(context)!.popup_delete,
+            style:
+                Styles.textStyle12Medium.copyWith(color: AppColors.errorColor),
+          ),
         ),
       ],
-      bodyBuilder: (BuildContext context) => Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          InkWell(
-            onTap: () {
-              Navigator.pop(context);
-            },
-            borderRadius: BorderRadius.circular(4),
-            splashColor: Colors.transparent,
-            child: Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 16, right: 16, top: 8),
-                  child: Text(
-                    AppLocalizations.of(context)!.popup_edit,
-                    style: Styles.textStyle12Medium,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child:
-                Divider(color: AppColors.hintTextColor.withValues(alpha: 0.4)),
-          ),
-          InkWell(
-            onTap: () {
-              Navigator.pop(context);
-            },
-            borderRadius: BorderRadius.circular(4),
-            splashColor: Colors.transparent,
-            child: Row(
-              children: [
-                Padding(
-                  padding:
-                      const EdgeInsets.only(left: 16, right: 16, bottom: 8),
-                  child: Text(
-                    AppLocalizations.of(context)!.popup_delete,
-                    style: Styles.textStyle12Medium
-                        .copyWith(color: AppColors.errorColor),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
     );
+  }
+}
+
+class ArrowShape extends ShapeBorder {
+  final double arrowWidth;
+  final double arrowHeight;
+  final double radius;
+  final bool isArabic;
+
+  const ArrowShape({
+    this.arrowWidth = 8.0,
+    this.arrowHeight = 6.0,
+    this.radius = 12.0,
+    required this.isArabic,
+  });
+
+  @override
+  EdgeInsetsGeometry get dimensions => EdgeInsets.only(top: arrowHeight);
+
+  @override
+  Path getInnerPath(Rect rect, {TextDirection? textDirection}) => Path();
+
+  @override
+  Path getOuterPath(Rect rect, {TextDirection? textDirection}) {
+    rect = Rect.fromPoints(
+      rect.topLeft + Offset(0, arrowHeight),
+      rect.bottomRight,
+    );
+
+    final path = Path()
+      ..addRRect(RRect.fromRectAndRadius(rect, Radius.circular(radius)));
+
+    // Calculate arrow position
+    final arrowX = isArabic
+        ? rect.left + arrowWidth * 3.8 // Position arrow near left edge
+        : rect.right - arrowWidth * 3.8; // Position arrow near right edge
+
+    // Draw the arrow (fixed syntax)
+    path.moveTo(arrowX, rect.top);
+    path.relativeLineTo(arrowWidth / 2, -arrowHeight);
+    path.relativeLineTo(arrowWidth / 2, arrowHeight);
+    path.close();
+
+    return path;
+  }
+
+  @override
+  void paint(Canvas canvas, Rect rect, {TextDirection? textDirection}) {}
+
+  @override
+  ShapeBorder scale(double t) => this;
+}

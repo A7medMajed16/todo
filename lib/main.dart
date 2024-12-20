@@ -75,7 +75,7 @@ class ToDo extends StatelessWidget {
       locale: Locale(state.langCode),
       theme: ThemeData(
         scaffoldBackgroundColor: AppColors.backgroundColor,
-        splashColor: AppColors.secondColor.withValues(alpha: 0.5),
+        splashColor: AppColors.splashColor,
         fontFamily: 'DMSans',
         primaryColor: AppColors.primerColor,
         textSelectionTheme: TextSelectionThemeData(

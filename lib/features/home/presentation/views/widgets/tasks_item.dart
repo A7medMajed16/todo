@@ -78,11 +78,29 @@ class TasksItem extends StatelessWidget {
           )
         ],
       ),
-      leading: ClipRRect(
-        borderRadius: BorderRadius.circular(4),
-        child: CachedNetworkImage(
-          imageUrl: taskModel.image!,
-          width: 64,
+      leading: Hero(
+        tag: "taskImage${taskModel.id}",
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(4),
+          child: CachedNetworkImage(
+            imageUrl: taskModel.image!,
+            width: 64,
+            errorWidget: (context, url, error) => const Icon(
+              Icons.error,
+              color: AppColors.errorColor,
+            ),
+            placeholder: (context, url) => SizedBox(
+              width: 30,
+              height: 30,
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: const CircularProgressIndicator(
+                  color: AppColors.primerColor,
+                  strokeCap: StrokeCap.round,
+                ),
+              ),
+            ),
+          ),
         ),
       ),
       title: Row(

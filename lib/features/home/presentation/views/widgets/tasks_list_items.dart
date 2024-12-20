@@ -37,10 +37,11 @@ List<TaskModel> generateRandomTasks(int length) {
 
   return List<TaskModel>.generate(length, (index) {
     return TaskModel(
+      id: faker.guid.guid(),
       title: faker.lorem.sentence(),
       content: faker.lorem.sentences(3).join(' '),
       date: faker.date.dateTime(minYear: 2010, maxYear: 2025).toString(),
-      image: faker.image.loremPicsum(),
+      image: faker.image.loremPicsum(random: index),
       status: statuses[faker.randomGenerator.integer(statuses.length)],
       importanceLevel: importanceLevels[
           faker.randomGenerator.integer(importanceLevels.length)],

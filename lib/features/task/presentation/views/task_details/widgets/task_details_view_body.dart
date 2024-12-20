@@ -21,17 +21,27 @@ class TaskDetailsViewBody extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           spacing: 16,
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: CachedNetworkImage(
-                imageUrl: taskModel.image!,
-                errorWidget: (context, url, error) => const Icon(
-                  Icons.error,
-                  color: AppColors.errorColor,
-                ),
-                placeholder: (context, url) => const CircularProgressIndicator(
-                  color: AppColors.primerColor,
-                  strokeCap: StrokeCap.round,
+            Hero(
+              tag: "taskImage${taskModel.id}",
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: CachedNetworkImage(
+                  imageUrl: taskModel.image!,
+                  errorWidget: (context, url, error) => const Icon(
+                    Icons.error,
+                    color: AppColors.errorColor,
+                  ),
+                  placeholder: (context, url) => const SizedBox(
+                    width: 50,
+                    height: 50,
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: CircularProgressIndicator(
+                        color: AppColors.primerColor,
+                        strokeCap: StrokeCap.round,
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ),

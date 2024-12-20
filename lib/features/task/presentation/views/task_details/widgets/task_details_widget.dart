@@ -5,11 +5,12 @@ import 'package:todo/core/localization/localization_functions.dart';
 import 'package:todo/core/theme/styles.dart';
 
 class TaskDetailsWidget extends StatelessWidget {
-  const TaskDetailsWidget(
-      {super.key,
-      required this.title,
-      required this.icon,
-      required this.isDate});
+  const TaskDetailsWidget({
+    super.key,
+    required this.title,
+    required this.icon,
+    required this.isDate,
+  });
   final String title, icon;
   final bool isDate;
   @override

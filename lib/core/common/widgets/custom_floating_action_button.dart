@@ -65,6 +65,7 @@ class _CustomFloatingActionButtonState extends State<CustomFloatingActionButton>
                 width: 50,
                 height: 50,
                 child: FloatingActionButton(
+                  heroTag: 'qr',
                   onPressed: () {},
                   backgroundColor: const Color(0xffEBE5FF),
                   elevation: 0,
@@ -89,6 +90,7 @@ class _CustomFloatingActionButtonState extends State<CustomFloatingActionButton>
                 width: 50,
                 height: 50,
                 child: FloatingActionButton(
+                  heroTag: 'add_new_task',
                   onPressed: () {},
                   backgroundColor: const Color(0xffEBE5FF),
                   elevation: 0,
@@ -105,6 +107,7 @@ class _CustomFloatingActionButtonState extends State<CustomFloatingActionButton>
             width: 64,
             height: 64,
             child: FloatingActionButton(
+              heroTag: 'add',
               onPressed: _toggleExpanded,
               backgroundColor: AppColors.buttonBackgroundColor,
               shape: const CircleBorder(),

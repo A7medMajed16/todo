@@ -1,8 +1,6 @@
 import 'dart:developer';
 
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:http/http.dart' as http;
-import 'dart:typed_data';
 
 class NotificationService {
   static final NotificationService _notificationsServices =
@@ -94,38 +92,38 @@ class NotificationService {
     );
   }
 
-  Future<void> showNotificationWithImage(
-      int id, String? title, String? body, String imageUrl) async {
-    final ByteArrayAndroidBitmap largeIcon = await _getBitmapFromUrl(imageUrl);
+  // Future<void> showNotificationWithImage(
+  //     int id, String? title, String? body, String imageUrl) async {
+  //   final ByteArrayAndroidBitmap largeIcon = await _getBitmapFromUrl(imageUrl);
 
-    final AndroidNotificationDetails androidPlatformChannelSpecifics =
-        AndroidNotificationDetails(
-      'your_channel_id',
-      'your_channel_name',
-      channelDescription: 'your_channel_description',
-      importance: Importance.max,
-      priority: Priority.high,
-      largeIcon: largeIcon,
-    );
+  //   final AndroidNotificationDetails androidPlatformChannelSpecifics =
+  //       AndroidNotificationDetails(
+  //     'your_channel_id',
+  //     'your_channel_name',
+  //     channelDescription: 'your_channel_description',
+  //     importance: Importance.max,
+  //     priority: Priority.high,
+  //     largeIcon: largeIcon,
+  //   );
 
-    final NotificationDetails platformChannelSpecifics =
-        NotificationDetails(android: androidPlatformChannelSpecifics);
+  //   final NotificationDetails platformChannelSpecifics =
+  //       NotificationDetails(android: androidPlatformChannelSpecifics);
 
-    await flutterLocalNotificationsPlugin.show(
-      id,
-      title,
-      body,
-      platformChannelSpecifics,
-    );
-  }
+  //   await flutterLocalNotificationsPlugin.show(
+  //     id,
+  //     title,
+  //     body,
+  //     platformChannelSpecifics,
+  //   );
+  // }
 
-  Future<ByteArrayAndroidBitmap> _getBitmapFromUrl(String url) async {
-    final http.Response response = await http.get(Uri.parse(url));
-    if (response.statusCode == 200) {
-      final Uint8List bytes = response.bodyBytes;
-      return ByteArrayAndroidBitmap(bytes);
-    } else {
-      throw Exception('Failed to load image');
-    }
-  }
+  // Future<ByteArrayAndroidBitmap> _getBitmapFromUrl(String url) async {
+  //   final http.Response response = await http.get(Uri.parse(url));
+  //   if (response.statusCode == 200) {
+  //     final Uint8List bytes = response.bodyBytes;
+  //     return ByteArrayAndroidBitmap(bytes);
+  //   } else {
+  //     throw Exception('Failed to load image');
+  //   }
+  // }
 }

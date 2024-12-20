@@ -15,7 +15,9 @@ class TaskDetailsView extends StatelessWidget {
       backgroundColor: AppColors.backgroundColor,
       body: SafeArea(
         bottom: false,
-        child: TaskDetailsViewBody(),
+        child: TaskDetailsViewBody(
+          taskModel: taskModel,
+        ),
       ),
     );
   }

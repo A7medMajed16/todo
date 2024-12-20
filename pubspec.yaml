@@ -31,17 +31,14 @@ dependencies:
   bloc: ^8.1.4
   cached_network_image: ^3.4.1
   country_picker: ^2.0.27
-  cupertino_icons: ^1.0.8
   dartz: ^0.10.1
   dio: ^5.7.0
   equatable: ^2.0.7
   faker: ^2.2.0
-  file_picker: ^8.1.6
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.6
   flutter_dotenv: ^5.2.1
-  flutter_launcher_icons: ^0.14.2
   flutter_local_notifications: ^18.0.1
   flutter_localizations:
     sdk: flutter
@@ -50,7 +47,6 @@ dependencies:
   flutter_svg: ^2.0.16
   get_it: ^8.0.3
   go_router: ^14.6.2
-  http: ^1.2.2
   image_cropper: ^8.1.0
   image_picker: ^1.1.2
   intl: ^0.19.0
@@ -58,8 +54,7 @@ dependencies:
   permission_handler: ^11.3.1
   shared_preferences: ^2.3.3
   shimmer: ^3.0.0
-  url_launcher: ^6.3.1
-  uuid: ^4.5.1
+
 
 dev_dependencies:
   flutter_lints: ^5.0.0
@@ -145,15 +140,4 @@ flutter_assets:
 #   ignore_comments: true
 #   field_prefix: null
 #   classname: AppAnimations
-flutter_launcher_icons:
-  android: "launcher_icon"
-  ios: true
-  image_path: "lib/core/common/assets/images/app_launcher.png"
-  min_sdk_android: 21 # android min sdk min:16, default 21
-  windows:
-    generate: true
-    image_path: "lib/core/common/assets/images/app_launcher.png"
-    icon_size: 48 # min:48, max:256, default: 48
-  macos:
-    generate: true
-    image_path: "lib/core/common/assets/images/app_launcher.png"
+

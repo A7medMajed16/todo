@@ -4,6 +4,8 @@ class AppIcons {
   
   static const String coreCommonAssetsIconsArrowLeft = "lib/core/common/assets/icons/Arrow_Left.svg";
 
+  static const String coreCommonAssetsIconsCalendar = "lib/core/common/assets/icons/calendar.svg";
+
   static const String coreCommonAssetsIconsCheckCircle2 = "lib/core/common/assets/icons/check_circle_2.svg";
 
   static const String coreCommonAssetsIconsCloseCircle = "lib/core/common/assets/icons/close-circle.svg";
@@ -23,5 +25,7 @@ class AppIcons {
   static const String coreCommonAssetsIconsPerson = "lib/core/common/assets/icons/person.svg";
 
   static const String coreCommonAssetsIconsQr = "lib/core/common/assets/icons/qr.svg";
+
+  static const String coreCommonAssetsIconsStatus = "lib/core/common/assets/icons/status.svg";
 }
 

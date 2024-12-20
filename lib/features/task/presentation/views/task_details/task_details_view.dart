@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:todo/core/common/colors/app_colors.dart';
+import 'package:todo/features/home/data/models/task_model.dart';
+import 'package:todo/features/task/presentation/views/task_details/widgets/task_details_view_body.dart';
 
 class TaskDetailsView extends StatelessWidget {
-  const TaskDetailsView({super.key});
-
+  const TaskDetailsView({super.key, required this.taskModel});
+  final TaskModel taskModel;
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      resizeToAvoidBottomInset: true,
+      backgroundColor: AppColors.backgroundColor,
+      body: SafeArea(
+        bottom: false,
+        child: TaskDetailsViewBody(),
+      ),
+    );
   }
 }

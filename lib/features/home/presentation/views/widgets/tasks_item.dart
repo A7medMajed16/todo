@@ -1,15 +1,17 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:todo/core/common/colors/app_colors.dart';
 import 'package:todo/core/common/size/screen_dimensions.dart';
 import 'package:todo/core/common/widgets/custom_pop_over_widget.dart';
+import 'package:todo/core/routes/app_router.dart';
 import 'package:todo/core/theme/app_icons.dart';
 import 'package:todo/core/theme/styles.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:todo/features/home/data/models/task_model.dart';
-import 'package:todo/features/home/data/models/task_status_data_model.dart';
+import 'package:todo/core/config/classes/task_status_data_model.dart';
 
 class TasksItem extends StatelessWidget {
   const TasksItem({super.key, required this.taskModel});
@@ -17,11 +19,10 @@ class TasksItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AppLocalizations localizations = AppLocalizations.of(context)!;
-
     TaskStatusDataModel taskData = getTaskData(taskModel.status ?? "Waiting",
         localizations, taskModel.importanceLevel ?? "Low");
     return ListTile(
-      onTap: () {},
+      onTap: () => context.push(AppRouter.kTaskDetails, extra: taskModel),
       splashColor: AppColors.splashColor.withValues(alpha: 0.05),
       hoverColor: Colors.transparent,
       contentPadding: EdgeInsets.symmetric(

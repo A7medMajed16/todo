@@ -2,6 +2,8 @@
 class AppIcons {
   AppIcons._();
   
+  static const String coreCommonAssetsIconsAddImage = "lib/core/common/assets/icons/add_image.svg";
+
   static const String coreCommonAssetsIconsArrowLeft = "lib/core/common/assets/icons/Arrow_Left.svg";
 
   static const String coreCommonAssetsIconsCalendar = "lib/core/common/assets/icons/calendar.svg";

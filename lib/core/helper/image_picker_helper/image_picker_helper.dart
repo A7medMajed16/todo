@@ -24,7 +24,7 @@ class ImagePickerHelper {
             toolbarColor: Colors.blue, // Replace with AppColors.iconColor
             toolbarWidgetColor: Colors.white,
             lockAspectRatio: true,
-            cropStyle: CropStyle.circle,
+            cropStyle: CropStyle.rectangle,
             hideBottomControls: true,
             aspectRatioPresets: [
               CropAspectRatioPreset.original,
@@ -39,7 +39,7 @@ class ImagePickerHelper {
                 LocalizationHelper.isAppArabic() ? "الغاء" : "Cancel",
             aspectRatioLockEnabled: true,
             aspectRatioPickerButtonHidden: true,
-            cropStyle: CropStyle.circle,
+            cropStyle: CropStyle.rectangle,
             aspectRatioLockDimensionSwapEnabled: true,
             aspectRatioPresets: [
               CropAspectRatioPreset.original,
@@ -96,11 +96,15 @@ class ImagePickerHelper {
     final AppLocalizations localization = AppLocalizations.of(context)!;
     showModalBottomSheet(
       context: context,
+      // shape: RoundedRectangleBorder(
+      //   borderRadius: BorderRadius.circular(12),
+      // ),
       builder: (BuildContext context) {
-        return Container(
-          padding: const EdgeInsets.all(16),
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
+            spacing: 5,
             children: [
               ListTile(
                 onTap: () async => await updateImageFunction(
@@ -114,14 +118,13 @@ class ImagePickerHelper {
                 ),
                 leading: const Icon(
                   Icons.photo_library_rounded,
-                  color: Colors.blue,
+                  color: AppColors.primerColor,
                 ),
                 title: Text(
                   localization.image_picker_gallery,
                   style: Styles.textStyle16Bold,
                 ),
               ),
-              const SizedBox(height: 10),
               ListTile(
                 onTap: () async => updateImageFunction(
                         await getImageFromCamera(arabicTitle, englishTitle))
@@ -134,13 +137,14 @@ class ImagePickerHelper {
                 ),
                 leading: const Icon(
                   Icons.camera_rounded,
-                  color: Colors.blue,
+                  color: AppColors.primerColor,
                 ),
                 title: Text(
                   localization.image_picker_camera,
                   style: Styles.textStyle16Bold,
                 ),
               ),
+              SizedBox(height: 10)
             ],
           ),
         );

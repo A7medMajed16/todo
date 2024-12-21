@@ -10,6 +10,7 @@ import 'package:todo/features/home/presentation/views/home_view.dart';
 import 'package:todo/features/onboarding/presentation/views/onboarding_view.dart';
 import 'package:todo/features/signup/presentation/manager/signup_cubit/signup_cubit.dart';
 import 'package:todo/features/signup/presentation/views/signup_view.dart';
+import 'package:todo/features/task/presentation/views/add_new_task/add_new_task_view.dart';
 import 'package:todo/features/task/presentation/views/task_details/task_details_view.dart';
 import 'package:todo/main.dart';
 
@@ -19,6 +20,7 @@ abstract class AppRouter {
   static const String kLogin = '/login';
   static const String kSignUp = '/signup';
   static const String kTaskDetails = '/task_details';
+  static const String kAddNewTask = '/add_new_task';
 
   static final router = GoRouter(
     observers: [GoRouteObserver()],
@@ -59,6 +61,10 @@ abstract class AppRouter {
         builder: (context, state) => TaskDetailsView(
           taskModel: state.extra as TaskModel,
         ),
+      ),
+      GoRoute(
+        path: kAddNewTask,
+        builder: (context, state) => AddNewTaskView(),
       ),
     ],
   );

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:todo/core/common/colors/app_colors.dart';
+import 'package:todo/core/routes/app_router.dart';
 import 'package:todo/core/theme/app_icons.dart';
 
 class CustomFloatingActionButton extends StatefulWidget {
@@ -91,7 +93,7 @@ class _CustomFloatingActionButtonState extends State<CustomFloatingActionButton>
                 height: 50,
                 child: FloatingActionButton(
                   heroTag: 'add_new_task',
-                  onPressed: () {},
+                  onPressed: () => context.push(AppRouter.kAddNewTask),
                   backgroundColor: const Color(0xffEBE5FF),
                   elevation: 0,
                   shape: const CircleBorder(),

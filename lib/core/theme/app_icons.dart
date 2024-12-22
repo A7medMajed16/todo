@@ -16,6 +16,8 @@ class AppIcons {
 
   static const String coreCommonAssetsIconsDownArrow = "lib/core/common/assets/icons/down_arrow.svg";
 
+  static const String coreCommonAssetsIconsDownArrow2 = "lib/core/common/assets/icons/down_arrow_2.svg";
+
   static const String coreCommonAssetsIconsEdit = "lib/core/common/assets/icons/edit.svg";
 
   static const String coreCommonAssetsIconsFlag = "lib/core/common/assets/icons/flag.svg";

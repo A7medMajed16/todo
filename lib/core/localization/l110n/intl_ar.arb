@@ -58,5 +58,17 @@
     "home_medium": "متوسط",
     "home_high": "مرتفع",
     "popup_edit": "تعديل",
-    "popup_delete": "حذف"
+    "popup_delete": "حذف",
+    "details_title": "تفاصيل المهمة",
+    "new_task": "إضافة مهمة جديدة",
+    "new_task_add_img": "إضافة صورة",
+    "new_task_title": "عنوان المهمة",
+    "new_task_title_hint": "أدخل العنوان هنا...",
+    "new_task_content": "وصف المهمة",
+    "new_task_content_hint": "أدخل الوصف هنا...",
+    "new_task_date": "تاريخ الانتهاء",
+    "new_task_date_hint": "اختر تاريخ الانتهاء...",
+    "new_task_priority": "الأولوية",
+    "new_task_priority_hint": "اختر الأولوية...",
+    "new_task_button": "إضافة المهمة"
 }

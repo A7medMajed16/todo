@@ -105,4 +105,36 @@ class Validations {
       return null;
     }
   }
+
+  static String? validateTaskTitle(String? value) {
+    if (value == null || value.isEmpty) {
+      return _localizations.new_task_title_empty;
+    } else {
+      return null;
+    }
+  }
+
+  static String? validateTaskContent(String? value) {
+    if (value == null || value.isEmpty) {
+      return _localizations.new_task_content_empty;
+    } else {
+      return null;
+    }
+  }
+
+  static String? validateTaskPriority(String? value) {
+    if (value == null || value.isEmpty) {
+      return _localizations.new_task_priority_empty;
+    } else {
+      return null;
+    }
+  }
+
+  static String? validateTaskDate(String? value) {
+    if (value == null || value.isEmpty) {
+      return _localizations.new_task_date_empty;
+    } else {
+      return null;
+    }
+  }
 }

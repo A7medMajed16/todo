@@ -33,6 +33,11 @@ abstract class Styles {
     fontSize: getResponsiveFontSize(baseFontSize: 14),
     fontWeight: FontWeight.w400,
   );
+  static TextStyle textStyle14Medium = TextStyle(
+    color: AppColors.mainTextColor,
+    fontSize: getResponsiveFontSize(baseFontSize: 14),
+    fontWeight: FontWeight.w500,
+  );
   static TextStyle textStyle14Bold = TextStyle(
     color: AppColors.mainTextColor,
     fontSize: getResponsiveFontSize(baseFontSize: 14),

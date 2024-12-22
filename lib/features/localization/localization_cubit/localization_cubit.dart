@@ -10,7 +10,6 @@ class LocalizationCubit extends Cubit<LocalizationChangeLocalLang> {
   Future<void> getSavedLanguage() async {
     final String cachedLangCode =
         await LanguageCacheHelper().getCachedLanguageCode();
-
     emit(LocalizationChangeLocalLang(langCode: cachedLangCode));
   }
 

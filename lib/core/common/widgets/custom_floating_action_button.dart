@@ -1,9 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo/core/common/colors/app_colors.dart';
+import 'package:todo/core/common/widgets/qr_scanner_bottom_sheet.dart';
+import 'package:todo/core/helper/qrcode_helper/qrcode_helper.dart';
 import 'package:todo/core/routes/app_router.dart';
 import 'package:todo/core/theme/app_icons.dart';
+import 'package:todo/features/home/data/models/task_model.dart';
 
 class CustomFloatingActionButton extends StatefulWidget {
   const CustomFloatingActionButton({
@@ -68,7 +73,18 @@ class _CustomFloatingActionButtonState extends State<CustomFloatingActionButton>
                 height: 50,
                 child: FloatingActionButton(
                   heroTag: 'qr',
-                  onPressed: () {},
+                  onPressed: () {
+                    QRScannerBottomSheet.show(
+                      context,
+                      (String qrCode) {
+                        if (qrCode.isNotEmpty) {
+                          context.push(AppRouter.kAddNewTask,
+                              extra: TaskModel.fromJson(jsonDecode(
+                                  QrCodeHelper.convertQrToJson(qrCode))));
+                        }
+                      },
+                    );
+                  },
                   backgroundColor: const Color(0xffEBE5FF),
                   elevation: 0,
                   shape: const CircleBorder(),

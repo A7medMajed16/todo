@@ -17,6 +17,7 @@ class LanguageCacheHelper {
     } else {
       final String deviceLanguageCode =
           ui.PlatformDispatcher.instance.locale.languageCode;
+      sharedPreferences.setString('local', deviceLanguageCode);
       return deviceLanguageCode;
     }
   }

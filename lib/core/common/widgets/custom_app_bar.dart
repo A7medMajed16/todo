@@ -20,13 +20,13 @@ AppBar customAppBar(
         padding: LocalizationHelper.isAppArabic()
             ? const EdgeInsets.only(right: 22)
             : const EdgeInsets.only(left: 22),
-        child: Transform.flip(
-          flipX: !LocalizationHelper.isAppArabic(),
-          child: InkWell(
-            splashColor: AppColors.splashColor,
-            hoverColor: Colors.transparent,
-            borderRadius: BorderRadius.circular(ScreenDimensions.width),
-            radius: ScreenDimensions.width,
+        child: InkWell(
+          splashColor: AppColors.splashColor,
+          hoverColor: Colors.transparent,
+          borderRadius: BorderRadius.circular(ScreenDimensions.width),
+          radius: ScreenDimensions.width,
+          child: Transform.flip(
+            flipX: !LocalizationHelper.isAppArabic(),
             child: SvgPicture.asset(
               AppIcons.coreCommonAssetsIconsArrowLeft,
               height: 24,
@@ -36,10 +36,10 @@ AppBar customAppBar(
                 BlendMode.srcIn,
               ),
             ),
-            onTap: () {
-              context.pop();
-            },
           ),
+          onTap: () {
+            context.pop();
+          },
         ),
       ),
       titleSpacing: 8,

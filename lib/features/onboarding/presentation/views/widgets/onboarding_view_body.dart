@@ -79,6 +79,7 @@ class OnboardingViewBody extends StatelessWidget {
                     ),
                   ),
                 ),
+                SizedBox(height: 22),
               ],
             ),
           ),

@@ -7,6 +7,7 @@ import 'package:todo/core/helper/image_picker_helper/image_picker_helper.dart';
 import 'package:todo/core/theme/app_icons.dart';
 import 'package:todo/core/theme/styles.dart';
 import 'package:todo/features/task/presentation/manager/add_new_task_cubit/add_new_task_cubit.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ImageContainer extends StatelessWidget {
   const ImageContainer({super.key});
@@ -44,7 +45,7 @@ class ImageContainer extends StatelessWidget {
                         SvgPicture.asset(
                             AppIcons.coreCommonAssetsIconsAddImage),
                         Text(
-                          "Add Img",
+                          AppLocalizations.of(context)!.new_task_add_img,
                           style: Styles.textStyle16Medium
                               .copyWith(color: AppColors.primerColor),
                         )

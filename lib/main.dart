@@ -49,7 +49,8 @@ class ToDo extends StatelessWidget {
                     barBackgroundColor: AppColors.backgroundColor,
                     textTheme: CupertinoTextThemeData(
                       textStyle: TextStyle(
-                        fontFamily: 'DMSans',
+                        fontFamily:
+                            state.langCode == 'ar' ? 'Almarai' : 'DMSans',
                       ),
                     ),
                   ),
@@ -76,7 +77,7 @@ class ToDo extends StatelessWidget {
       theme: ThemeData(
         scaffoldBackgroundColor: AppColors.backgroundColor,
         splashColor: AppColors.splashColor,
-        fontFamily: 'DMSans',
+        fontFamily: state.langCode == 'ar' ? 'Almarai' : 'DMSans',
         primaryColor: AppColors.primerColor,
         textSelectionTheme: TextSelectionThemeData(
           cursorColor: AppColors.curserColor,

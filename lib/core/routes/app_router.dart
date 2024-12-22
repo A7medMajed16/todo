@@ -66,7 +66,8 @@ abstract class AppRouter {
       GoRoute(
         path: kAddNewTask,
         builder: (context, state) => BlocProvider(
-          create: (context) => AddNewTaskCubit(),
+          create: (context) =>
+              AddNewTaskCubit()..initTask(state.extra as TaskModel?),
           child: AddNewTaskView(),
         ),
       ),

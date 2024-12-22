@@ -5,8 +5,14 @@ import 'package:todo/core/localization/localization_functions.dart';
 import 'package:todo/core/theme/styles.dart';
 
 class CustomPopOverWidget extends StatelessWidget {
-  const CustomPopOverWidget({super.key, this.isAppBar = false});
+  const CustomPopOverWidget(
+      {super.key,
+      this.isAppBar = false,
+      this.editFunction,
+      this.cancelFunction});
   final bool isAppBar;
+  final void Function()? editFunction;
+  final void Function()? cancelFunction;
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton(

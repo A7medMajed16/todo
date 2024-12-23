@@ -15,12 +15,13 @@ class AddNewTaskCubit extends Cubit<AddNewTaskState> {
   final TextEditingController titleController = TextEditingController();
   final TextEditingController contentController = TextEditingController();
 
-  String? priority, date;
+  String? priority, date, imagePath;
 
   void initTask(TaskModel? taskModel) {
     if (taskModel != null) {
       titleController.text = taskModel.title ?? "";
       contentController.text = taskModel.content ?? "";
+      imagePath = taskModel.image;
       priority = taskModel.importanceLevel == "High"
           ? "h"
           : taskModel.importanceLevel == "Medium"

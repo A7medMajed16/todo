@@ -131,7 +131,10 @@ class TasksItem extends StatelessWidget {
           )
         ],
       ),
-      trailing: CustomPopOverWidget(),
+      trailing: CustomPopOverWidget(
+        editFunction: () =>
+            context.push(AppRouter.kAddNewTask, extra: taskModel),
+      ),
     );
   }
 

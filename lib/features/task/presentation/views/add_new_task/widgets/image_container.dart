@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -30,29 +31,51 @@ class ImageContainer extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                   child: Image.file(addNewTaskCubit.imageFile!),
                 )
-              : DottedBorderContainer(
-                  width: double.infinity,
-                  height: 56,
-                  borderColor: AppColors.primerColor,
-                  borderWidth: 2,
-                  spacing: 3,
-                  borderRadius: 12,
-                  child: Center(
-                    child: Row(
-                      spacing: 8,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        SvgPicture.asset(
-                            AppIcons.coreCommonAssetsIconsAddImage),
-                        Text(
-                          AppLocalizations.of(context)!.new_task_add_img,
-                          style: Styles.textStyle16Medium
-                              .copyWith(color: AppColors.primerColor),
-                        )
-                      ],
+              : addNewTaskCubit.imagePath != null
+                  ? ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: CachedNetworkImage(
+                        imageUrl: addNewTaskCubit.imagePath!,
+                        errorWidget: (context, url, error) => const Icon(
+                          Icons.error,
+                          color: AppColors.errorColor,
+                        ),
+                        placeholder: (context, url) => const SizedBox(
+                          width: 50,
+                          height: 50,
+                          child: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: CircularProgressIndicator(
+                              color: AppColors.primerColor,
+                              strokeCap: StrokeCap.round,
+                            ),
+                          ),
+                        ),
+                      ),
+                    )
+                  : DottedBorderContainer(
+                      width: double.infinity,
+                      height: 56,
+                      borderColor: AppColors.primerColor,
+                      borderWidth: 2,
+                      spacing: 3,
+                      borderRadius: 12,
+                      child: Center(
+                        child: Row(
+                          spacing: 8,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            SvgPicture.asset(
+                                AppIcons.coreCommonAssetsIconsAddImage),
+                            Text(
+                              AppLocalizations.of(context)!.new_task_add_img,
+                              style: Styles.textStyle16Medium
+                                  .copyWith(color: AppColors.primerColor),
+                            )
+                          ],
+                        ),
+                      ),
                     ),
-                  ),
-                ),
         );
       },
     );

@@ -9,10 +9,10 @@ class CustomPopOverWidget extends StatelessWidget {
       {super.key,
       this.isAppBar = false,
       this.editFunction,
-      this.cancelFunction});
+      this.deleteFunction});
   final bool isAppBar;
   final void Function()? editFunction;
-  final void Function()? cancelFunction;
+  final void Function()? deleteFunction;
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton(
@@ -47,9 +47,7 @@ class CustomPopOverWidget extends StatelessWidget {
       itemBuilder: (context) => [
         PopupMenuItem(
           height: 36,
-          onTap: () {
-            Navigator.pop(context);
-          },
+          onTap: editFunction,
           child: Text(
             AppLocalizations.of(context)!.popup_edit,
             style: Styles.textStyle12Medium,
@@ -62,9 +60,7 @@ class CustomPopOverWidget extends StatelessWidget {
         ),
         PopupMenuItem(
           height: 36,
-          onTap: () {
-            Navigator.pop(context);
-          },
+          onTap: deleteFunction,
           child: Text(
             AppLocalizations.of(context)!.popup_delete,
             style:

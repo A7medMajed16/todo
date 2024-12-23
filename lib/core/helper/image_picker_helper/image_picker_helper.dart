@@ -96,9 +96,6 @@ class ImagePickerHelper {
     final AppLocalizations localization = AppLocalizations.of(context)!;
     showModalBottomSheet(
       context: context,
-      // shape: RoundedRectangleBorder(
-      //   borderRadius: BorderRadius.circular(12),
-      // ),
       builder: (BuildContext context) {
         return Padding(
           padding: const EdgeInsets.all(8.0),

@@ -8,6 +8,7 @@ import 'package:todo/features/home/data/models/task_model.dart';
 import 'package:todo/features/home/presentation/manager/home_cubit/home_cubit.dart';
 import 'package:todo/features/home/presentation/views/home_view.dart';
 import 'package:todo/features/onboarding/presentation/views/onboarding_view.dart';
+import 'package:todo/features/profile/presentation/views/profile_view.dart';
 import 'package:todo/features/signup/presentation/manager/signup_cubit/signup_cubit.dart';
 import 'package:todo/features/signup/presentation/views/signup_view.dart';
 import 'package:todo/features/task/presentation/manager/add_new_task_cubit/add_new_task_cubit.dart';
@@ -22,6 +23,7 @@ abstract class AppRouter {
   static const String kSignUp = '/signup';
   static const String kTaskDetails = '/task_details';
   static const String kAddNewTask = '/add_new_task';
+  static const String kProfile = '/profile';
 
   static final router = GoRouter(
     observers: [GoRouteObserver()],
@@ -70,6 +72,10 @@ abstract class AppRouter {
               AddNewTaskCubit()..initTask(state.extra as TaskModel?),
           child: AddNewTaskView(),
         ),
+      ),
+      GoRoute(
+        path: kProfile,
+        builder: (context, state) => ProfileView(),
       ),
     ],
   );

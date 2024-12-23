@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:todo/core/routes/app_router.dart';
 import 'package:todo/core/theme/app_icons.dart';
 import 'package:todo/core/theme/app_images.dart';
 
@@ -24,7 +26,7 @@ class HomePageHeader extends StatelessWidget {
             AppIcons.coreCommonAssetsIconsPerson,
             height: 26,
           ),
-          onPressed: () {},
+          onPressed: () => context.push(AppRouter.kProfile),
         ),
         IconButton(
           padding: EdgeInsets.zero,

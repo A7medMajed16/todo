@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:todo/core/common/widgets/custom_button.dart';
 import 'package:todo/core/common/widgets/custom_date_picker.dart';
 import 'package:todo/core/common/widgets/custom_drop_button.dart';
@@ -73,9 +74,10 @@ class AddNewTaskBody extends StatelessWidget {
                   height: 49,
                   child: CustomButton(
                     title: localizations.new_task_button,
-                    onPressed: () {},
+                    onPressed: () => context.pop(),
                   ),
                 ),
+                SizedBox(),
               ],
             );
           },

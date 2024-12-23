@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo/core/routes/app_router.dart';
 import 'package:todo/core/theme/app_icons.dart';
 import 'package:todo/core/theme/app_images.dart';
+import 'package:todo/features/auth/presentation/manager/login_cubit/login_cubit.dart';
 
 class HomePageHeader extends StatelessWidget {
   const HomePageHeader({
@@ -28,15 +30,22 @@ class HomePageHeader extends StatelessWidget {
           ),
           onPressed: () => context.push(AppRouter.kProfile),
         ),
-        IconButton(
-          padding: EdgeInsets.zero,
-          constraints: BoxConstraints(),
-          visualDensity: VisualDensity(horizontal: -4, vertical: -4),
-          icon: SvgPicture.asset(
-            AppIcons.coreCommonAssetsIconsLogout,
-            height: 26,
+        BlocListener<LoginCubit, LoginState>(
+          listener: (context, state) {
+            if (state is LogoutSuccess) {
+              context.go(AppRouter.kLogin);
+            }
+          },
+          child: IconButton(
+            padding: EdgeInsets.zero,
+            constraints: BoxConstraints(),
+            visualDensity: VisualDensity(horizontal: -4, vertical: -4),
+            icon: SvgPicture.asset(
+              AppIcons.coreCommonAssetsIconsLogout,
+              height: 26,
+            ),
+            onPressed: () {},
           ),
-          onPressed: () {},
         ),
       ],
     );

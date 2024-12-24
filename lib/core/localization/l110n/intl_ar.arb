@@ -40,6 +40,8 @@
     "sign_up_address": "العنوان",
     "sign_up_address_hint": "العنوان...",
     "signup_success": "تم التسجيل بنجاح",
+    "signup_failed": "فشل التسجيل",
+    "signup_user_exists": "هذا الرقم مستخدم بالفعل",
     "name_empty": "يرجى إدخال الاسم",
     "years_of_experience_empty": "يرجى إدخال سنوات الخبرة",
     "experience_level_empty": "يرجى اختيار مستوى الخبرة",
@@ -70,5 +72,6 @@
     "new_task_date_hint": "اختر تاريخ الانتهاء...",
     "new_task_priority": "الأولوية",
     "new_task_priority_hint": "اختر الأولوية...",
-    "new_task_button": "إضافة المهمة"
+    "new_task_button": "إضافة المهمة",
+    "loading": "تحميل..."
 }

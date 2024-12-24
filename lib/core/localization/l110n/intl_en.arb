@@ -42,6 +42,8 @@
     "sign_up_address": "Address",
     "sign_up_address_hint": "Address...",
     "signup_success": "Sign up successfully",
+    "signup_failed": "Sign up failed",
+    "signup_user_exists": "This phone number already used",
     "name_empty": "Please enter your name",
     "years_of_experience_empty": "Please enter your years of experience",
     "experience_level_empty": "Please choose your experience level",
@@ -78,5 +80,6 @@
     "new_task_date_empty": "Please choose date",
     "new_task_priority_empty": "Please choose priority",
     "new_task_success": "Task added successfully",
-    "new_task_update_success": "Task updated successfully"
+    "new_task_update_success": "Task updated successfully",
+    "loading": "Loading..."
 }

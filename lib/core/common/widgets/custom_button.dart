@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo/core/common/colors/app_colors.dart';
 import 'package:todo/core/theme/styles.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CustomButton extends StatelessWidget {
   const CustomButton({
@@ -13,16 +14,18 @@ class CustomButton extends StatelessWidget {
     this.borderColor = AppColors.borderColor,
     this.titleStyle,
     this.tailing,
+    this.isLoading = false,
   });
   final void Function()? onPressed;
   final String? title;
   final Widget? leading, tailing;
   final Color backGroundColor, borderColor;
-  final bool isFilled;
+  final bool isFilled, isLoading;
 
   final TextStyle? titleStyle;
   @override
   Widget build(BuildContext context) {
+    final AppLocalizations localizations = AppLocalizations.of(context)!;
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
@@ -39,13 +42,20 @@ class CustomButton extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            leading ?? const SizedBox(),
-            leading != null && title != null
+            leading != null || isLoading
+                ? isLoading
+                    ? CircularProgressIndicator(
+                        color: AppColors.primerColor,
+                        strokeCap: StrokeCap.round,
+                      )
+                    : leading ?? SizedBox()
+                : const SizedBox(),
+            (leading != null || isLoading) && title != null
                 ? const SizedBox(width: 8)
                 : const SizedBox(),
-            title != null
+            title != null || isLoading
                 ? Text(
-                    title!,
+                    isLoading ? localizations.loading : title!,
                     style: titleStyle ??
                         Styles.textStyle16Bold.copyWith(
                             color: isFilled

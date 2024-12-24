@@ -1,12 +1,15 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:todo/features/signup/data/models/signup_model.dart';
+import 'package:todo/features/signup/data/repos/signup_repo.dart';
 
 part 'signup_state.dart';
 
 class SignupCubit extends Cubit<SignupState> {
-  SignupCubit() : super(SignupInitial());
+  SignupCubit(this._signupRepo) : super(SignupInitial());
 
+  final SignupRepo _signupRepo;
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
   final TextEditingController yearsOfExperienceController =
@@ -14,8 +17,7 @@ class SignupCubit extends Cubit<SignupState> {
   final TextEditingController addressController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final FocusNode passwordFocusNode = FocusNode();
-  String? countryCode, experienceLevel;
-
+  String? countryCode = '+20', experienceLevel;
   final List<bool> passwordConditions = [
     false,
     false,
@@ -23,8 +25,28 @@ class SignupCubit extends Cubit<SignupState> {
     false,
     false,
   ];
-
   bool isSubmitted = false;
+
+  Future<void> register() async {
+    emit(SignupLoading());
+    var result = await _signupRepo.registerNewUser(
+      SignupModel(
+        displayName: nameController.text,
+        phone: countryCode! + phoneController.text,
+        password: passwordController.text,
+        experienceYears: int.parse(yearsOfExperienceController.text),
+        address: addressController.text,
+        level: experienceLevel,
+      ),
+    );
+    result.fold(
+      (failure) => !isClosed
+          ? emit(SignupFailure(errorMessage: failure.errorMessage))
+          : null,
+      (done) => !isClosed ? emit(SignupSuccess()) : null,
+    );
+  }
+
   void changeCountryCode(String code) {
     countryCode = code;
   }

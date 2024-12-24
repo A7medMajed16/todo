@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -130,21 +132,48 @@ class SignupViewBody extends StatelessWidget {
                           SizedBox(
                             width: double.infinity,
                             height: 48,
-                            child: CustomButton(
-                              title: localizations.sign_up_title,
-                              onPressed: () => _signupFormKey.currentState!
-                                      .validate()
-                                  ? {
-                                      router.pop(),
-                                      CustomSnackBar.show(
-                                        context: context,
-                                        message: localizations.signup_success,
-                                        isDone: true,
-                                      )
-                                    }
-                                  : {
-                                      signupCubit.updateIsSubmittedState(),
-                                    },
+                            child: BlocConsumer<SignupCubit, SignupState>(
+                              builder: (context, state) {
+                                return CustomButton(
+                                  isLoading: state is SignupLoading,
+                                  title: localizations.sign_up_title,
+                                  onPressed: () => _signupFormKey.currentState!
+                                          .validate()
+                                      ? {
+                                          signupCubit.register(),
+                                        }
+                                      : {
+                                          signupCubit.updateIsSubmittedState(),
+                                        },
+                                );
+                              },
+                              listener:
+                                  (BuildContext context, SignupState state) {
+                                if (state is SignupSuccess) {
+                                  router.pop();
+                                  CustomSnackBar.show(
+                                    context: context,
+                                    message: localizations.signup_success,
+                                    isDone: true,
+                                  );
+                                } else if (state is SignupFailure) {
+                                  log("error message:${state.errorMessage}");
+                                  if (state.errorMessage ==
+                                      "رقم الهاتف مستخدم بالفعل") {
+                                    CustomSnackBar.show(
+                                      context: context,
+                                      message: localizations.signup_user_exists,
+                                      isError: true,
+                                    );
+                                  } else {
+                                    CustomSnackBar.show(
+                                      context: context,
+                                      message: localizations.signup_failed,
+                                      isError: true,
+                                    );
+                                  }
+                                }
+                              },
                             ),
                           ),
                           Center(

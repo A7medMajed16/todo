@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:todo/core/api/service_locator.dart';
 import 'package:todo/core/common/colors/app_colors.dart';
 import 'package:todo/core/common/size/screen_dimensions.dart';
 import 'package:todo/core/helper/validations/validations.dart';
@@ -15,6 +16,7 @@ SharedPreferences? sharedPreferences;
 FlutterSecureStorage? secureStorage;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  setupServiceLocator();
   sharedPreferences = await SharedPreferences.getInstance();
   secureStorage = const FlutterSecureStorage();
   runApp(const ToDo());

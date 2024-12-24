@@ -3,24 +3,27 @@ import 'package:todo/core/localization/localization_functions.dart';
 
 class ExperienceLevelData {
   final List<String> dataEnglish = [
-    'Beginner',
-    'Intermediate',
-    'Advanced',
+    'Fresh',
+    'Junior',
+    'MidLevel',
+    'Senior',
   ];
   final List<String> dataArabic = [
     'مبتدئ',
+    'جونيور',
     'متوسط',
-    'متقدم',
+    'سينير',
   ];
   final List<String> values = [
-    "b",
-    "i",
-    "a",
+    "fresh",
+    "junior",
+    "midLevel",
+    "senior",
   ];
 
   List<DropdownMenuItem> get experienceLevelItems =>
       List<DropdownMenuItem>.generate(
-        3,
+        4,
         (index) => DropdownMenuItem(
           value: values[index],
           child: Text(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:todo/core/api/service_locator.dart';
 import 'package:todo/core/config/classes/account_helper.dart';
 import 'package:todo/features/auth/presentation/manager/login_cubit/login_cubit.dart';
 import 'package:todo/features/auth/presentation/views/login_view.dart';
@@ -9,6 +10,7 @@ import 'package:todo/features/home/presentation/manager/home_cubit/home_cubit.da
 import 'package:todo/features/home/presentation/views/home_view.dart';
 import 'package:todo/features/onboarding/presentation/views/onboarding_view.dart';
 import 'package:todo/features/profile/presentation/views/profile_view.dart';
+import 'package:todo/features/signup/data/repos/signup_repo_impl.dart';
 import 'package:todo/features/signup/presentation/manager/signup_cubit/signup_cubit.dart';
 import 'package:todo/features/signup/presentation/views/signup_view.dart';
 import 'package:todo/features/task/presentation/manager/add_new_task_cubit/add_new_task_cubit.dart';
@@ -55,7 +57,7 @@ abstract class AppRouter {
       GoRoute(
         path: kSignUp,
         builder: (context, state) => BlocProvider(
-          create: (context) => SignupCubit(),
+          create: (context) => SignupCubit(getIt.get<SignupRepoImpl>()),
           child: const SignupView(),
         ),
       ),

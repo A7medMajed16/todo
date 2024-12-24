@@ -105,10 +105,10 @@ class CustomSnackBarState extends State<CustomSnackBar>
                 child: Container(
                   decoration: BoxDecoration(
                     color: widget.isError
-                        ? AppColors.errorColor.withValues(alpha: 0.5)
+                        ? AppColors.errorColor
                         : widget.isDone
-                            ? AppColors.doneColor.withValues(alpha: 0.8)
-                            : AppColors.primerColor.withValues(alpha: 0.5),
+                            ? AppColors.doneColor
+                            : AppColors.primerColor,
                     borderRadius: BorderRadius.circular(10),
                   ),
                   padding:

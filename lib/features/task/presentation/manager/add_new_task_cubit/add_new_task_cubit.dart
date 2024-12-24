@@ -20,16 +20,10 @@ class AddNewTaskCubit extends Cubit<AddNewTaskState> {
   void initTask(TaskModel? taskModel) {
     if (taskModel != null) {
       titleController.text = taskModel.title ?? "";
-      contentController.text = taskModel.content ?? "";
+      contentController.text = taskModel.desc ?? "";
       imagePath = taskModel.image;
-      priority = taskModel.importanceLevel == "High"
-          ? "h"
-          : taskModel.importanceLevel == "Medium"
-              ? "m"
-              : "l";
-      date = DateFormat('dd/MM/yyyy')
-          .format(DateTime.parse(taskModel.date!))
-          .toString();
+      priority = taskModel.priority;
+      date = DateFormat('dd/MM/yyyy').format(DateTime.now()).toString();
     }
   }
 

@@ -28,6 +28,15 @@ class _HomePageTabsBarState extends State<HomePageTabsBar>
       setState(() {
         _selectedIndex = _homeCubit.tabController!.index;
       });
+      _homeCubit.updateFilter(_selectedIndex == 0
+          ? null
+          : _selectedIndex == 1
+              ? "inprogress"
+              : _selectedIndex == 2
+                  ? "waiting"
+                  : _selectedIndex == 3
+                      ? "finished"
+                      : null);
     });
   }
 

@@ -18,8 +18,8 @@ class TasksItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AppLocalizations localizations = AppLocalizations.of(context)!;
-    TaskStatusDataModel taskData = getTaskData(taskModel.status ?? "Waiting",
-        localizations, taskModel.importanceLevel ?? "Low");
+    TaskStatusDataModel taskData = getTaskData(taskModel.status ?? "waiting",
+        localizations, taskModel.priority ?? "low");
     return ListTile(
       onTap: () => context.push(AppRouter.kTaskDetails, extra: taskModel),
       splashColor: AppColors.splashColor.withValues(alpha: 0.05),
@@ -39,7 +39,7 @@ class TasksItem extends StatelessWidget {
             children: [
               Flexible(
                 child: Text(
-                  taskModel.content ?? "",
+                  taskModel.desc ?? "",
                   overflow: TextOverflow.ellipsis,
                   style: Styles.textStyle14Regular
                       .copyWith(color: AppColors.subtitleTextColor),
@@ -69,7 +69,7 @@ class TasksItem extends StatelessWidget {
                 ],
               ),
               Text(
-                taskModel.date != null ? formatDateTime(taskModel.date!) : "",
+                formatDateTime(DateTime.now().toString()),
                 style: Styles.textStyle12Regular.copyWith(
                   color: AppColors.subtitleTextColor,
                 ),
@@ -143,27 +143,27 @@ class TasksItem extends StatelessWidget {
       TaskStatusDataModel(
           statusContainerColor: status == "Finished"
               ? Color(0xffE3F2FF)
-              : status == "Inprogress"
+              : status == "inprogress"
                   ? Color(0xffF0ECFF)
                   : Color(0xffFFE4F2),
-          statusTitleColor: status == "Finished"
+          statusTitleColor: status == "finished"
               ? Color(0xff0087FF)
-              : status == "Inprogress"
+              : status == "inprogress"
                   ? Color(0xff5F33E1)
                   : Color(0xffFF7D53),
-          importanceLevelColor: importanceLevel == "High"
+          importanceLevelColor: importanceLevel == "high"
               ? Color(0xffFF7D53)
-              : importanceLevel == "Medium"
+              : importanceLevel == "medium"
                   ? Color(0xff5F33E1)
                   : Color(0xff0087FF),
-          statusTitle: status == "Finished"
+          statusTitle: status == "finished"
               ? localizations.home_finished_tasks
-              : status == "Inprogress"
+              : status == "inprogress"
                   ? localizations.home_in_progress_tasks
                   : localizations.home_waiting_tasks,
-          importanceLevelTitle: importanceLevel == "High"
+          importanceLevelTitle: importanceLevel == "high"
               ? localizations.home_high
-              : importanceLevel == "Medium"
+              : importanceLevel == "medium"
                   ? localizations.home_medium
                   : localizations.home_low);
 

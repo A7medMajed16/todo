@@ -52,13 +52,12 @@ class TaskDetailsViewBody extends StatelessWidget {
               style: Styles.textStyle19Bold,
             ),
             Text(
-              formatContentWithNewLines(taskModel.content ?? ""),
+              formatContentWithNewLines(taskModel.desc ?? ""),
               style: Styles.textStyle14Regular
                   .copyWith(color: AppColors.subtitleTextColor),
             ),
             TaskDetailsWidget(
-              title: DateFormat('d MMMM, yyyy')
-                  .format(DateTime.parse(taskModel.date!)),
+              title: DateFormat('d MMMM, yyyy').format(DateTime.now()),
               icon: AppIcons.coreCommonAssetsIconsCalendar,
               isDate: true,
             ),
@@ -68,7 +67,7 @@ class TaskDetailsViewBody extends StatelessWidget {
               isDate: false,
             ),
             TaskDetailsWidget(
-              title: taskModel.importanceLevel ?? "",
+              title: taskModel.priority ?? "",
               icon: AppIcons.coreCommonAssetsIconsFlag,
               isDate: false,
             ),

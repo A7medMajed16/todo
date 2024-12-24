@@ -5,6 +5,7 @@ import 'package:todo/core/api/service_locator.dart';
 import 'package:todo/core/config/classes/account_helper.dart';
 import 'package:todo/features/auth/presentation/views/login_view.dart';
 import 'package:todo/features/home/data/models/task_model.dart';
+import 'package:todo/features/home/data/repos/home_repo_impl.dart';
 import 'package:todo/features/home/presentation/manager/home_cubit/home_cubit.dart';
 import 'package:todo/features/home/presentation/views/home_view.dart';
 import 'package:todo/features/onboarding/presentation/views/onboarding_view.dart';
@@ -42,7 +43,7 @@ abstract class AppRouter {
       GoRoute(
         path: kHome,
         builder: (context, state) => BlocProvider(
-          create: (context) => HomeCubit(),
+          create: (context) => HomeCubit(getIt.get<HomeRepoImpl>())..getTasks(),
           child: const HomeView(),
         ),
       ),

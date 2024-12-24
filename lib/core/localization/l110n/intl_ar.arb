@@ -62,6 +62,7 @@
     "home_low": "منخفض",
     "home_medium": "متوسط",
     "home_high": "مرتفع",
+    "home_no_tasks": "لا توجد مهام",
     "popup_edit": "تعديل",
     "popup_delete": "حذف",
     "details_title": "تفاصيل المهمة",
@@ -76,5 +77,7 @@
     "new_task_priority": "الأولوية",
     "new_task_priority_hint": "اختر الأولوية...",
     "new_task_button": "إضافة المهمة",
-    "loading": "تحميل..."
+    "loading": "تحميل...",
+    "unknown_page_error": "حدث خطأ ، يرجى التحقق من الاتصال بالانترنت",
+    "try_again": "حاول مرة اخرى"
 }

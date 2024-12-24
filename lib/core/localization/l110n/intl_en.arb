@@ -64,6 +64,7 @@
     "home_low": "Low",
     "home_medium": "Medium",
     "home_high": "High",
+    "home_no_tasks": "No tasks found",
     "popup_edit": "Edit",
     "popup_delete": "Delete",
     "details_title": "Task Details",
@@ -84,5 +85,7 @@
     "new_task_priority_empty": "Please choose priority",
     "new_task_success": "Task added successfully",
     "new_task_update_success": "Task updated successfully",
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "unknown_page_error": "Something went wrong, pleas check your internet connection",
+    "try_again": "Try again"
 }

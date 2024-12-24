@@ -26,7 +26,7 @@ class LoginCubit extends Cubit<LoginState> {
     result.fold(
       (failure) => !isClosed ? emit(LoginFailure(failure.errorMessage)) : null,
       (done) async {
-        sharedPreferences!.setString("user_logged", "true");
+        sharedPreferences!.setBool("user_logged", true);
         !isClosed ? emit(LoginSuccess()) : null;
       },
     );

@@ -26,9 +26,9 @@ class TaskStatusData {
     'عالي',
   ];
   final List<String> values = [
-    "l",
-    "m",
-    "h",
+    "low",
+    "medium",
+    "high",
   ];
 
   List<DropdownMenuItem> get priorityItems => List<DropdownMenuItem>.generate(

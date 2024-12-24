@@ -24,13 +24,10 @@ AppBar customAppBar(
           splashColor: AppColors.splashColor,
           hoverColor: Colors.transparent,
           borderRadius: BorderRadius.circular(ScreenDimensions.width),
-          radius: ScreenDimensions.width,
           child: Transform.flip(
             flipX: !LocalizationHelper.isAppArabic(),
             child: SvgPicture.asset(
               AppIcons.coreCommonAssetsIconsArrowLeft,
-              height: 24,
-              width: 24,
               colorFilter: ColorFilter.mode(
                 AppColors.iconColor,
                 BlendMode.srcIn,

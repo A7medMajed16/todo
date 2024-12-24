@@ -32,7 +32,7 @@ class SignupCubit extends Cubit<SignupState> {
     var result = await _signupRepo.registerNewUser(
       SignupModel(
         displayName: nameController.text,
-        phone: countryCode! + phoneController.text,
+        phone: "$countryCode${phoneController.text}",
         password: passwordController.text,
         experienceYears: int.parse(yearsOfExperienceController.text),
         address: addressController.text,

@@ -9,6 +9,8 @@ import 'package:todo/core/common/colors/app_colors.dart';
 import 'package:todo/core/common/size/screen_dimensions.dart';
 import 'package:todo/core/helper/validations/validations.dart';
 import 'package:todo/core/routes/app_router.dart';
+import 'package:todo/features/auth/data/repos/login_repo_impl.dart';
+import 'package:todo/features/auth/presentation/manager/login_cubit/login_cubit.dart';
 import 'package:todo/features/localization/localization_cubit/localization_cubit.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -32,9 +34,9 @@ class ToDo extends StatelessWidget {
         BlocProvider(
           create: (context) => LocalizationCubit()..getSavedLanguage(),
         ),
-        // BlocProvider(
-        //   create: (context) => LoginCubit(),
-        // ),
+        BlocProvider(
+          create: (context) => LoginCubit(getIt.get<LoginRepoImpl>()),
+        ),
         // BlocProvider(
         //   create: (context) => SignupCubit(),
         // ),

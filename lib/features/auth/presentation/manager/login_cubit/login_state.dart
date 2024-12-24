@@ -19,4 +19,12 @@ final class LoginLoading extends LoginState {}
 
 final class LoginSuccess extends LoginState {}
 
+final class LogoutLoading extends LoginState {}
+
+final class LogoutFailure extends LoginState {
+  final String errorMessage;
+
+  const LogoutFailure(this.errorMessage);
+}
+
 final class LogoutSuccess extends LoginState {}

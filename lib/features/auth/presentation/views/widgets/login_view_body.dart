@@ -13,7 +13,6 @@ import 'package:todo/core/routes/app_router.dart';
 import 'package:todo/core/theme/app_images.dart';
 import 'package:todo/core/theme/styles.dart';
 import 'package:todo/features/auth/presentation/manager/login_cubit/login_cubit.dart';
-import 'package:todo/main.dart';
 
 class LoginViewBody extends StatelessWidget {
   LoginViewBody({super.key});
@@ -23,7 +22,7 @@ class LoginViewBody extends StatelessWidget {
     final AppLocalizations localizations = AppLocalizations.of(context)!;
     final LoginCubit loginCubit = context.read<LoginCubit>();
     final GoRouter router = GoRouter.of(context);
-    return BlocBuilder<LoginCubit, LoginState>(
+    return BlocConsumer<LoginCubit, LoginState>(
       builder: (context, state) {
         return SingleChildScrollView(
           physics: AlwaysScrollableScrollPhysics(),
@@ -76,17 +75,11 @@ class LoginViewBody extends StatelessWidget {
                         width: double.infinity,
                         height: 55,
                         child: CustomButton(
+                          isLoading: state is LoginLoading,
                           onPressed: () =>
                               _loginFormKey.currentState!.validate()
                                   ? {
-                                      sharedPreferences!
-                                          .setBool("user_logged", true),
-                                      CustomSnackBar.show(
-                                        context: context,
-                                        message: localizations.signup_success,
-                                        isDone: true,
-                                      ),
-                                      router.go(AppRouter.kHome),
+                                      loginCubit.login(),
                                     }
                                   : null,
                           title: localizations.login_button,
@@ -128,6 +121,30 @@ class LoginViewBody extends StatelessWidget {
             ),
           ),
         );
+      },
+      listener: (BuildContext context, LoginState state) {
+        if (state is LoginFailure) {
+          if (state.errorMessage == "يوجد خطأ في رقم الهاتف أو كلمة المرور") {
+            CustomSnackBar.show(
+              context: context,
+              message: localizations.login_wrong_user,
+              isError: true,
+            );
+          } else {
+            CustomSnackBar.show(
+              context: context,
+              message: localizations.login_error,
+              isError: true,
+            );
+          }
+        } else if (state is LoginSuccess) {
+          CustomSnackBar.show(
+            context: context,
+            message: localizations.login_success,
+            isDone: true,
+          );
+          router.go(AppRouter.kHome);
+        }
       },
     );
   }

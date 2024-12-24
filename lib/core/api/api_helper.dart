@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:todo/main.dart';
 
 class ApiHelper {
   final String _baseUrl = "https://todo.iraqsapp.com";
@@ -31,11 +32,11 @@ class ApiHelper {
 
   Future<dynamic> post(
       {required String endPoint,
-      required data,
+      required body,
       Map<String, dynamic>? headers}) async {
     var response = await _dio.post(
       '$_baseUrl$endPoint',
-      data: data,
+      data: body,
       options: Options(
         headers: headers,
       ),
@@ -45,11 +46,11 @@ class ApiHelper {
 
   Future<Map<String, dynamic>> put(
       {required String endPoint,
-      required data,
+      required body,
       Map<String, dynamic>? headers}) async {
     var response = await _dio.put(
       '$_baseUrl$endPoint',
-      data: data,
+      data: body,
       options: Options(
         headers: headers,
       ),
@@ -66,5 +67,27 @@ class ApiHelper {
       ),
     );
     return response.data;
+  }
+
+  Future<void> refreshToken() async {
+    try {
+      final refreshToken = await secureStorage!.read(key: "refresh_token");
+      final accessToken = await secureStorage!.read(key: "access_token");
+
+      var response = await _dio.get(
+        '$_baseUrl/auth/refresh-token?token=$refreshToken',
+        options: Options(
+          headers: {"Authorization": "Bearer $accessToken"},
+        ),
+      );
+
+      await secureStorage!.write(
+        key: "access_token",
+        value: response.data["access_token"],
+      );
+    } catch (e) {
+      // Let the error propagate up to be handled by the calling function
+      rethrow;
+    }
   }
 }

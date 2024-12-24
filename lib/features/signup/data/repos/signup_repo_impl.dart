@@ -13,7 +13,7 @@ class SignupRepoImpl implements SignupRepo {
   Future<Either<Failure, void>> registerNewUser(SignupModel signupModel) async {
     try {
       await _apiHelper.post(
-          endPoint: "/auth/register", data: signupModel.toJson());
+          endPoint: "/auth/register", body: signupModel.toJson());
       return right(null);
     } catch (e) {
       if (e is DioException) {

@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo/core/api/service_locator.dart';
 import 'package:todo/core/config/classes/account_helper.dart';
-import 'package:todo/features/auth/presentation/manager/login_cubit/login_cubit.dart';
 import 'package:todo/features/auth/presentation/views/login_view.dart';
 import 'package:todo/features/home/data/models/task_model.dart';
 import 'package:todo/features/home/presentation/manager/home_cubit/home_cubit.dart';
@@ -49,10 +48,7 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: kLogin,
-        builder: (context, state) => BlocProvider(
-          create: (context) => LoginCubit(),
-          child: const LoginView(),
-        ),
+        builder: (context, state) => const LoginView(),
       ),
       GoRoute(
         path: kSignUp,

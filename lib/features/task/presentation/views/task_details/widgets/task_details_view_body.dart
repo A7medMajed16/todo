@@ -23,30 +23,32 @@ class TaskDetailsViewBody extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           spacing: 16,
           children: [
-            Hero(
-              tag: "taskImage${taskModel.id}",
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(12),
-                child: CachedNetworkImage(
-                  imageUrl: taskModel.image!,
-                  errorWidget: (context, url, error) => const Icon(
-                    Icons.error,
-                    color: AppColors.errorColor,
-                  ),
-                  placeholder: (context, url) => const SizedBox(
-                    width: 50,
-                    height: 50,
-                    child: FittedBox(
-                      fit: BoxFit.scaleDown,
-                      child: CircularProgressIndicator(
-                        color: AppColors.primerColor,
-                        strokeCap: StrokeCap.round,
+            taskModel.image == null
+                ? SizedBox()
+                : Hero(
+                    tag: "taskImage${taskModel.id}",
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: CachedNetworkImage(
+                        imageUrl: taskModel.image!,
+                        errorWidget: (context, url, error) => const Icon(
+                          Icons.error,
+                          color: AppColors.errorColor,
+                        ),
+                        placeholder: (context, url) => const SizedBox(
+                          width: 50,
+                          height: 50,
+                          child: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: CircularProgressIndicator(
+                              color: AppColors.primerColor,
+                              strokeCap: StrokeCap.round,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ),
-            ),
             Text(
               taskModel.title ?? "",
               style: Styles.textStyle19Bold,
@@ -57,7 +59,9 @@ class TaskDetailsViewBody extends StatelessWidget {
                   .copyWith(color: AppColors.subtitleTextColor),
             ),
             TaskDetailsWidget(
-              title: DateFormat('d MMMM, yyyy').format(DateTime.now()),
+              title: taskModel.createdAt == null
+                  ? "'d MMMM yyyy'"
+                  : DateFormat('d MMMM, yyyy').format(taskModel.createdAt!),
               icon: AppIcons.coreCommonAssetsIconsCalendar,
               isDate: true,
             ),

@@ -5,12 +5,13 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:todo/features/home/data/models/task_model.dart';
+import 'package:todo/features/task/data/repos/task_repo.dart';
 
 part 'add_new_task_state.dart';
 
 class AddNewTaskCubit extends Cubit<AddNewTaskState> {
-  AddNewTaskCubit() : super(AddNewTaskInitial());
-
+  AddNewTaskCubit(this._taskRepo) : super(AddNewTaskInitial());
+  final TaskRepo _taskRepo;
   File? imageFile;
   final TextEditingController titleController = TextEditingController();
   final TextEditingController contentController = TextEditingController();
@@ -23,7 +24,51 @@ class AddNewTaskCubit extends Cubit<AddNewTaskState> {
       contentController.text = taskModel.desc ?? "";
       imagePath = taskModel.image;
       priority = taskModel.priority;
-      date = DateFormat('dd/MM/yyyy').format(DateTime.now()).toString();
+      date = taskModel.createdAt == null
+          ? null
+          : DateFormat('dd/MM/yyyy').format(taskModel.createdAt!).toString();
+    }
+  }
+
+  Future<void> addNewTask() async {
+    emit(AddNewTaskLoading());
+    if (imageFile != null) {
+      var uploadImageResult = await _taskRepo.uploadImage(
+        image: imageFile!,
+      );
+      uploadImageResult.fold(
+          (failure) => !isClosed
+              ? emit(AddNewTaskFailure(error: failure.errorMessage))
+              : null, (imageUrl) async {
+        var result = await _taskRepo.addNewTask(
+          TaskModel(
+            title: titleController.text,
+            desc: contentController.text,
+            priority: priority,
+            image: imageUrl,
+            status: "waiting",
+          ),
+        );
+        result.fold(
+            (failure) => !isClosed
+                ? emit(AddNewTaskFailure(error: failure.errorMessage))
+                : null,
+            (done) => !isClosed ? emit(AddNewTaskSuccess()) : null);
+      });
+    } else {
+      var result = await _taskRepo.addNewTask(
+        TaskModel(
+          title: titleController.text,
+          desc: contentController.text,
+          priority: priority,
+          image: imagePath,
+        ),
+      );
+      result.fold(
+          (failure) => !isClosed
+              ? emit(AddNewTaskFailure(error: failure.errorMessage))
+              : null,
+          (done) => !isClosed ? emit(AddNewTaskSuccess()) : null);
     }
   }
 

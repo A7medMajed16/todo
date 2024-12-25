@@ -4,6 +4,7 @@ import 'package:todo/core/api/api_helper.dart';
 import 'package:todo/features/auth/data/repos/login_repo_impl.dart';
 import 'package:todo/features/home/data/repos/home_repo_impl.dart';
 import 'package:todo/features/signup/data/repos/signup_repo_impl.dart';
+import 'package:todo/features/task/data/repos/task_repo_impl.dart';
 
 /// The GetIt instance for service locator
 final getIt = GetIt.instance;
@@ -26,6 +27,13 @@ void setupServiceLocator() {
   );
   getIt.registerSingleton<HomeRepoImpl>(
     HomeRepoImpl(
+      ApiHelper(
+        Dio(),
+      ),
+    ),
+  );
+  getIt.registerSingleton<TaskRepoImpl>(
+    TaskRepoImpl(
       ApiHelper(
         Dio(),
       ),

@@ -13,6 +13,7 @@ import 'package:todo/features/profile/presentation/views/profile_view.dart';
 import 'package:todo/features/signup/data/repos/signup_repo_impl.dart';
 import 'package:todo/features/signup/presentation/manager/signup_cubit/signup_cubit.dart';
 import 'package:todo/features/signup/presentation/views/signup_view.dart';
+import 'package:todo/features/task/data/repos/task_repo_impl.dart';
 import 'package:todo/features/task/presentation/manager/add_new_task_cubit/add_new_task_cubit.dart';
 import 'package:todo/features/task/presentation/views/add_new_task/add_new_task_view.dart';
 import 'package:todo/features/task/presentation/views/task_details/task_details_view.dart';
@@ -67,8 +68,8 @@ abstract class AppRouter {
       GoRoute(
         path: kAddNewTask,
         builder: (context, state) => BlocProvider(
-          create: (context) =>
-              AddNewTaskCubit()..initTask(state.extra as TaskModel?),
+          create: (context) => AddNewTaskCubit(getIt.get<TaskRepoImpl>())
+            ..initTask(state.extra as TaskModel?),
           child: AddNewTaskView(),
         ),
       ),

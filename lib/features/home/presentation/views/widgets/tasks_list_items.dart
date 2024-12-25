@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo/core/common/colors/app_colors.dart';
 import 'package:todo/core/common/size/screen_dimensions.dart';
 import 'package:todo/core/common/widgets/error_page.dart';
+import 'package:todo/features/auth/presentation/manager/login_cubit/login_cubit.dart';
 import 'package:todo/features/home/presentation/manager/home_cubit/home_cubit.dart';
 import 'package:todo/features/home/presentation/views/widgets/tasks_item.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -22,7 +23,7 @@ class TasksListItems extends StatelessWidget {
       thickness: 5,
       minThumbLength: 30,
       radius: Radius.circular(ScreenDimensions.width),
-      child: BlocBuilder<HomeCubit, HomeState>(
+      child: BlocConsumer<HomeCubit, HomeState>(
         builder: (context, state) {
           if (state is HomeSuccess) {
             if (state.tasks.isNotEmpty) {
@@ -61,6 +62,16 @@ class TasksListItems extends StatelessWidget {
                 strokeCap: StrokeCap.round,
               ),
             );
+          }
+        },
+        listener: (BuildContext context, HomeState state) {
+          if (state is HomeFailure) {
+            if (state.message == "Unauthorized") {
+              homeCubit.getTasks();
+            } else if (state.message ==
+                "Session expired. Please login again.") {
+              context.read<LoginCubit>().logout();
+            }
           }
         },
       ),

@@ -69,7 +69,9 @@ class TasksItem extends StatelessWidget {
                 ],
               ),
               Text(
-                formatDateTime(DateTime.now().toString()),
+                taskModel.createdAt != null
+                    ? formatDateTime(taskModel.createdAt!)
+                    : "",
                 style: Styles.textStyle12Regular.copyWith(
                   color: AppColors.subtitleTextColor,
                 ),
@@ -78,31 +80,33 @@ class TasksItem extends StatelessWidget {
           )
         ],
       ),
-      leading: Hero(
-        tag: "taskImage${taskModel.id}",
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(4),
-          child: CachedNetworkImage(
-            imageUrl: taskModel.image!,
-            width: 64,
-            errorWidget: (context, url, error) => const Icon(
-              Icons.error,
-              color: AppColors.errorColor,
-            ),
-            placeholder: (context, url) => SizedBox(
-              width: 30,
-              height: 30,
-              child: FittedBox(
-                fit: BoxFit.scaleDown,
-                child: const CircularProgressIndicator(
-                  color: AppColors.primerColor,
-                  strokeCap: StrokeCap.round,
+      leading: taskModel.image == null
+          ? SizedBox()
+          : Hero(
+              tag: "taskImage${taskModel.id}",
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(4),
+                child: CachedNetworkImage(
+                  imageUrl: taskModel.image!,
+                  width: 64,
+                  errorWidget: (context, url, error) => const Icon(
+                    Icons.error,
+                    color: AppColors.errorColor,
+                  ),
+                  placeholder: (context, url) => SizedBox(
+                    width: 30,
+                    height: 30,
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: const CircularProgressIndicator(
+                        color: AppColors.primerColor,
+                        strokeCap: StrokeCap.round,
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ),
-          ),
-        ),
-      ),
       title: Row(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -167,8 +171,7 @@ class TasksItem extends StatelessWidget {
                   ? localizations.home_medium
                   : localizations.home_low);
 
-  String formatDateTime(String dateTimeString) {
-    DateTime dateTime = DateTime.parse(dateTimeString);
+  String formatDateTime(DateTime dateTime) {
     DateFormat formatter = DateFormat('dd/MM/yyyy');
     return formatter.format(dateTime);
   }

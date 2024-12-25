@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:todo/main.dart';
 
@@ -69,11 +71,35 @@ class ApiHelper {
     return response.data;
   }
 
+  Future<Map<String, dynamic>> uploadFile({
+    required String endPoint,
+    required File file,
+    required String bodyKey,
+    required String fileName,
+    Map<String, dynamic>? headers,
+  }) async {
+    final formData = FormData.fromMap({
+      bodyKey: await MultipartFile.fromFile(
+        file.path,
+        filename: fileName,
+        contentType: DioMediaType.parse('image/jpeg'),
+      )
+    });
+
+    var response = await _dio.post(
+      '$_baseUrl$endPoint',
+      data: formData,
+      options: Options(
+        headers: headers,
+      ),
+    );
+    return response.data;
+  }
+
   Future<void> refreshToken() async {
     try {
       final refreshToken = await secureStorage!.read(key: "refresh_token");
       final accessToken = await secureStorage!.read(key: "access_token");
-
       var response = await _dio.get(
         '$_baseUrl/auth/refresh-token?token=$refreshToken',
         options: Options(

@@ -21,6 +21,7 @@ class LoginRepoImpl implements LoginRepo {
           .write(key: "access_token", value: response["access_token"]);
       await secureStorage!
           .write(key: "refresh_token", value: response["refresh_token"]);
+      await secureStorage!.write(key: "user_id", value: response["_id"]);
       return right(null);
     } catch (e) {
       if (e is DioException) {

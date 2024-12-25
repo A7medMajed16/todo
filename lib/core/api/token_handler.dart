@@ -5,6 +5,7 @@ import 'package:todo/core/api/errors/failures.dart';
 
 class TokenHandler {
   final ApiHelper _apiHelper;
+  final int maxRetries = 3;
 
   TokenHandler(this._apiHelper);
 
@@ -12,32 +13,38 @@ class TokenHandler {
     required Future<T> Function() apiCall,
     bool shouldLogoutOn403 = true,
   }) async {
-    try {
-      final result = await apiCall();
-      return right(result);
-    } catch (e) {
-      if (e is DioException) {
-        if (e.response?.statusCode == 401) {
-          try {
-            await _apiHelper.refreshToken();
-            final retryResult = await apiCall();
-            return right(retryResult);
-          } catch (refreshError) {
-            if (refreshError is DioException &&
-                refreshError.response?.statusCode == 403) {
-              if (shouldLogoutOn403) {
+    int retryCount = 0;
+
+    while (true) {
+      try {
+        final result = await apiCall();
+        return right(result);
+      } catch (e) {
+        if (e is DioException) {
+          if (e.response?.statusCode == 401) {
+            if (retryCount >= maxRetries) {
+              return left(ServerFailure("Max refresh attempts reached"));
+            }
+            try {
+              await _apiHelper.refreshToken();
+              retryCount++;
+              continue;
+            } catch (refreshError) {
+              if (refreshError is DioException &&
+                  refreshError.response?.statusCode == 403 &&
+                  shouldLogoutOn403) {
                 return left(
                     ServerFailure("Session expired. Please login again."));
               }
+              return left(_handleDioException(refreshError as DioException));
             }
-            return left(_handleDioException(refreshError as DioException));
+          } else if (e.response?.statusCode == 403 && shouldLogoutOn403) {
+            return left(ServerFailure("Session expired. Please login again."));
           }
-        } else if (e.response?.statusCode == 403 && shouldLogoutOn403) {
-          return left(ServerFailure("Session expired. Please login again."));
+          return left(_handleDioException(e));
         }
-        return left(_handleDioException(e));
+        return left(ServerFailure(e.toString()));
       }
-      return left(ServerFailure(e.toString()));
     }
   }
 

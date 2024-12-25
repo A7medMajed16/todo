@@ -9,7 +9,7 @@ class TaskEditDeleteCubit extends Cubit<TaskEditDeleteState> {
   final HomeRepo _homeRepo;
   int? itemIndex;
 
-  void deleteTask(String taskId, int itemIndex) async {
+  void deleteTask(String taskId, int? itemIndex) async {
     itemIndex = itemIndex;
     emit(TaskEditDeleteLoading());
     var result = await _homeRepo.deleteTask(taskId: taskId);

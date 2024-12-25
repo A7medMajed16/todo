@@ -13,9 +13,10 @@ class TaskDetailsView extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: customAppBar(
-          title: AppLocalizations.of(context)!.details_title,
-          context: context,
-          taskId: taskModel.id),
+        title: AppLocalizations.of(context)!.details_title,
+        context: context,
+        taskModel: taskModel,
+      ),
       backgroundColor: AppColors.backgroundColor,
       body: SafeArea(
         bottom: false,

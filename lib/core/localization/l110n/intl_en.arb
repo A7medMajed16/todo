@@ -88,5 +88,11 @@
     "new_task_update": "Update task",
     "loading": "Loading...",
     "unknown_page_error": "Something went wrong, pleas check your internet connection",
-    "try_again": "Try again"
+    "try_again": "Try again",
+    "profile": "Profile",
+    "profile_name": "NAME",
+    "profile_phone": "PHONE",
+    "profile_level": "LEVEL",
+    "profile_years_of_experience": "YEARS OF EXPERIENCE",
+    "profile_location": "LOCATION"
 }

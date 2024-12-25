@@ -9,7 +9,10 @@ import 'package:todo/features/home/data/repos/home_repo_impl.dart';
 import 'package:todo/features/home/presentation/manager/home_cubit/home_cubit.dart';
 import 'package:todo/features/home/presentation/views/home_view.dart';
 import 'package:todo/features/onboarding/presentation/views/onboarding_view.dart';
+import 'package:todo/features/profile/data/repos/profile_repo_impl.dart';
+import 'package:todo/features/profile/presentation/manager/profile_cubit/profile_cubit.dart';
 import 'package:todo/features/profile/presentation/views/profile_view.dart';
+import 'package:todo/features/profile/presentation/views/widgets/dev_profile/dev_profile_view.dart';
 import 'package:todo/features/signup/data/repos/signup_repo_impl.dart';
 import 'package:todo/features/signup/presentation/manager/signup_cubit/signup_cubit.dart';
 import 'package:todo/features/signup/presentation/views/signup_view.dart';
@@ -27,6 +30,7 @@ abstract class AppRouter {
   static const String kTaskDetails = '/task_details';
   static const String kAddNewTask = '/add_new_task';
   static const String kProfile = '/profile';
+  static const String kDevProfile = '/dev_profile';
 
   static final router = GoRouter(
     observers: [GoRouteObserver()],
@@ -44,7 +48,8 @@ abstract class AppRouter {
       GoRoute(
         path: kHome,
         builder: (context, state) => BlocProvider(
-          create: (context) => HomeCubit(getIt.get<HomeRepoImpl>())..getTasks(),
+          create: (context) =>
+              HomeCubit(getIt.get<HomeRepoImpl>())..initScrollController(),
           child: const HomeView(),
         ),
       ),
@@ -75,7 +80,15 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: kProfile,
-        builder: (context, state) => ProfileView(),
+        builder: (context, state) => BlocProvider(
+          create: (context) =>
+              ProfileCubit(getIt.get<ProfileRepoImpl>())..getProfileData(),
+          child: ProfileView(),
+        ),
+      ),
+      GoRoute(
+        path: kDevProfile,
+        builder: (context, state) => DevProfileView(),
       ),
     ],
   );

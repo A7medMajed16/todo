@@ -3,8 +3,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:todo/core/common/colors/app_colors.dart';
 import 'package:todo/core/theme/styles.dart';
 
-class ProfileWidget extends StatelessWidget {
-  const ProfileWidget({
+class DevProfileWidget extends StatelessWidget {
+  const DevProfileWidget({
     super.key,
     required this.title,
     required this.content,

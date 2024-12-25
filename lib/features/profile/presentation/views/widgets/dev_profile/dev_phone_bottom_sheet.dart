@@ -8,8 +8,9 @@ import 'package:todo/core/theme/app_icons.dart';
 import 'package:todo/core/theme/styles.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class PhoneBottomSheet {
-  static void show(BuildContext context) => showModalBottomSheet(
+class DevPhoneBottomSheet {
+  static void show(BuildContext context, String? phoneNumber) =>
+      showModalBottomSheet(
         context: context,
         builder: (BuildContext context) {
           return Padding(
@@ -20,7 +21,8 @@ class PhoneBottomSheet {
               children: [
                 ListTile(
                   onTap: () {
-                    Clipboard.setData(ClipboardData(text: "+201005677471"));
+                    Clipboard.setData(
+                        ClipboardData(text: phoneNumber ?? "+201005677471"));
                     CustomSnackBar.show(
                       context: context,
                       message: "Phone Number Copied",
@@ -41,13 +43,13 @@ class PhoneBottomSheet {
                   onTap: () async {
                     final Uri launchUri = Uri(
                       scheme: 'tel',
-                      path: "+201005677471",
+                      path: phoneNumber ?? "+201005677471",
                     );
 
                     if (await canLaunchUrl(launchUri)) {
                       await launchUrl(launchUri);
                     } else {
-                      throw 'Could not launch +201005677471';
+                      throw 'Could not launch ${phoneNumber ?? "+201005677471"}';
                     }
                   },
                   splashColor: AppColors.splashColor,
@@ -62,8 +64,8 @@ class PhoneBottomSheet {
                 ),
                 ListTile(
                   onTap: () async {
-                    final cleanNumber =
-                        "+201005677471".replaceAll(RegExp(r'[^\d+]'), '');
+                    final cleanNumber = (phoneNumber ?? "+201005677471")
+                        .replaceAll(RegExp(r'[^\d+]'), '');
 
                     // Create the WhatsApp URL
                     final whatsappUrl =

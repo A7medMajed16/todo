@@ -2,12 +2,12 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:todo/core/theme/app_icons.dart';
-import 'package:todo/features/profile/presentation/views/widgets/phone_bottom_sheet.dart';
-import 'package:todo/features/profile/presentation/views/widgets/profile_widget.dart';
+import 'package:todo/features/profile/presentation/views/widgets/dev_profile/dev_phone_bottom_sheet.dart';
+import 'package:todo/features/profile/presentation/views/widgets/dev_profile/dev_profile_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class ProfileViewBody extends StatelessWidget {
-  const ProfileViewBody({super.key});
+class DevProfileViewBody extends StatelessWidget {
+  const DevProfileViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,25 +18,25 @@ class ProfileViewBody extends StatelessWidget {
           spacing: 8,
           children: [
             SizedBox(height: 16),
-            ProfileWidget(
+            DevProfileWidget(
               title: 'NAME',
               content: "Ahmed Majed El-Sayed Farag",
             ),
-            ProfileWidget(
+            DevProfileWidget(
               title: 'PHONE',
               content: "+201005677471",
               icon: Icons.more_horiz_rounded,
-              onTap: () => PhoneBottomSheet.show(context),
+              onTap: () => DevPhoneBottomSheet.show(context, null),
             ),
-            ProfileWidget(
+            DevProfileWidget(
               title: 'LEVEL',
               content: "Can you guess? 🤔",
             ),
-            ProfileWidget(
+            DevProfileWidget(
               title: 'YEARS OF EXPERIENCE',
               content: "Guess my level and experience! 🎯",
             ),
-            ProfileWidget(
+            DevProfileWidget(
               title: 'LOCATION',
               content: "Zagazig, Sharqia, Eypt",
               iconPath: AppIcons.coreCommonAssetsIconsLocation,
@@ -52,7 +52,7 @@ class ProfileViewBody extends StatelessWidget {
                 }
               },
             ),
-            ProfileWidget(
+            DevProfileWidget(
               title: 'GITHUB',
               content: "A7medMajed16",
               iconPath: AppIcons.coreCommonAssetsIconsGithub,
@@ -67,7 +67,7 @@ class ProfileViewBody extends StatelessWidget {
                 }
               },
             ),
-            ProfileWidget(
+            DevProfileWidget(
               title: 'GMAIL',
               content: "ahmed.maged.1682@gmail.com",
               iconPath: AppIcons.coreCommonAssetsIconsGmail,

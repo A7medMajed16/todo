@@ -80,5 +80,11 @@
     "new_task_update": "تحديث المهمة",
     "loading": "تحميل...",
     "unknown_page_error": "حدث خطأ ، يرجى التحقق من الاتصال بالانترنت",
-    "try_again": "حاول مرة اخرى"
+    "try_again": "حاول مرة اخرى",
+    "profile": "الملف الشخصي",
+    "profile_name": "الاسم",
+    "profile_phone": "رقم الهاتف",
+    "profile_level": "مستوى الخبرة",
+    "profile_years_of_experience": "سنوات الخبرة",
+    "profile_location": "الموقع"
 }

@@ -115,7 +115,6 @@ class TaskDetailsViewBody extends StatelessWidget {
           .join('.\n');
 }
 
-
 // QrImageView(
 //                 data: taskModel.toJson().toString(),
 //                 version: QrVersions.auto,

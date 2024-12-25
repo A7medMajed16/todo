@@ -15,38 +15,42 @@ class TaskRepoImpl implements TaskRepo {
   TaskRepoImpl(this._apiHelper) : _tokenHandler = TokenHandler(_apiHelper);
   @override
   Future<Either<Failure, void>> addNewTask(TaskModel taskModel) async {
-    final String? accessToken = await secureStorage!.read(key: "access_token");
-    return _tokenHandler.executeWithToken(
-        apiCall: () => _apiHelper.post(
-            endPoint: "/todos",
-            body: taskModel.toJson(),
-            headers: {"Authorization": "Bearer $accessToken"}));
+    return _tokenHandler.executeWithToken(apiCall: () async {
+      final String? accessToken =
+          await secureStorage!.read(key: "access_token");
+      _apiHelper.post(
+          endPoint: "/todos",
+          body: taskModel.toJson(),
+          headers: {"Authorization": "Bearer $accessToken"});
+    });
   }
 
   @override
   Future<Either<Failure, void>> updateTask(TaskModel taskModel) async {
-    final String? accessToken = await secureStorage!.read(key: "access_token");
     final String? userId = await secureStorage!.read(key: "user_id");
-    return _tokenHandler.executeWithToken(
-        apiCall: () =>
-            _apiHelper.put(endPoint: "/todos/${taskModel.id}", body: {
-              "image": taskModel.image,
-              "title": taskModel.title,
-              "desc": taskModel.desc,
-              "priority": taskModel.priority,
-              "status": taskModel.status,
-              "user": userId
-            }, headers: {
-              "Authorization": "Bearer $accessToken"
-            }));
+    return _tokenHandler.executeWithToken(apiCall: () async {
+      final String? accessToken =
+          await secureStorage!.read(key: "access_token");
+      _apiHelper.put(endPoint: "/todos/${taskModel.id}", body: {
+        "image": taskModel.image,
+        "title": taskModel.title,
+        "desc": taskModel.desc,
+        "priority": taskModel.priority,
+        "status": taskModel.status,
+        "user": userId
+      }, headers: {
+        "Authorization": "Bearer $accessToken"
+      });
+    });
   }
 
   @override
   Future<Either<Failure, String>> uploadImage({required File image}) async {
-    final String? accessToken = await secureStorage!.read(key: "access_token");
-
     return _tokenHandler.executeWithToken(
       apiCall: () async {
+        final String? accessToken =
+            await secureStorage!.read(key: "access_token");
+
         var response = await _apiHelper.uploadFile(
           endPoint: "/upload/image",
           file: image,

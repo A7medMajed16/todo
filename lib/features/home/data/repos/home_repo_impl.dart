@@ -14,9 +14,10 @@ class HomeRepoImpl implements HomeRepo {
   @override
   Future<Either<Failure, List<TaskModel>>> getTasks(
       {required int pageIndex}) async {
-    final accessToken = await secureStorage!.read(key: "access_token");
     return _tokenHandler.executeWithToken(
       apiCall: () async {
+        final accessToken = await secureStorage!.read(key: "access_token");
+
         List<dynamic> response = await _apiHelper.getList(
           endPoint: "/todos?page=$pageIndex",
           headers: {"Authorization": "Bearer $accessToken"},

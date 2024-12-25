@@ -3,6 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:todo/core/api/api_helper.dart';
 import 'package:todo/features/auth/data/repos/login_repo_impl.dart';
 import 'package:todo/features/home/data/repos/home_repo_impl.dart';
+import 'package:todo/features/profile/data/repos/profile_repo_impl.dart';
 import 'package:todo/features/signup/data/repos/signup_repo_impl.dart';
 import 'package:todo/features/task/data/repos/task_repo_impl.dart';
 
@@ -34,6 +35,13 @@ void setupServiceLocator() {
   );
   getIt.registerSingleton<TaskRepoImpl>(
     TaskRepoImpl(
+      ApiHelper(
+        Dio(),
+      ),
+    ),
+  );
+  getIt.registerSingleton<ProfileRepoImpl>(
+    ProfileRepoImpl(
       ApiHelper(
         Dio(),
       ),

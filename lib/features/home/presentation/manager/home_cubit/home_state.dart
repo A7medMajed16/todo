@@ -17,8 +17,4 @@ final class HomeFailure extends HomeState {
   const HomeFailure(this.message);
 }
 
-final class HomeSuccess extends HomeState {
-  final List<TaskModel> tasks;
-
-  const HomeSuccess(this.tasks);
-}
+final class HomeSuccess extends HomeState {}

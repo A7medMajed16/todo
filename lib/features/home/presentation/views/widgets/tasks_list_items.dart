@@ -32,18 +32,39 @@ class TasksListItems extends StatelessWidget {
         },
         child: BlocConsumer<HomeCubit, HomeState>(
           builder: (context, state) {
-            if (state is HomeSuccess) {
-              if (state.tasks.isNotEmpty) {
+            if (state is HomeLoading) {
+              return Center(
+                child: CircularProgressIndicator(
+                  color: AppColors.primerColor,
+                  strokeCap: StrokeCap.round,
+                ),
+              );
+            } else if (state is HomeFailure) {
+              log("tasks_list_items-HomeFailure:${state.message}");
+              return ErrorPage(
+                onPressed: () => homeCubit.getTasks(),
+              );
+            } else {
+              if (homeCubit.tasks.isNotEmpty) {
                 return RefreshIndicator(
                   onRefresh: () => homeCubit.getTasks(),
                   color: AppColors.backgroundColor,
                   backgroundColor: AppColors.primerColor,
                   child: ListView.separated(
-                    itemCount: state.tasks.length + 1,
-                    itemBuilder: (context, index) => index == state.tasks.length
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    controller: homeCubit.scrollController,
+                    itemCount: homeCubit.filterStatus != null
+                        ? homeCubit.filteredTasks.length + 1
+                        : homeCubit.tasks.length + 1,
+                    itemBuilder: (context, index) => index ==
+                            (homeCubit.filterStatus != null
+                                ? homeCubit.filteredTasks.length
+                                : homeCubit.tasks.length)
                         ? SizedBox(height: 65)
                         : TasksItem(
-                            taskModel: state.tasks[index],
+                            taskModel: homeCubit.filterStatus != null
+                                ? homeCubit.filteredTasks[index]
+                                : homeCubit.tasks[index],
                             itemIndex: index,
                           ),
                     separatorBuilder: (BuildContext context, int index) =>
@@ -58,18 +79,6 @@ class TasksListItems extends StatelessWidget {
                       : null,
                 );
               }
-            } else if (state is HomeFailure) {
-              log("tasks_list_items-HomeFailure:${state.message}");
-              return ErrorPage(
-                onPressed: () => homeCubit.getTasks(),
-              );
-            } else {
-              return Center(
-                child: CircularProgressIndicator(
-                  color: AppColors.primerColor,
-                  strokeCap: StrokeCap.round,
-                ),
-              );
             }
           },
           listener: (BuildContext context, HomeState state) {

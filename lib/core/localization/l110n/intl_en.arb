@@ -85,6 +85,7 @@
     "new_task_priority_empty": "Please choose priority",
     "new_task_success": "Task added successfully",
     "new_task_update_success": "Task updated successfully",
+    "new_task_update": "Update task",
     "loading": "Loading...",
     "unknown_page_error": "Something went wrong, pleas check your internet connection",
     "try_again": "Try again"

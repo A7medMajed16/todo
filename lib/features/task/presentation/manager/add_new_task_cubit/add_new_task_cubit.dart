@@ -16,14 +16,16 @@ class AddNewTaskCubit extends Cubit<AddNewTaskState> {
   final TextEditingController titleController = TextEditingController();
   final TextEditingController contentController = TextEditingController();
 
-  String? priority, date, imagePath;
+  String? priority, date, imagePath, taskId, status;
 
   void initTask(TaskModel? taskModel) {
     if (taskModel != null) {
+      taskId = taskModel.id;
       titleController.text = taskModel.title ?? "";
       contentController.text = taskModel.desc ?? "";
       imagePath = taskModel.image;
       priority = taskModel.priority;
+      status = taskModel.status;
       date = taskModel.createdAt == null
           ? null
           : DateFormat('dd/MM/yyyy').format(taskModel.createdAt!).toString();
@@ -62,6 +64,48 @@ class AddNewTaskCubit extends Cubit<AddNewTaskState> {
           desc: contentController.text,
           priority: priority,
           image: imagePath,
+        ),
+      );
+      result.fold(
+          (failure) => !isClosed
+              ? emit(AddNewTaskFailure(error: failure.errorMessage))
+              : null,
+          (done) => !isClosed ? emit(AddNewTaskSuccess()) : null);
+    }
+  }
+
+  Future<void> updateTask() async {
+    emit(AddNewTaskLoading());
+    if (imageFile != null) {
+      var uploadImageResult = await _taskRepo.uploadImage(
+        image: imageFile!,
+      );
+      uploadImageResult.fold(
+          (failure) => !isClosed
+              ? emit(AddNewTaskFailure(error: failure.errorMessage))
+              : null, (imageUrl) async {
+        var result = await _taskRepo.updateTask(
+          TaskModel(
+            title: titleController.text,
+            desc: contentController.text,
+            priority: priority,
+            image: imageUrl,
+            status: status,
+          ),
+        );
+        result.fold(
+            (failure) => !isClosed
+                ? emit(AddNewTaskFailure(error: failure.errorMessage))
+                : null,
+            (done) => !isClosed ? emit(AddNewTaskSuccess()) : null);
+      });
+    } else {
+      var result = await _taskRepo.updateTask(
+        TaskModel(
+          title: titleController.text,
+          desc: contentController.text,
+          priority: priority,
+          status: status,
         ),
       );
       result.fold(

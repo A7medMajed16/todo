@@ -5,7 +5,7 @@ import 'package:todo/core/api/errors/failures.dart';
 
 class TokenHandler {
   final ApiHelper _apiHelper;
-  final int maxRetries = 3;
+  final int maxRetries = 5;
 
   TokenHandler(this._apiHelper);
 

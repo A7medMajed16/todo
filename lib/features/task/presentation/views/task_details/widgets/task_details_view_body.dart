@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:qr_flutter/qr_flutter.dart';
+import 'package:pretty_qr_code/pretty_qr_code.dart';
 import 'package:todo/core/common/colors/app_colors.dart';
-import 'package:todo/core/common/size/screen_dimensions.dart';
 import 'package:todo/core/theme/app_icons.dart';
+import 'package:todo/core/theme/app_images.dart';
 import 'package:todo/core/theme/styles.dart';
 import 'package:todo/features/home/data/models/task_model.dart';
 import 'package:todo/features/task/presentation/views/task_details/widgets/task_details_widget.dart';
@@ -25,24 +25,26 @@ class TaskDetailsViewBody extends StatelessWidget {
           children: [
             taskModel.image == null
                 ? SizedBox()
-                : Hero(
-                    tag: "taskImage${taskModel.id}",
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(12),
-                      child: CachedNetworkImage(
-                        imageUrl: taskModel.image!,
-                        errorWidget: (context, url, error) => const Icon(
-                          Icons.error,
-                          color: AppColors.errorColor,
-                        ),
-                        placeholder: (context, url) => const SizedBox(
-                          width: 50,
-                          height: 50,
-                          child: FittedBox(
-                            fit: BoxFit.scaleDown,
-                            child: CircularProgressIndicator(
-                              color: AppColors.primerColor,
-                              strokeCap: StrokeCap.round,
+                : Center(
+                    child: Hero(
+                      tag: "taskImage${taskModel.id}",
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                        child: CachedNetworkImage(
+                          imageUrl: taskModel.image!,
+                          errorWidget: (context, url, error) => const Icon(
+                            Icons.error,
+                            color: AppColors.errorColor,
+                          ),
+                          placeholder: (context, url) => const SizedBox(
+                            width: 50,
+                            height: 50,
+                            child: FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: CircularProgressIndicator(
+                                color: AppColors.primerColor,
+                                strokeCap: StrokeCap.round,
+                              ),
                             ),
                           ),
                         ),
@@ -76,14 +78,25 @@ class TaskDetailsViewBody extends StatelessWidget {
               isDate: false,
             ),
             Center(
-              child: QrImageView(
-                data: taskModel.toJson().toString(),
-                version: QrVersions.auto,
-                eyeStyle: QrEyeStyle(
-                  eyeShape: QrEyeShape.square,
-                  color: AppColors.primerColor,
+              child: Container(
+                padding: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: AppColors.secondColor,
+                  borderRadius: BorderRadius.circular(12),
                 ),
-                size: ScreenDimensions.width - 44,
+                child: PrettyQrView.data(
+                  data: taskModel.toJson().toString(),
+                  decoration: const PrettyQrDecoration(
+                    image: PrettyQrDecorationImage(
+                      image: AssetImage(
+                        AppImages.coreCommonAssetsImagesAppLauncher,
+                      ),
+                    ),
+                    shape: PrettyQrSmoothSymbol(
+                      color: AppColors.mainTextColor,
+                    ),
+                  ),
+                ),
               ),
             ),
             SizedBox(height: 16),
@@ -101,3 +114,14 @@ class TaskDetailsViewBody extends StatelessWidget {
           .where((sentence) => sentence.isNotEmpty)
           .join('.\n');
 }
+
+
+// QrImageView(
+//                 data: taskModel.toJson().toString(),
+//                 version: QrVersions.auto,
+//                 eyeStyle: QrEyeStyle(
+//                   eyeShape: QrEyeShape.square,
+//                   color: AppColors.primerColor,
+//                 ),
+//                 size: ScreenDimensions.width - 44,
+//               )

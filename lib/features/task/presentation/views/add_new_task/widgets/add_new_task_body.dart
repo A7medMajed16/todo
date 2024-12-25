@@ -35,7 +35,7 @@ class AddNewTaskBody extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 spacing: 16,
                 children: [
-                  ImageContainer(),
+                  Center(child: ImageContainer()),
                   CustomTextField(
                     textEditingController: addNewTaskCubit.titleController,
                     hintText: localizations.new_task_title_hint,
@@ -80,7 +80,9 @@ class AddNewTaskBody extends StatelessWidget {
                     height: 49,
                     child: CustomButton(
                       isLoading: state is AddNewTaskLoading,
-                      title: localizations.new_task_button,
+                      title: addNewTaskCubit.status != null
+                          ? localizations.new_task_update
+                          : localizations.new_task_button,
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           addNewTaskCubit.addNewTask();

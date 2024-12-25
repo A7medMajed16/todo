@@ -64,7 +64,9 @@ class ImagePickerHelper {
       final XFile? imageCamera =
           await picker.pickImage(source: ImageSource.camera);
       if (imageCamera != null) {
-        return await imageCropper(imageCamera.path, arabicTitle, englishTitle);
+        return Platform.isWindows
+            ? File(imageCamera.path)
+            : await imageCropper(imageCamera.path, arabicTitle, englishTitle);
       }
     } catch (e) {
       debugPrint('Error picking image from camera: $e');
@@ -79,7 +81,9 @@ class ImagePickerHelper {
       final XFile? imageGallery =
           await picker.pickImage(source: ImageSource.gallery);
       if (imageGallery != null) {
-        return await imageCropper(imageGallery.path, arabicTitle, englishTitle);
+        return Platform.isWindows
+            ? File(imageGallery.path)
+            : await imageCropper(imageGallery.path, arabicTitle, englishTitle);
       }
     } catch (e) {
       debugPrint('Error picking image from gallery: $e');
@@ -96,6 +100,9 @@ class ImagePickerHelper {
     final AppLocalizations localization = AppLocalizations.of(context)!;
     showModalBottomSheet(
       context: context,
+      constraints: BoxConstraints(
+        maxWidth: 500,
+      ),
       builder: (BuildContext context) {
         return Padding(
           padding: const EdgeInsets.all(8.0),

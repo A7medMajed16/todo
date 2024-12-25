@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo/core/common/colors/app_colors.dart';
+import 'package:todo/core/common/size/screen_dimensions.dart';
 import 'package:todo/features/auth/presentation/views/widgets/login_view_body.dart';
 
 class LoginView extends StatelessWidget {
@@ -11,7 +12,12 @@ class LoginView extends StatelessWidget {
       resizeToAvoidBottomInset: true,
       backgroundColor: AppColors.backgroundColor,
       body: SafeArea(
-        child: LoginViewBody(),
+        child: Center(
+          child: SizedBox(
+            width: ScreenDimensions.width > 500 ? 500 : double.infinity,
+            child: LoginViewBody(),
+          ),
+        ),
       ),
     );
   }

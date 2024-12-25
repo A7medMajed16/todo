@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -131,6 +133,7 @@ class LoginViewBody extends StatelessWidget {
               isError: true,
             );
           } else {
+            log("login_view_body-LoginFailure:${state.errorMessage}");
             CustomSnackBar.show(
               context: context,
               message: localizations.login_error,

@@ -12,6 +12,7 @@ class DevPhoneBottomSheet {
   static void show(BuildContext context, String? phoneNumber) =>
       showModalBottomSheet(
         context: context,
+        constraints: BoxConstraints(maxWidth: 500),
         builder: (BuildContext context) {
           return Padding(
             padding: const EdgeInsets.all(8.0),

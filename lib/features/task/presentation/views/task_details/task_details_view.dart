@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo/core/common/colors/app_colors.dart';
+import 'package:todo/core/common/size/screen_dimensions.dart';
 import 'package:todo/core/common/widgets/custom_app_bar.dart';
 import 'package:todo/features/home/data/models/task_model.dart';
 import 'package:todo/features/task/presentation/views/task_details/widgets/task_details_view_body.dart';
@@ -20,8 +21,13 @@ class TaskDetailsView extends StatelessWidget {
       backgroundColor: AppColors.backgroundColor,
       body: SafeArea(
         bottom: false,
-        child: TaskDetailsViewBody(
-          taskModel: taskModel,
+        child: Center(
+          child: SizedBox(
+            width: ScreenDimensions.width > 500 ? 500 : double.infinity,
+            child: TaskDetailsViewBody(
+              taskModel: taskModel,
+            ),
+          ),
         ),
       ),
     );

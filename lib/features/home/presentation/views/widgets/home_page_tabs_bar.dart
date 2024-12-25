@@ -66,10 +66,14 @@ class _HomePageTabsBarState extends State<HomePageTabsBar>
           labelPadding: LocalizationHelper.isAppArabic()
               ? EdgeInsets.only(left: 8)
               : EdgeInsets.only(right: 8),
-          labelStyle:
-              Styles.textStyle16Bold.copyWith(color: AppColors.backgroundColor),
-          unselectedLabelStyle:
-              Styles.textStyle16Regular.copyWith(color: Color(0xff7C7C80)),
+          labelStyle: Styles.textStyle16Bold.copyWith(
+            color: AppColors.backgroundColor,
+            fontFamily: LocalizationHelper.isAppArabic() ? 'Almarai' : 'DMSans',
+          ),
+          unselectedLabelStyle: Styles.textStyle16Regular.copyWith(
+            color: Color(0xff7C7C80),
+            fontFamily: LocalizationHelper.isAppArabic() ? 'Almarai' : 'DMSans',
+          ),
           tabs: List<Widget>.generate(
             4,
             (index) => Container(

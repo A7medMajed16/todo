@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:todo/core/common/colors/app_colors.dart';
+import 'package:todo/core/localization/localization_functions.dart';
 import 'package:todo/core/theme/app_icons.dart';
 import 'package:todo/core/theme/styles.dart';
 
@@ -48,6 +49,8 @@ class CustomDropButton extends StatelessWidget {
             hint ?? "",
             style: Styles.textStyle14Regular.copyWith(
               color: AppColors.hintTextColor,
+              fontFamily:
+                  LocalizationHelper.isAppArabic() ? 'Almarai' : 'DMSans',
             ),
           ),
           icon: SvgPicture.asset(
@@ -94,8 +97,15 @@ class CustomDropButton extends StatelessWidget {
           elevation: 9,
           borderRadius: BorderRadius.circular(8),
           style: isColored
-              ? Styles.textStyle16Bold.copyWith(color: AppColors.primerColor)
-              : Styles.textStyle14Medium,
+              ? Styles.textStyle16Bold.copyWith(
+                  color: AppColors.primerColor,
+                  fontFamily:
+                      LocalizationHelper.isAppArabic() ? 'Almarai' : 'DMSans',
+                )
+              : Styles.textStyle14Medium.copyWith(
+                  fontFamily:
+                      LocalizationHelper.isAppArabic() ? 'Almarai' : 'DMSans',
+                ),
           dropdownColor: const Color(0xffF7F9FA),
         ),
       ],

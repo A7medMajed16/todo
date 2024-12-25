@@ -17,7 +17,8 @@ class AddNewTaskView extends StatelessWidget {
       backgroundColor: AppColors.backgroundColor,
       body: SafeArea(
         bottom: false,
-        child: Center(
+        child: Align(
+          alignment: Alignment.topCenter,
           child: SizedBox(
             width: ScreenDimensions.width > 500 ? 500 : double.infinity,
             child: AddNewTaskBody(),

@@ -91,41 +91,41 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-fonts:
-  - family: DMSans
-    fonts:
-      - asset: lib/core/common/assets/fonts/english/DMSans-Black.ttf
-        weight: 900
-      - asset: lib/core/common/assets/fonts/english/DMSans-ExtraBold.ttf
-        weight: 800
-      - asset: lib/core/common/assets/fonts/english/DMSans-Bold.ttf
-        weight: 700
-      - asset: lib/core/common/assets/fonts/english/DMSans-SemiBold.ttf
-        weight: 600
-      - asset: lib/core/common/assets/fonts/english/DMSans-Medium.ttf
-        weight: 500
-      - asset: lib/core/common/assets/fonts/english/DMSans-Regular.ttf
-        weight: 400
-      - asset: lib/core/common/assets/fonts/english/DMSans-Light.ttf
-        weight: 300
-      - asset: lib/core/common/assets/fonts/english/DMSans-ExtraLight.ttf
-        weight: 200
-      - asset: lib/core/common/assets/fonts/english/DMSans-Thin.ttf
-        weight: 100
-  - family: Almarai
-    fonts:
-      - asset: lib/core/common/assets/fonts/arabic/Almarai-Bold.ttf
-        weight: 700
-      - asset: lib/core/common/assets/fonts/arabic/Almarai-ExtraBold.ttf
-        weight: 800
-      - asset: lib/core/common/assets/fonts/arabic/Almarai-Light.ttf
-        weight: 300
-      - asset: lib/core/common/assets/fonts/arabic/Almarai-Regular.ttf
-        weight: 400
-      - asset: lib/core/common/assets/fonts/arabic/Almarai-Regular.ttf
-        weight: 500
-      - asset: lib/core/common/assets/fonts/arabic/Almarai-Bold.ttf
-        weight: 600
+  fonts:
+    - family: DMSans
+      fonts:
+        - asset: lib/core/common/assets/fonts/english/DMSans-Black.ttf
+          weight: 900
+        - asset: lib/core/common/assets/fonts/english/DMSans-ExtraBold.ttf
+          weight: 800
+        - asset: lib/core/common/assets/fonts/english/DMSans-Bold.ttf
+          weight: 700
+        - asset: lib/core/common/assets/fonts/english/DMSans-SemiBold.ttf
+          weight: 600
+        - asset: lib/core/common/assets/fonts/english/DMSans-Medium.ttf
+          weight: 500
+        - asset: lib/core/common/assets/fonts/english/DMSans-Regular.ttf
+          weight: 400
+        - asset: lib/core/common/assets/fonts/english/DMSans-Light.ttf
+          weight: 300
+        - asset: lib/core/common/assets/fonts/english/DMSans-ExtraLight.ttf
+          weight: 200
+        - asset: lib/core/common/assets/fonts/english/DMSans-Thin.ttf
+          weight: 100
+    - family: Almarai
+      fonts:
+        - asset: lib/core/common/assets/fonts/arabic/Almarai-Bold.ttf
+          weight: 700
+        - asset: lib/core/common/assets/fonts/arabic/Almarai-ExtraBold.ttf
+          weight: 800
+        - asset: lib/core/common/assets/fonts/arabic/Almarai-Light.ttf
+          weight: 300
+        - asset: lib/core/common/assets/fonts/arabic/Almarai-Regular.ttf
+          weight: 400
+        - asset: lib/core/common/assets/fonts/arabic/Almarai-Regular.ttf
+          weight: 500
+        - asset: lib/core/common/assets/fonts/arabic/Almarai-Bold.ttf
+          weight: 600
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/english/TrajanPro.ttf

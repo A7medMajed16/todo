@@ -12,7 +12,8 @@ class SignupView extends StatelessWidget {
       resizeToAvoidBottomInset: true,
       backgroundColor: AppColors.backgroundColor,
       body: SafeArea(
-        child: Center(
+        child: Align(
+          alignment: Alignment.topCenter,
           child: SizedBox(
             width: ScreenDimensions.width > 500 ? 500 : double.infinity,
             child: SignupViewBody(),

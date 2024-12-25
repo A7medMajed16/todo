@@ -16,7 +16,8 @@ class DevProfileView extends StatelessWidget {
       ),
       backgroundColor: AppColors.backgroundColor,
       body: SafeArea(
-        child: Center(
+        child: Align(
+          alignment: Alignment.topCenter,
           child: SizedBox(
             width: ScreenDimensions.width > 500 ? 500 : double.infinity,
             child: DevProfileViewBody(),

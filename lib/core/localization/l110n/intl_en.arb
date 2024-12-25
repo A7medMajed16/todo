@@ -94,5 +94,8 @@
     "profile_phone": "PHONE",
     "profile_level": "LEVEL",
     "profile_years_of_experience": "YEARS OF EXPERIENCE",
-    "profile_location": "LOCATION"
+    "profile_location": "LOCATION",
+    "profile_arabic": "العربية",
+    "profile_english": "English",
+    "profile_dev_page": "Go to the developer page"
 }

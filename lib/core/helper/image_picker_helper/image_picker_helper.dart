@@ -21,7 +21,9 @@ class ImagePickerHelper {
           AndroidUiSettings(
             toolbarTitle:
                 LocalizationHelper.isAppArabic() ? arabicTitle : englishTitle,
-            toolbarColor: Colors.blue, // Replace with AppColors.iconColor
+            statusBarColor: AppColors.primerColor,
+            toolbarColor:
+                AppColors.primerColor, // Replace with AppColors.iconColor
             toolbarWidgetColor: Colors.white,
             lockAspectRatio: true,
             cropStyle: CropStyle.rectangle,

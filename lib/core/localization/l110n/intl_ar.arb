@@ -86,5 +86,8 @@
     "profile_phone": "رقم الهاتف",
     "profile_level": "مستوى الخبرة",
     "profile_years_of_experience": "سنوات الخبرة",
-    "profile_location": "الموقع"
+    "profile_location": "الموقع",
+    "profile_arabic": "العربية",
+    "profile_english": "English",
+    "profile_dev_page": "الذهاب لصفحة المطور"
 }

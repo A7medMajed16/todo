@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:todo/core/common/colors/app_colors.dart';
 import 'package:todo/core/common/size/screen_dimensions.dart';
 import 'package:todo/core/common/widgets/custom_button.dart';
+import 'package:todo/core/localization/localization_functions.dart';
 import 'package:todo/core/routes/app_router.dart';
 import 'package:todo/core/theme/app_icons.dart';
 import 'package:todo/core/theme/app_images.dart';
@@ -71,11 +72,14 @@ class OnboardingViewBody extends StatelessWidget {
                     title: localizations.onboarding_button,
                     titleStyle: Styles.textStyle19Bold
                         .copyWith(color: AppColors.filledButtonTextColor),
-                    tailing: SvgPicture.asset(
-                      AppIcons.coreCommonAssetsIconsArrowLeft,
-                      width: 24,
-                      height: 24,
-                      fit: BoxFit.scaleDown,
+                    tailing: Transform.flip(
+                      flipX: LocalizationHelper.isAppArabic(),
+                      child: SvgPicture.asset(
+                        AppIcons.coreCommonAssetsIconsArrowLeft,
+                        width: 24,
+                        height: 24,
+                        fit: BoxFit.scaleDown,
+                      ),
                     ),
                   ),
                 ),

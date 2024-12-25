@@ -6,9 +6,11 @@ import 'package:go_router/go_router.dart';
 import 'package:todo/core/common/colors/app_colors.dart';
 import 'package:todo/core/common/widgets/custom_button.dart';
 import 'package:todo/core/common/widgets/error_page.dart';
+import 'package:todo/core/localization/localization_functions.dart';
 import 'package:todo/core/routes/app_router.dart';
 import 'package:todo/core/theme/app_icons.dart';
 import 'package:todo/core/theme/styles.dart';
+import 'package:todo/features/localization/localization_cubit/localization_cubit.dart';
 import 'package:todo/features/profile/presentation/manager/profile_cubit/profile_cubit.dart';
 import 'package:todo/features/profile/presentation/views/widgets/dev_profile/dev_phone_bottom_sheet.dart';
 import 'package:todo/features/profile/presentation/views/widgets/dev_profile/dev_profile_widget.dart';
@@ -67,11 +69,38 @@ class ProfileViewBody extends StatelessWidget {
                   SizedBox(height: 16),
                   SizedBox(
                     height: 50,
-                    child: CustomButton(
-                      titleStyle: Styles.textStyle12Bold
-                          .copyWith(color: AppColors.backgroundColor),
-                      title: "Go to the developer page",
-                      onPressed: () => router.push(AppRouter.kDevProfile),
+                    child: Row(
+                      spacing: 10,
+                      children: [
+                        Expanded(
+                          flex: 2,
+                          child: CustomButton(
+                            titleStyle: Styles.textStyle12Bold
+                                .copyWith(color: AppColors.backgroundColor),
+                            title: appLocalizations.profile_dev_page,
+                            onPressed: () => router.push(AppRouter.kDevProfile),
+                          ),
+                        ),
+                        Expanded(
+                          child: CustomButton(
+                            isFilled: false,
+                            titleStyle: Styles.textStyle12Bold.copyWith(
+                                color: AppColors.primerColor,
+                                fontFamily: LocalizationHelper.isAppArabic()
+                                    ? 'DMSans'
+                                    : 'Almarai'),
+                            borderColor: AppColors.primerColor,
+                            title: LocalizationHelper.isAppArabic()
+                                ? appLocalizations.profile_english
+                                : appLocalizations.profile_arabic,
+                            onPressed: () => context
+                                .read<LocalizationCubit>()
+                                .changeLanguage(LocalizationHelper.isAppArabic()
+                                    ? "en"
+                                    : "ar"),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],

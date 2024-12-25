@@ -4,4 +4,5 @@ import 'package:todo/features/home/data/models/task_model.dart';
 
 abstract class HomeRepo {
   Future<Either<Failure, List<TaskModel>>> getTasks({required int pageIndex});
+  Future<Either<Failure, void>> deleteTask({required String taskId});
 }

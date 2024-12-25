@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
@@ -11,15 +12,20 @@ import 'package:todo/core/theme/styles.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:todo/features/home/data/models/task_model.dart';
 import 'package:todo/core/config/classes/task_status_data_model.dart';
+import 'package:todo/features/home/presentation/manager/task_edit_delete_cubit/task_edit_delete_cubit.dart';
 
 class TasksItem extends StatelessWidget {
-  const TasksItem({super.key, required this.taskModel});
+  const TasksItem(
+      {super.key, required this.taskModel, required this.itemIndex});
   final TaskModel taskModel;
+  final int itemIndex;
   @override
   Widget build(BuildContext context) {
     AppLocalizations localizations = AppLocalizations.of(context)!;
     TaskStatusDataModel taskData = getTaskData(taskModel.status ?? "waiting",
         localizations, taskModel.priority ?? "low");
+    TaskEditDeleteCubit taskEditDeleteCubit =
+        context.read<TaskEditDeleteCubit>();
     return ListTile(
       onTap: () => context.push(AppRouter.kTaskDetails, extra: taskModel),
       splashColor: AppColors.splashColor.withValues(alpha: 0.05),
@@ -135,9 +141,23 @@ class TasksItem extends StatelessWidget {
           )
         ],
       ),
-      trailing: CustomPopOverWidget(
-        editFunction: () =>
-            context.push(AppRouter.kAddNewTask, extra: taskModel),
+      trailing: BlocBuilder<TaskEditDeleteCubit, TaskEditDeleteState>(
+        builder: (context, state) {
+          if (state is TaskEditDeleteLoading &&
+              itemIndex == taskEditDeleteCubit.itemIndex) {
+            return CircularProgressIndicator(
+              color: AppColors.primerColor,
+              strokeCap: StrokeCap.round,
+            );
+          } else {
+            return CustomPopOverWidget(
+              editFunction: () =>
+                  context.push(AppRouter.kAddNewTask, extra: taskModel),
+              deleteFunction: () =>
+                  taskEditDeleteCubit.deleteTask(taskModel.id!, itemIndex),
+            );
+          }
+        },
       ),
     );
   }

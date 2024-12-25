@@ -7,6 +7,7 @@ import 'package:todo/core/common/size/screen_dimensions.dart';
 import 'package:todo/core/common/widgets/error_page.dart';
 import 'package:todo/features/auth/presentation/manager/login_cubit/login_cubit.dart';
 import 'package:todo/features/home/presentation/manager/home_cubit/home_cubit.dart';
+import 'package:todo/features/home/presentation/manager/task_edit_delete_cubit/task_edit_delete_cubit.dart';
 import 'package:todo/features/home/presentation/views/widgets/tasks_item.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -23,57 +24,65 @@ class TasksListItems extends StatelessWidget {
       thickness: 5,
       minThumbLength: 30,
       radius: Radius.circular(ScreenDimensions.width),
-      child: BlocConsumer<HomeCubit, HomeState>(
-        builder: (context, state) {
-          if (state is HomeSuccess) {
-            if (state.tasks.isNotEmpty) {
-              return RefreshIndicator(
-                onRefresh: () => homeCubit.getTasks(),
-                color: AppColors.backgroundColor,
-                backgroundColor: AppColors.primerColor,
-                child: ListView.separated(
-                  itemCount: state.tasks.length + 1,
-                  itemBuilder: (context, index) => index == state.tasks.length
-                      ? SizedBox(height: 65)
-                      : TasksItem(
-                          taskModel: state.tasks[index],
-                        ),
-                  separatorBuilder: (BuildContext context, int index) =>
-                      SizedBox(height: 12),
-                ),
+      child: BlocListener<TaskEditDeleteCubit, TaskEditDeleteState>(
+        listener: (context, state) {
+          if (state is TaskEditDeleteSuccess) {
+            homeCubit.deleteTask(state.taskId);
+          }
+        },
+        child: BlocConsumer<HomeCubit, HomeState>(
+          builder: (context, state) {
+            if (state is HomeSuccess) {
+              if (state.tasks.isNotEmpty) {
+                return RefreshIndicator(
+                  onRefresh: () => homeCubit.getTasks(),
+                  color: AppColors.backgroundColor,
+                  backgroundColor: AppColors.primerColor,
+                  child: ListView.separated(
+                    itemCount: state.tasks.length + 1,
+                    itemBuilder: (context, index) => index == state.tasks.length
+                        ? SizedBox(height: 65)
+                        : TasksItem(
+                            taskModel: state.tasks[index],
+                            itemIndex: index,
+                          ),
+                    separatorBuilder: (BuildContext context, int index) =>
+                        SizedBox(height: 12),
+                  ),
+                );
+              } else {
+                return ErrorPage(
+                  errorMessage: appLocalizations.home_no_tasks,
+                  onPressed: homeCubit.filterStatus == null
+                      ? () => homeCubit.getTasks()
+                      : null,
+                );
+              }
+            } else if (state is HomeFailure) {
+              log("tasks_list_items-HomeFailure:${state.message}");
+              return ErrorPage(
+                onPressed: () => homeCubit.getTasks(),
               );
             } else {
-              return ErrorPage(
-                errorMessage: appLocalizations.home_no_tasks,
-                onPressed: homeCubit.filterStatus == null
-                    ? () => homeCubit.getTasks()
-                    : null,
+              return Center(
+                child: CircularProgressIndicator(
+                  color: AppColors.primerColor,
+                  strokeCap: StrokeCap.round,
+                ),
               );
             }
-          } else if (state is HomeFailure) {
-            log("tasks_list_items-HomeFailure:${state.message}");
-            return ErrorPage(
-              onPressed: () => homeCubit.getTasks(),
-            );
-          } else {
-            return Center(
-              child: CircularProgressIndicator(
-                color: AppColors.primerColor,
-                strokeCap: StrokeCap.round,
-              ),
-            );
-          }
-        },
-        listener: (BuildContext context, HomeState state) {
-          if (state is HomeFailure) {
-            if (state.message == "Unauthorized") {
-              homeCubit.getTasks();
-            } else if (state.message ==
-                "Session expired. Please login again.") {
-              context.read<LoginCubit>().logout();
+          },
+          listener: (BuildContext context, HomeState state) {
+            if (state is HomeFailure) {
+              if (state.message == "Unauthorized") {
+                homeCubit.getTasks();
+              } else if (state.message ==
+                  "Session expired. Please login again.") {
+                context.read<LoginCubit>().logout();
+              }
             }
-          }
-        },
+          },
+        ),
       ),
     );
   }

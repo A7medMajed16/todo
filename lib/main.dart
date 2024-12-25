@@ -11,6 +11,8 @@ import 'package:todo/core/helper/validations/validations.dart';
 import 'package:todo/core/routes/app_router.dart';
 import 'package:todo/features/auth/data/repos/login_repo_impl.dart';
 import 'package:todo/features/auth/presentation/manager/login_cubit/login_cubit.dart';
+import 'package:todo/features/home/data/repos/home_repo_impl.dart';
+import 'package:todo/features/home/presentation/manager/task_edit_delete_cubit/task_edit_delete_cubit.dart';
 import 'package:todo/features/localization/localization_cubit/localization_cubit.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -37,9 +39,9 @@ class ToDo extends StatelessWidget {
         BlocProvider(
           create: (context) => LoginCubit(getIt.get<LoginRepoImpl>()),
         ),
-        // BlocProvider(
-        //   create: (context) => SignupCubit(),
-        // ),
+        BlocProvider(
+          create: (context) => TaskEditDeleteCubit(getIt.get<HomeRepoImpl>()),
+        ),
       ],
       child: BlocBuilder<LocalizationCubit, LocalizationChangeLocalLang>(
         builder: (context, state) {

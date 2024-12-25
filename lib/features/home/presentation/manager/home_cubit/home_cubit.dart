@@ -32,6 +32,12 @@ class HomeCubit extends Cubit<HomeState> with TabControllerManager {
     );
   }
 
+  void deleteTask(String taskId) {
+    emit(HomeLoading());
+    tasks.removeWhere((element) => element.id == taskId);
+    emit(HomeSuccess(tasks));
+  }
+
   Future<void> updateFilter(String? newFilter) async {
     emit(HomeLoading());
     filterStatus = newFilter;

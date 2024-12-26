@@ -9,6 +9,7 @@ import 'package:todo/core/helper/qrcode_helper/qrcode_helper.dart';
 import 'package:todo/core/routes/app_router.dart';
 import 'package:todo/core/theme/app_icons.dart';
 import 'package:todo/features/home/data/models/task_model.dart';
+import 'package:todo/features/task/data/models/add_task_model.dart';
 
 class CustomFloatingActionButton extends StatefulWidget {
   const CustomFloatingActionButton({
@@ -78,9 +79,15 @@ class _CustomFloatingActionButtonState extends State<CustomFloatingActionButton>
                       context,
                       (String qrCode) {
                         if (qrCode.isNotEmpty) {
-                          context.push(AppRouter.kAddNewTask,
-                              extra: TaskModel.fromJson(jsonDecode(
-                                  QrCodeHelper.convertQrToJson(qrCode))));
+                          context.push(
+                            AppRouter.kAddNewTask,
+                            extra: AddTaskModel(
+                                taskModel: TaskModel.fromJson(
+                                  jsonDecode(
+                                      QrCodeHelper.convertQrToJson(qrCode)),
+                                ),
+                                isQr: true),
+                          );
                         }
                       },
                     );

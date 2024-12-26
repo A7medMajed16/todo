@@ -18,35 +18,43 @@ class HomeCubit extends Cubit<HomeState> with TabControllerManager {
   String? filterStatus;
   List<TaskModel> tasks = [];
   List<TaskModel> filteredTasks = [];
-  final ScrollController scrollController = ScrollController();
-
+  ScrollController scrollController = ScrollController();
+  // ignore: prefer_final_fields
+  bool _isFirstLoading = true;
   void initScrollController() {
     scrollController.addListener(() {
       if (scrollController.position.pixels ==
           scrollController.position.maxScrollExtent) {
         log("reached");
         pageIndex++;
-        getTasks();
+        getTasks(withRefresh: false);
       }
     });
     getTasks();
   }
 
-  Future<void> getTasks({bool refresh = false}) async {
+  Future<void> getTasks({bool refresh = false, bool withRefresh = true}) async {
     log("refresh_token:${await secureStorage!.read(key: "refresh_token")}");
     log("access_token:${await secureStorage!.read(key: "access_token")}");
-    if (refresh) {
+    log("user_id:${await secureStorage!.read(key: "user_id")}");
+    if (withRefresh || _isFirstLoading || refresh) {
+      emit(HomeLoading());
       pageIndex = 1;
+    } else {
+      emit(HomeLoadingMore());
     }
-    emit(HomeLoading());
+
     var result = await _homeRepo.getTasks(pageIndex: pageIndex);
     result.fold(
       (failure) => !isClosed ? emit(HomeFailure(failure.errorMessage)) : null,
       (apiTasks) {
+        _isFirstLoading = false;
         if (pageIndex == 1) {
           tasks.clear();
+          tasks.addAll(apiTasks);
+        } else {
+          tasks.addAll(apiTasks);
         }
-        tasks.addAll(apiTasks);
         !isClosed ? emit(HomeSuccess()) : null;
       },
     );

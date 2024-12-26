@@ -16,8 +16,9 @@ import 'package:todo/features/task/presentation/views/add_new_task/widgets/image
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AddNewTaskBody extends StatelessWidget {
-  AddNewTaskBody({super.key});
+  AddNewTaskBody({super.key, required this.isQr});
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final bool isQr;
   @override
   Widget build(BuildContext context) {
     final AddNewTaskCubit addNewTaskCubit = context.read<AddNewTaskCubit>();
@@ -80,12 +81,14 @@ class AddNewTaskBody extends StatelessWidget {
                     height: 49,
                     child: CustomButton(
                       isLoading: state is AddNewTaskLoading,
-                      title: addNewTaskCubit.status != null
+                      title: addNewTaskCubit.status != null && isQr == false
                           ? localizations.new_task_update
                           : localizations.new_task_button,
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
-                          addNewTaskCubit.addNewTask();
+                          addNewTaskCubit.status != null && isQr == false
+                              ? addNewTaskCubit.updateTask()
+                              : addNewTaskCubit.addNewTask(isQr);
                         }
                       },
                     ),
@@ -97,6 +100,7 @@ class AddNewTaskBody extends StatelessWidget {
           },
           listener: (BuildContext context, AddNewTaskState state) {
             if (state is AddNewTaskSuccess) {
+              log("add_new_task_body - AddNewTaskSuccess");
               context.replace(AppRouter.kHome);
             } else if (state is AddNewTaskFailure) {
               log("add_new_task_body - AddNewTaskFailure:${state.error}");

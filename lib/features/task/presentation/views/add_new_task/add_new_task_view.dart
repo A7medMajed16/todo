@@ -6,8 +6,8 @@ import 'package:todo/features/task/presentation/views/add_new_task/widgets/add_n
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AddNewTaskView extends StatelessWidget {
-  const AddNewTaskView({super.key});
-
+  const AddNewTaskView({super.key, this.isQr = false});
+  final bool isQr;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +21,9 @@ class AddNewTaskView extends StatelessWidget {
           alignment: Alignment.topCenter,
           child: SizedBox(
             width: ScreenDimensions.width > 500 ? 500 : double.infinity,
-            child: AddNewTaskBody(),
+            child: AddNewTaskBody(
+              isQr: isQr,
+            ),
           ),
         ),
       ),

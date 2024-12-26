@@ -32,9 +32,9 @@ class AddNewTaskCubit extends Cubit<AddNewTaskState> {
     }
   }
 
-  Future<void> addNewTask() async {
+  Future<void> addNewTask(bool isQr) async {
     emit(AddNewTaskLoading());
-    if (imageFile != null) {
+    if (imageFile != null && isQr == false) {
       var uploadImageResult = await _taskRepo.uploadImage(
         image: imageFile!,
       );
@@ -63,7 +63,8 @@ class AddNewTaskCubit extends Cubit<AddNewTaskState> {
           title: titleController.text,
           desc: contentController.text,
           priority: priority,
-          image: imagePath,
+          status: status ?? "waiting",
+          image: imagePath ?? "empty",
         ),
       );
       result.fold(
@@ -102,10 +103,12 @@ class AddNewTaskCubit extends Cubit<AddNewTaskState> {
     } else {
       var result = await _taskRepo.updateTask(
         TaskModel(
+          id: taskId,
           title: titleController.text,
           desc: contentController.text,
           priority: priority,
           status: status,
+          image: imagePath ?? "empty",
         ),
       );
       result.fold(

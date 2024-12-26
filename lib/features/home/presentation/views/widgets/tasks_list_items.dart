@@ -17,81 +17,126 @@ class TasksListItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     HomeCubit homeCubit = context.read<HomeCubit>();
+    TaskEditDeleteCubit taskEditDeleteCubit =
+        context.read<TaskEditDeleteCubit>();
     final AppLocalizations appLocalizations = AppLocalizations.of(context)!;
-    return RawScrollbar(
-      thumbColor: AppColors.primerColor.withValues(alpha: 0.8),
-      padding: EdgeInsets.symmetric(horizontal: 8),
-      thickness: 5,
-      minThumbLength: 30,
-      radius: Radius.circular(ScreenDimensions.width),
-      child: BlocListener<TaskEditDeleteCubit, TaskEditDeleteState>(
-        listener: (context, state) {
-          if (state is TaskEditDeleteSuccess) {
-            homeCubit.deleteTask(state.taskId);
+    return BlocListener<TaskEditDeleteCubit, TaskEditDeleteState>(
+      listener: (context, state) {
+        if (state is TaskEditDeleteSuccess) {
+          homeCubit.deleteTask(state.taskId);
+        }
+      },
+      child: BlocConsumer<HomeCubit, HomeState>(
+        builder: (context, state) {
+          log("state:$state");
+          if (state is HomeLoading) {
+            return Center(
+              child: CircularProgressIndicator(
+                color: AppColors.primerColor,
+                strokeCap: StrokeCap.round,
+              ),
+            );
+          } else if (state is HomeFailure) {
+            log("tasks_list_items-HomeFailure:${state.message}");
+            return ErrorPage(
+              onPressed: () => homeCubit.getTasks(),
+            );
+          } else {
+            return Column(
+              children: [
+                Expanded(
+                  child: RawScrollbar(
+                    thumbColor: AppColors.primerColor.withValues(alpha: 0.8),
+                    padding: EdgeInsets.symmetric(horizontal: 8),
+                    thickness: 5,
+                    minThumbLength: 30,
+                    controller: homeCubit.scrollController,
+                    radius: Radius.circular(ScreenDimensions.width),
+                    child: RefreshIndicator(
+                      onRefresh: () => homeCubit.getTasks(refresh: true),
+                      color: AppColors.backgroundColor,
+                      backgroundColor: AppColors.primerColor,
+                      child: ListView.separated(
+                        physics: AlwaysScrollableScrollPhysics(),
+                        controller: homeCubit.scrollController,
+                        itemCount: homeCubit.filterStatus != null
+                            ? homeCubit.filteredTasks.length + 1
+                            : homeCubit.tasks.length + 1,
+                        itemBuilder: (context, index) => (homeCubit
+                                        .filterStatus !=
+                                    null
+                                ? homeCubit.filteredTasks.isEmpty
+                                : homeCubit.tasks.isEmpty)
+                            ? ErrorPage(
+                                errorMessage: appLocalizations.home_no_tasks,
+                                onPressed: homeCubit.filterStatus == null
+                                    ? () => homeCubit.getTasks()
+                                    : null,
+                              )
+                            : index ==
+                                    (homeCubit.filterStatus != null
+                                        ? homeCubit.filteredTasks.length
+                                        : homeCubit.tasks.length)
+                                ? SizedBox(height: 65)
+                                : Dismissible(
+                                    key: ValueKey(homeCubit.tasks[index].id),
+                                    secondaryBackground: Container(
+                                      padding: EdgeInsets.all(16),
+                                      color: Colors.red,
+                                      alignment: AlignmentDirectional.centerEnd,
+                                      child: const Icon(
+                                        Icons.delete_rounded,
+                                        color: Colors.white,
+                                        size: 30,
+                                      ),
+                                    ),
+                                    background: Container(
+                                      padding: EdgeInsets.all(16),
+                                      color: Colors.red,
+                                      alignment:
+                                          AlignmentDirectional.centerStart,
+                                      child: const Icon(
+                                        Icons.delete_rounded,
+                                        color: Colors.white,
+                                        size: 30,
+                                      ),
+                                    ),
+                                    onDismissed: (direction) =>
+                                        taskEditDeleteCubit.deleteTask(
+                                            homeCubit.tasks[index].id!, index),
+                                    child: TasksItem(
+                                      taskModel: homeCubit.filterStatus != null
+                                          ? homeCubit.filteredTasks[index]
+                                          : homeCubit.tasks[index],
+                                      itemIndex: index,
+                                    ),
+                                  ),
+                        separatorBuilder: (BuildContext context, int index) =>
+                            SizedBox(height: 12),
+                      ),
+                    ),
+                  ),
+                ),
+                if (state is HomeLoadingMore)
+                  CircularProgressIndicator(
+                    color: AppColors.primerColor,
+                    strokeCap: StrokeCap.round,
+                  ),
+                SizedBox(height: 20),
+              ],
+            );
           }
         },
-        child: BlocConsumer<HomeCubit, HomeState>(
-          builder: (context, state) {
-            if (state is HomeLoading) {
-              return Center(
-                child: CircularProgressIndicator(
-                  color: AppColors.primerColor,
-                  strokeCap: StrokeCap.round,
-                ),
-              );
-            } else if (state is HomeFailure) {
-              log("tasks_list_items-HomeFailure:${state.message}");
-              return ErrorPage(
-                onPressed: () => homeCubit.getTasks(),
-              );
-            } else {
-              if (homeCubit.tasks.isNotEmpty) {
-                return RefreshIndicator(
-                  onRefresh: () => homeCubit.getTasks(),
-                  color: AppColors.backgroundColor,
-                  backgroundColor: AppColors.primerColor,
-                  child: ListView.separated(
-                    physics: const AlwaysScrollableScrollPhysics(),
-                    controller: homeCubit.scrollController,
-                    itemCount: homeCubit.filterStatus != null
-                        ? homeCubit.filteredTasks.length + 1
-                        : homeCubit.tasks.length + 1,
-                    itemBuilder: (context, index) => index ==
-                            (homeCubit.filterStatus != null
-                                ? homeCubit.filteredTasks.length
-                                : homeCubit.tasks.length)
-                        ? SizedBox(height: 65)
-                        : TasksItem(
-                            taskModel: homeCubit.filterStatus != null
-                                ? homeCubit.filteredTasks[index]
-                                : homeCubit.tasks[index],
-                            itemIndex: index,
-                          ),
-                    separatorBuilder: (BuildContext context, int index) =>
-                        SizedBox(height: 12),
-                  ),
-                );
-              } else {
-                return ErrorPage(
-                  errorMessage: appLocalizations.home_no_tasks,
-                  onPressed: homeCubit.filterStatus == null
-                      ? () => homeCubit.getTasks()
-                      : null,
-                );
-              }
+        listener: (BuildContext context, HomeState state) {
+          if (state is HomeFailure) {
+            if (state.message == "Unauthorized") {
+              homeCubit.getTasks();
+            } else if (state.message ==
+                "Session expired. Please login again.") {
+              context.read<LoginCubit>().logout();
             }
-          },
-          listener: (BuildContext context, HomeState state) {
-            if (state is HomeFailure) {
-              if (state.message == "Unauthorized") {
-                homeCubit.getTasks();
-              } else if (state.message ==
-                  "Session expired. Please login again.") {
-                context.read<LoginCubit>().logout();
-              }
-            }
-          },
-        ),
+          }
+        },
       ),
     );
   }

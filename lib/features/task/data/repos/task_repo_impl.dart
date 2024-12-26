@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
@@ -15,10 +16,11 @@ class TaskRepoImpl implements TaskRepo {
   TaskRepoImpl(this._apiHelper) : _tokenHandler = TokenHandler(_apiHelper);
   @override
   Future<Either<Failure, void>> addNewTask(TaskModel taskModel) async {
+    log("addNewTask:${taskModel.toJson()}");
     return _tokenHandler.executeWithToken(apiCall: () async {
       final String? accessToken =
           await secureStorage!.read(key: "access_token");
-      _apiHelper.post(
+      await _apiHelper.post(
           endPoint: "/todos",
           body: taskModel.toJson(),
           headers: {"Authorization": "Bearer $accessToken"});
@@ -28,10 +30,12 @@ class TaskRepoImpl implements TaskRepo {
   @override
   Future<Either<Failure, void>> updateTask(TaskModel taskModel) async {
     final String? userId = await secureStorage!.read(key: "user_id");
+    log("updateTask:${taskModel.toJson()}");
+
     return _tokenHandler.executeWithToken(apiCall: () async {
       final String? accessToken =
           await secureStorage!.read(key: "access_token");
-      _apiHelper.put(endPoint: "/todos/${taskModel.id}", body: {
+      await _apiHelper.put(endPoint: "/todos/${taskModel.id}", body: {
         "image": taskModel.image,
         "title": taskModel.title,
         "desc": taskModel.desc,

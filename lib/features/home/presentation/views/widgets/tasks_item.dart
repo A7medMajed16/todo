@@ -13,6 +13,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:todo/features/home/data/models/task_model.dart';
 import 'package:todo/core/config/classes/task_status_data_model.dart';
 import 'package:todo/features/home/presentation/manager/task_edit_delete_cubit/task_edit_delete_cubit.dart';
+import 'package:todo/features/task/data/models/add_task_model.dart';
 
 class TasksItem extends StatelessWidget {
   const TasksItem(
@@ -86,7 +87,7 @@ class TasksItem extends StatelessWidget {
           )
         ],
       ),
-      leading: taskModel.image == null
+      leading: taskModel.image == "empty"
           ? SizedBox()
           : Hero(
               tag: "taskImage${taskModel.id}",
@@ -151,8 +152,8 @@ class TasksItem extends StatelessWidget {
             );
           } else {
             return CustomPopOverWidget(
-              editFunction: () =>
-                  context.push(AppRouter.kAddNewTask, extra: taskModel),
+              editFunction: () => context.push(AppRouter.kAddNewTask,
+                  extra: AddTaskModel(taskModel: taskModel)),
               deleteFunction: () =>
                   taskEditDeleteCubit.deleteTask(taskModel.id!, itemIndex),
             );

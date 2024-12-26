@@ -16,6 +16,7 @@ import 'package:todo/features/profile/presentation/views/widgets/dev_profile/dev
 import 'package:todo/features/signup/data/repos/signup_repo_impl.dart';
 import 'package:todo/features/signup/presentation/manager/signup_cubit/signup_cubit.dart';
 import 'package:todo/features/signup/presentation/views/signup_view.dart';
+import 'package:todo/features/task/data/models/add_task_model.dart';
 import 'package:todo/features/task/data/repos/task_repo_impl.dart';
 import 'package:todo/features/task/presentation/manager/add_new_task_cubit/add_new_task_cubit.dart';
 import 'package:todo/features/task/presentation/views/add_new_task/add_new_task_view.dart';
@@ -72,11 +73,16 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: kAddNewTask,
-        builder: (context, state) => BlocProvider(
-          create: (context) => AddNewTaskCubit(getIt.get<TaskRepoImpl>())
-            ..initTask(state.extra as TaskModel?),
-          child: AddNewTaskView(),
-        ),
+        builder: (context, state) {
+          AddTaskModel? addTaskModel = state.extra as AddTaskModel?;
+          return BlocProvider(
+            create: (context) => AddNewTaskCubit(getIt.get<TaskRepoImpl>())
+              ..initTask(addTaskModel?.taskModel),
+            child: AddNewTaskView(
+              isQr: addTaskModel?.isQr ?? false,
+            ),
+          );
+        },
       ),
       GoRoute(
         path: kProfile,

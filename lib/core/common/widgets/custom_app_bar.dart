@@ -11,6 +11,7 @@ import 'package:todo/core/theme/app_icons.dart';
 import 'package:todo/core/theme/styles.dart';
 import 'package:todo/features/home/data/models/task_model.dart';
 import 'package:todo/features/home/presentation/manager/task_edit_delete_cubit/task_edit_delete_cubit.dart';
+import 'package:todo/features/task/data/models/add_task_model.dart';
 
 AppBar customAppBar(
         {required String title,
@@ -70,8 +71,8 @@ AppBar customAppBar(
                   } else {
                     return CustomPopOverWidget(
                       isAppBar: true,
-                      editFunction: () =>
-                          context.push(AppRouter.kAddNewTask, extra: taskModel),
+                      editFunction: () => context.push(AppRouter.kAddNewTask,
+                          extra: AddTaskModel(taskModel: taskModel)),
                       deleteFunction: () => context
                           .read<TaskEditDeleteCubit>()
                           .deleteTask(taskModel.id!, null),

@@ -31,7 +31,8 @@ class TaskDetailsViewBody extends StatelessWidget {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(12),
                         child: CachedNetworkImage(
-                          imageUrl: taskModel.image!,
+                          imageUrl:
+                              "https://todo.iraqsapp.com/images/${taskModel.image!}",
                           errorWidget: (context, url, error) => const Icon(
                             Icons.error,
                             color: AppColors.errorColor,

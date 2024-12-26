@@ -35,7 +35,8 @@ class ImageContainer extends StatelessWidget {
                   ? ClipRRect(
                       borderRadius: BorderRadius.circular(12),
                       child: CachedNetworkImage(
-                        imageUrl: addNewTaskCubit.imagePath!,
+                        imageUrl:
+                            "https://todo.iraqsapp.com/images/${addNewTaskCubit.imagePath!}",
                         errorWidget: (context, url, error) => const Icon(
                           Icons.error,
                           color: AppColors.errorColor,

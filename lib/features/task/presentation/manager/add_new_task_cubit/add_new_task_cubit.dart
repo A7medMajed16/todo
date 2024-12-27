@@ -87,6 +87,7 @@ class AddNewTaskCubit extends Cubit<AddNewTaskState> {
               : null, (imageUrl) async {
         var result = await _taskRepo.updateTask(
           TaskModel(
+            id: taskId,
             title: titleController.text,
             desc: contentController.text,
             priority: priority,

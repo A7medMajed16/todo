@@ -23,7 +23,7 @@ class TaskDetailsViewBody extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           spacing: 16,
           children: [
-            taskModel.image == null
+            taskModel.image == 'empty'
                 ? SizedBox()
                 : Center(
                     child: Hero(

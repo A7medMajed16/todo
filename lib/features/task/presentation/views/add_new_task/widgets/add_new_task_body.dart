@@ -7,7 +7,7 @@ import 'package:todo/core/common/widgets/custom_button.dart';
 import 'package:todo/core/common/widgets/custom_date_picker.dart';
 import 'package:todo/core/common/widgets/custom_drop_button.dart';
 import 'package:todo/core/common/widgets/custom_text_field.dart';
-import 'package:todo/core/config/classes/task_status_data_model.dart';
+import 'package:todo/core/config/classes/task_priority_data_model.dart';
 import 'package:todo/core/helper/date_picker_helper/custome_date_picker.dart';
 import 'package:todo/core/helper/validations/validations.dart';
 import 'package:todo/core/routes/app_router.dart';
@@ -55,7 +55,7 @@ class AddNewTaskBody extends StatelessWidget {
                         Validations.validateTaskContent(value),
                   ),
                   CustomDropButton(
-                    items: TaskStatusData().priorityItems,
+                    items: TaskPriorityData().priorityItems,
                     value: addNewTaskCubit.priority,
                     onChanged: (value) => addNewTaskCubit.updatePriority(value),
                     hint: localizations.new_task_priority_hint,

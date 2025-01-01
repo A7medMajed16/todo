@@ -11,7 +11,7 @@ import 'package:todo/core/theme/app_icons.dart';
 import 'package:todo/core/theme/styles.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:todo/features/home/data/models/task_model.dart';
-import 'package:todo/core/config/classes/task_status_data_model.dart';
+import 'package:todo/core/config/classes/task_priority_data_model.dart';
 import 'package:todo/features/home/presentation/manager/task_edit_delete_cubit/task_edit_delete_cubit.dart';
 import 'package:todo/features/task/data/models/add_task_model.dart';
 
@@ -23,7 +23,7 @@ class TasksItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AppLocalizations localizations = AppLocalizations.of(context)!;
-    TaskStatusDataModel taskData = getTaskData(taskModel.status ?? "waiting",
+    TaskPriorityDataModel taskData = getTaskData(taskModel.status ?? "waiting",
         localizations, taskModel.priority ?? "low");
     TaskEditDeleteCubit taskEditDeleteCubit =
         context.read<TaskEditDeleteCubit>();
@@ -116,10 +116,7 @@ class TasksItem extends StatelessWidget {
               ),
             ),
       title: Row(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        spacing: 10,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Flexible(
             child: Text(
@@ -164,9 +161,9 @@ class TasksItem extends StatelessWidget {
     );
   }
 
-  TaskStatusDataModel getTaskData(String status, AppLocalizations localizations,
-          String importanceLevel) =>
-      TaskStatusDataModel(
+  TaskPriorityDataModel getTaskData(String status,
+          AppLocalizations localizations, String importanceLevel) =>
+      TaskPriorityDataModel(
           statusContainerColor: status == "Finished"
               ? Color(0xffE3F2FF)
               : status == "inprogress"

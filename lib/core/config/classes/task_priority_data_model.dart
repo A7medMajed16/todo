@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:todo/core/localization/localization_functions.dart';
 
-class TaskStatusDataModel {
+class TaskPriorityDataModel {
   final Color statusContainerColor, statusTitleColor, importanceLevelColor;
   final String statusTitle, importanceLevelTitle;
 
-  TaskStatusDataModel({
+  TaskPriorityDataModel({
     required this.statusContainerColor,
     required this.statusTitleColor,
     required this.importanceLevelColor,
@@ -14,7 +14,7 @@ class TaskStatusDataModel {
   });
 }
 
-class TaskStatusData {
+class TaskPriorityData {
   final List<String> dataEnglish = [
     'Low Priority',
     'Medium Priority',

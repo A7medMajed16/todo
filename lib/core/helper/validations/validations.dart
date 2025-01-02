@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:phone_numbers_parser/phone_numbers_parser.dart';
 
 class Validations {
   static late AppLocalizations _localizations;
@@ -64,12 +67,15 @@ class Validations {
     return null;
   }
 
-  static String? validatePhoneNumber(String? value) {
+  static String? validatePhoneNumber(String? value, String? countryCode) {
+    log("$countryCode $value");
     if (value == null || value.isEmpty) {
       return _localizations.phone_number_empty;
-    } else if (value.length < 8) {
-      return _localizations.phone_invalid_number;
     } else {
+      final parsedNumber = PhoneNumber.parse("$countryCode $value");
+      if (!parsedNumber.isValid()) {
+        return _localizations.phone_invalid_number;
+      }
       return null;
     }
   }

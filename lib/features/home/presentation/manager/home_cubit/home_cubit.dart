@@ -19,7 +19,6 @@ class HomeCubit extends Cubit<HomeState> with TabControllerManager {
   List<TaskModel> tasks = [];
   List<TaskModel> filteredTasks = [];
   ScrollController scrollController = ScrollController();
-  // ignore: prefer_final_fields
   bool _isFirstLoading = true;
   bool loadMore = true;
   void initScrollController() {

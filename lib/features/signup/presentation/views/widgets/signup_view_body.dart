@@ -75,7 +75,8 @@ class SignupViewBody extends StatelessWidget {
                             countryPhoneCodeUpdateFunction: (value) =>
                                 signupCubit.changeCountryCode(value ?? "+20"),
                             validator: (value) =>
-                                Validations.validatePhoneNumber(value),
+                                Validations.validatePhoneNumber(
+                                    value, signupCubit.countryCode),
                           ),
                           CustomTextField(
                             textEditingController:

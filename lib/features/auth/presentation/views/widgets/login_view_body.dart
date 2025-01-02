@@ -62,8 +62,8 @@ class LoginViewBody extends StatelessWidget {
                         controller: loginCubit.phoneController,
                         countryPhoneCodeUpdateFunction: (value) =>
                             loginCubit.changeCountryCode(value ?? "+20"),
-                        validator: (value) =>
-                            Validations.validatePhoneNumber(value),
+                        validator: (value) => Validations.validatePhoneNumber(
+                            value, loginCubit.countryCode),
                       ),
                       CustomTextField(
                         textEditingController: loginCubit.passwordController,

@@ -6,12 +6,12 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:todo/core/common/colors/app_colors.dart';
 import 'package:todo/core/common/widgets/custom_pop_over_widget.dart';
+import 'package:todo/core/config/classes/task_data.dart';
 import 'package:todo/core/routes/app_router.dart';
 import 'package:todo/core/theme/app_icons.dart';
 import 'package:todo/core/theme/styles.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:todo/features/home/data/models/task_model.dart';
-import 'package:todo/core/config/classes/task_priority_data_model.dart';
 import 'package:todo/features/home/presentation/manager/task_edit_delete_cubit/task_edit_delete_cubit.dart';
 import 'package:todo/features/task/data/models/add_task_model.dart';
 
@@ -23,7 +23,7 @@ class TasksItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AppLocalizations localizations = AppLocalizations.of(context)!;
-    TaskPriorityDataModel taskData = getTaskData(taskModel.status ?? "waiting",
+    TaskDataModel taskData = getTaskData(taskModel.status ?? "waiting",
         localizations, taskModel.priority ?? "low");
     TaskEditDeleteCubit taskEditDeleteCubit =
         context.read<TaskEditDeleteCubit>();
@@ -152,8 +152,8 @@ class TasksItem extends StatelessWidget {
             return CustomPopOverWidget(
               editFunction: () => context.push(AppRouter.kAddNewTask,
                   extra: AddTaskModel(taskModel: taskModel)),
-              deleteFunction: () =>
-                  taskEditDeleteCubit.deleteTask(taskModel.id!, itemIndex),
+              deleteFunction: () => taskEditDeleteCubit
+                ..showDeleteDialog(context, taskModel.id!, null),
             );
           }
         },
@@ -161,10 +161,10 @@ class TasksItem extends StatelessWidget {
     );
   }
 
-  TaskPriorityDataModel getTaskData(String status,
-          AppLocalizations localizations, String importanceLevel) =>
-      TaskPriorityDataModel(
-          statusContainerColor: status == "Finished"
+  TaskDataModel getTaskData(String status, AppLocalizations localizations,
+          String importanceLevel) =>
+      TaskDataModel(
+          statusContainerColor: status == "finished"
               ? Color(0xffE3F2FF)
               : status == "inprogress"
                   ? Color(0xffF0ECFF)

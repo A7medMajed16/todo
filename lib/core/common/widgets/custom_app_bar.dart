@@ -75,7 +75,7 @@ AppBar customAppBar(
                           extra: AddTaskModel(taskModel: taskModel)),
                       deleteFunction: () => context
                           .read<TaskEditDeleteCubit>()
-                          .deleteTask(taskModel.id!, null),
+                          .showDeleteDialog(context, taskModel.id!, null),
                     );
                   }
                 },
@@ -86,7 +86,7 @@ AppBar customAppBar(
                       state.errorMessage == "Unauthorized") {
                     context
                         .read<TaskEditDeleteCubit>()
-                        .deleteTask(taskModel.id!, null);
+                        .showDeleteDialog(context, taskModel.id!, null);
                   }
                 },
               ),

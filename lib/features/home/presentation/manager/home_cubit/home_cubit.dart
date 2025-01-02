@@ -21,10 +21,12 @@ class HomeCubit extends Cubit<HomeState> with TabControllerManager {
   ScrollController scrollController = ScrollController();
   // ignore: prefer_final_fields
   bool _isFirstLoading = true;
+  bool loadMore = true;
   void initScrollController() {
     scrollController.addListener(() {
       if (scrollController.position.pixels ==
-          scrollController.position.maxScrollExtent) {
+              scrollController.position.maxScrollExtent &&
+          loadMore) {
         log("reached");
         pageIndex++;
         getTasks(withRefresh: false);
@@ -39,6 +41,7 @@ class HomeCubit extends Cubit<HomeState> with TabControllerManager {
     log("user_id:${await secureStorage!.read(key: "user_id")}");
     if (withRefresh || _isFirstLoading || refresh) {
       emit(HomeLoading());
+      loadMore = true;
       pageIndex = 1;
     } else {
       emit(HomeLoadingMore());
@@ -49,12 +52,17 @@ class HomeCubit extends Cubit<HomeState> with TabControllerManager {
       (failure) => !isClosed ? emit(HomeFailure(failure.errorMessage)) : null,
       (apiTasks) {
         _isFirstLoading = false;
-        if (pageIndex == 1) {
-          tasks.clear();
-          tasks.addAll(apiTasks);
+        if (apiTasks.isEmpty) {
+          loadMore = false;
         } else {
-          tasks.addAll(apiTasks);
+          if (pageIndex == 1) {
+            tasks.clear();
+            tasks.addAll(apiTasks);
+          } else {
+            tasks.addAll(apiTasks);
+          }
         }
+
         !isClosed ? emit(HomeSuccess()) : null;
       },
     );

@@ -35,7 +35,9 @@ class ImageContainer extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                   child: Image.file(addNewTaskCubit.imageFile!),
                 )
-              : addNewTaskCubit.imagePath != 'empty'
+              : addNewTaskCubit.imagePath != 'empty' &&
+                      addNewTaskCubit.imagePath != null &&
+                      addNewTaskCubit.imagePath!.isNotEmpty
                   ? ClipRRect(
                       borderRadius: BorderRadius.circular(12),
                       child: CachedNetworkImage(

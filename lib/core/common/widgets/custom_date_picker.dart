@@ -14,10 +14,11 @@ class CustomDatePicker extends StatelessWidget {
     this.isPop = false,
     this.value,
     this.hint,
+    this.errorMessage,
   });
   final Function()? onTap;
   final String? title;
-  final String? value, hint;
+  final String? value, hint, errorMessage;
   final bool isError, isActive, isPop;
 
   @override
@@ -43,8 +44,10 @@ class CustomDatePicker extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               border: Border.all(
-                color: AppColors.borderColor,
-                width: 1,
+                color: errorMessage != null
+                    ? AppColors.errorColor
+                    : AppColors.borderColor,
+                width: errorMessage != null ? 1.5 : 1,
               ),
             ),
             child: Row(
@@ -65,6 +68,14 @@ class CustomDatePicker extends StatelessWidget {
             ),
           ),
         ),
+        errorMessage != null
+            ? Text(
+                errorMessage!,
+                style: Styles.textStyle9Regular.copyWith(
+                  color: AppColors.errorColor,
+                ),
+              )
+            : SizedBox(),
       ],
     );
   }

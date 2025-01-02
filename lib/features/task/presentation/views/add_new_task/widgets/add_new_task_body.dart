@@ -7,7 +7,7 @@ import 'package:todo/core/common/widgets/custom_button.dart';
 import 'package:todo/core/common/widgets/custom_date_picker.dart';
 import 'package:todo/core/common/widgets/custom_drop_button.dart';
 import 'package:todo/core/common/widgets/custom_text_field.dart';
-import 'package:todo/core/config/classes/task_priority_data_model.dart';
+import 'package:todo/core/config/classes/task_data.dart';
 import 'package:todo/core/helper/date_picker_helper/custome_date_picker.dart';
 import 'package:todo/core/helper/validations/validations.dart';
 import 'package:todo/core/routes/app_router.dart';
@@ -61,11 +61,27 @@ class AddNewTaskBody extends StatelessWidget {
                     hint: localizations.new_task_priority_hint,
                     isColored: true,
                     title: localizations.new_task_priority,
+                    validator: (value) =>
+                        Validations.validateTaskPriority(value),
                   ),
+                  addNewTaskCubit.status != null && isQr == false
+                      ? CustomDropButton(
+                          items: TaskStatusData().statusItems,
+                          value: addNewTaskCubit.status,
+                          onChanged: (value) =>
+                              addNewTaskCubit.updateStatus(value),
+                          hint: localizations.new_task_status_hint,
+                          isColored: true,
+                          title: localizations.new_task_status,
+                          validator: (value) =>
+                              Validations.validateTaskStatus(value),
+                        )
+                      : SizedBox(),
                   CustomDatePicker(
                     hint: localizations.new_task_date_hint,
                     title: localizations.new_task_date,
                     value: addNewTaskCubit.date,
+                    errorMessage: addNewTaskCubit.dateError,
                     onTap: () async {
                       DateTime? date = await showCustomDatePicker(
                         context: context,
@@ -85,7 +101,9 @@ class AddNewTaskBody extends StatelessWidget {
                           ? localizations.new_task_update
                           : localizations.new_task_button,
                       onPressed: () {
-                        if (_formKey.currentState!.validate()) {
+                        addNewTaskCubit.updateDateError();
+                        if (_formKey.currentState!.validate() &&
+                            addNewTaskCubit.dateError == null) {
                           addNewTaskCubit.status != null && isQr == false
                               ? addNewTaskCubit.updateTask()
                               : addNewTaskCubit.addNewTask(isQr);

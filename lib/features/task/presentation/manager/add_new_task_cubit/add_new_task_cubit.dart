@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:todo/core/helper/validations/validations.dart';
 import 'package:todo/features/home/data/models/task_model.dart';
 import 'package:todo/features/task/data/repos/task_repo.dart';
 
@@ -16,7 +17,7 @@ class AddNewTaskCubit extends Cubit<AddNewTaskState> {
   final TextEditingController titleController = TextEditingController();
   final TextEditingController contentController = TextEditingController();
 
-  String? priority, date, imagePath, taskId, status;
+  String? priority, date, imagePath, taskId, status, dateError;
 
   void initTask(TaskModel? taskModel) {
     if (taskModel != null) {
@@ -128,6 +129,17 @@ class AddNewTaskCubit extends Cubit<AddNewTaskState> {
 
   void updatePriority(String value) {
     priority = value;
+  }
+
+  void updateStatus(String value) {
+    status = value;
+  }
+
+  void updateDateError() {
+    emit(AddNewTaskInitial());
+
+    dateError = Validations.validateDate(date);
+    emit(AddNewTaskUpdateUi());
   }
 
   void updateDate(DateTime? value) {

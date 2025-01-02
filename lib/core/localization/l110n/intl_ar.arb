@@ -63,6 +63,7 @@
     "home_medium": "متوسط",
     "home_high": "مرتفع",
     "home_no_tasks": "لا توجد مهام",
+    "home_no_more_tasks": "لا توجد مهام أخرى",
     "popup_edit": "تعديل",
     "popup_delete": "حذف",
     "details_title": "تفاصيل المهمة",
@@ -75,7 +76,9 @@
     "new_task_date": "تاريخ الانتهاء",
     "new_task_date_hint": "اختر تاريخ الانتهاء...",
     "new_task_priority": "الأولوية",
+    "new_task_status": "الحالة",
     "new_task_priority_hint": "اختر الأولوية...",
+    "new_task_status_hint": "اختر الحالة...",
     "new_task_button": "إضافة المهمة",
     "new_task_update": "تحديث المهمة",
     "loading": "تحميل...",
@@ -89,5 +92,11 @@
     "profile_location": "الموقع",
     "profile_arabic": "العربية",
     "profile_english": "English",
-    "profile_dev_page": "الذهاب لصفحة المطور"
+    "profile_dev_page": "الذهاب لصفحة المطور",
+    "new_task_priority_empty": "يرجى اختيار الأولوية",
+    "new_task_status_empty": "يرجى اختيار الحالة",
+    "delete_task_title": "حذف المهمة",
+    "delete_task_content": "هل تريد حذف المهمة؟",
+    "delete_task_button": "حذف",
+    "delete_task_cancel": "الغاء"
 }

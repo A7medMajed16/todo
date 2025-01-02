@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo/core/common/colors/app_colors.dart';
 import 'package:todo/core/common/size/screen_dimensions.dart';
 import 'package:todo/core/common/widgets/error_page.dart';
+import 'package:todo/core/theme/styles.dart';
 import 'package:todo/features/auth/presentation/manager/login_cubit/login_cubit.dart';
 import 'package:todo/features/home/presentation/manager/home_cubit/home_cubit.dart';
 import 'package:todo/features/home/presentation/manager/task_edit_delete_cubit/task_edit_delete_cubit.dart';
@@ -101,9 +102,18 @@ class TasksListItems extends StatelessWidget {
                                         size: 30,
                                       ),
                                     ),
-                                    onDismissed: (direction) =>
-                                        taskEditDeleteCubit.deleteTask(
-                                            homeCubit.tasks[index].id!, index),
+                                    confirmDismiss: (direction) async {
+                                      taskEditDeleteCubit.showDeleteDialog(
+                                          context,
+                                          homeCubit.tasks[index].id!,
+                                          index);
+                                      if (taskEditDeleteCubit.state
+                                          is TaskEditDeleteSuccess) {
+                                        return true;
+                                      } else {
+                                        return false;
+                                      }
+                                    },
                                     child: TasksItem(
                                       taskModel: homeCubit.filterStatus != null
                                           ? homeCubit.filteredTasks[index]
@@ -121,6 +131,15 @@ class TasksListItems extends StatelessWidget {
                   CircularProgressIndicator(
                     color: AppColors.primerColor,
                     strokeCap: StrokeCap.round,
+                  ),
+                if (homeCubit.loadMore == false)
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      appLocalizations.home_no_more_tasks,
+                      style: Styles.textStyle14Regular
+                          .copyWith(color: AppColors.subtitleTextColor),
+                    ),
                   ),
                 SizedBox(height: 20),
               ],

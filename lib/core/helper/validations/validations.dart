@@ -130,6 +130,22 @@ class Validations {
     }
   }
 
+  static String? validateTaskStatus(String? value) {
+    if (value == null || value.isEmpty) {
+      return _localizations.new_task_status_empty;
+    } else {
+      return null;
+    }
+  }
+
+  static String? validateDate(String? value) {
+    if (value == null || value.isEmpty) {
+      return _localizations.new_task_date_empty;
+    } else {
+      return null;
+    }
+  }
+
   static String? validateTaskDate(String? value) {
     if (value == null || value.isEmpty) {
       return _localizations.new_task_date_empty;

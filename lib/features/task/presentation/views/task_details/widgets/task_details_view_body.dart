@@ -33,11 +33,13 @@ class TaskDetailsViewBody extends StatelessWidget {
                         child: CachedNetworkImage(
                           imageUrl:
                               "https://todo.iraqsapp.com/images/${taskModel.image!}",
-                          errorWidget: (context, url, error) => const Icon(
+                          errorWidget: (context, url, error) =>
+                              const Icon(
                             Icons.error,
                             color: AppColors.errorColor,
                           ),
-                          placeholder: (context, url) => const SizedBox(
+                          placeholder: (context, url) =>
+                              const SizedBox(
                             width: 50,
                             height: 50,
                             child: FittedBox(
@@ -64,7 +66,8 @@ class TaskDetailsViewBody extends StatelessWidget {
             TaskDetailsWidget(
               title: taskModel.createdAt == null
                   ? "'d MMMM yyyy'"
-                  : DateFormat('d MMMM, yyyy').format(taskModel.createdAt!),
+                  : DateFormat('d MMMM, yyyy')
+                      .format(taskModel.createdAt!),
               icon: AppIcons.coreCommonAssetsIconsCalendar,
               isDate: true,
             ),

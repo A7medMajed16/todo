@@ -1,34 +1,16 @@
 import 'package:dio/dio.dart';
+import 'package:equatable/equatable.dart';
 
 /// Abstract class representing a failure.
-abstract class Failure {
-  /// Error message associated with the failure.
+abstract class Failure extends Equatable {
   final String errorMessage;
 
-  /// Constructor for Failure.
-  ///
-  /// @param errorMessage The error message.
   const Failure(this.errorMessage);
 }
 
-/// ServerFailure class extending Failure.
 class ServerFailure extends Failure {
-  /// Constructor for ServerFailure.
-  ///
-  /// @param errorMessage The error message.
-  ServerFailure(super.errorMessage);
+  const ServerFailure(super.errorMessage);
 
-  /// Factory method to create a ServerFailure from a DioException.
-  ///
-  /// @param dioException The DioException to create the ServerFailure from.
-  /// @return A ServerFailure instance.
-  ///
-  /// Example:
-  /// ```dart
-  /// DioException dioException = DioException(type: DioExceptionType.connectionTimeout);
-  /// ServerFailure failure = ServerFailure.fromDioException(dioException);
-  /// print(failure.errorMessage); // Output: Connection Timeout
-  /// ```
   factory ServerFailure.fromDioException(DioException dioException) {
     switch (dioException.type) {
       case DioExceptionType.connectionTimeout:
@@ -61,19 +43,6 @@ class ServerFailure extends Failure {
     }
   }
 
-  /// Factory method to create a ServerFailure from a response.
-  ///
-  /// @param statusCode The status code of the response.
-  /// @param response The response data.
-  /// @return A ServerFailure instance.
-  ///
-  /// Example:
-  /// ```dart
-  /// int statusCode = 400;
-  /// var response = {'message': 'Bad request'};
-  /// ServerFailure failure = ServerFailure.fromResponse(statusCode, response);
-  /// print(failure.errorMessage); // Output: Bad request
-  /// ```
   factory ServerFailure.fromResponse(int statusCode, var response) {
     if (statusCode == 400 || statusCode == 401 || statusCode == 403) {
       return ServerFailure(response['message']);
@@ -97,4 +66,21 @@ class ServerFailure extends Failure {
       return ServerFailure('Oops there was an Error, Pleas try  again later!');
     }
   }
+
+  @override
+  List<Object?> get props => [];
+}
+
+class OfflineFailures extends Failure {
+  const OfflineFailures(super.errorMessage);
+
+  @override
+  List<Object?> get props => [];
+}
+
+class CacheFailures extends Failure {
+  const CacheFailures(super.errorMessage);
+
+  @override
+  List<Object?> get props => [];
 }

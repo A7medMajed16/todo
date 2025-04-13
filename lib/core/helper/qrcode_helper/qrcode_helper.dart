@@ -1,7 +1,8 @@
 class QrCodeHelper {
   static String convertQrToJson(String qrString) {
     // Remove the curly braces
-    String content = qrString.trim().substring(1, qrString.length - 1);
+    String content =
+        qrString.trim().substring(1, qrString.length - 1);
 
     // Split by comma and space
     List<String> pairs = content.split(', ');

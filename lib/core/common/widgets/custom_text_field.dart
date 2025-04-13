@@ -66,12 +66,13 @@ class _CustomTextFieldState extends State<CustomTextField> {
         TextFormField(
           keyboardType: widget.keyboardType ?? TextInputType.text,
           focusNode: widget.focusNode,
-          inputFormatters: widget.keyboardType == TextInputType.number ||
-                  widget.keyboardType == TextInputType.phone
-              ? <TextInputFormatter>[
-                  FilteringTextInputFormatter.digitsOnly,
-                ]
-              : [],
+          inputFormatters:
+              widget.keyboardType == TextInputType.number ||
+                      widget.keyboardType == TextInputType.phone
+                  ? <TextInputFormatter>[
+                      FilteringTextInputFormatter.digitsOnly,
+                    ]
+                  : [],
           style: Styles.textStyle14Regular,
           maxLength: widget.maxLength,
           enabled: widget.isEnabled,
@@ -123,7 +124,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
               color: AppColors.hintTextColor,
             ),
             errorMaxLines: 4,
-            labelText: _isFocused && widget.showLabel ? widget.title : null,
+            labelText:
+                _isFocused && widget.showLabel ? widget.title : null,
             labelStyle: Styles.textStyle14Regular,
             prefixIcon: widget.tailWidget ??
                 (widget.leadingIcon == null
@@ -133,11 +135,13 @@ class _CustomTextFieldState extends State<CustomTextField> {
                         height: 24,
                         fit: BoxFit.scaleDown,
                         colorFilter: ColorFilter.mode(
-                          widget.leadingIconColor ?? AppColors.iconColor,
+                          widget.leadingIconColor ??
+                              AppColors.iconColor,
                           BlendMode.srcIn,
                         ),
                       )),
-            suffixIcon: widget.isPassword || widget.suffixWidget != null
+            suffixIcon: widget.isPassword ||
+                    widget.suffixWidget != null
                 ? widget.isPassword
                     ? IconButton(
                         onPressed: () => setState(() {
@@ -146,14 +150,17 @@ class _CustomTextFieldState extends State<CustomTextField> {
                         icon: SvgPicture.asset(
                           isVisible
                               ? AppIcons.coreCommonAssetsIconsOpenEye
-                              : AppIcons.coreCommonAssetsIconsClosedEye,
+                              : AppIcons
+                                  .coreCommonAssetsIconsClosedEye,
                           height: 25,
                           fit: BoxFit.scaleDown,
                           colorFilter: widget.isEnabled
                               ? const ColorFilter.mode(
-                                  AppColors.borderColor, BlendMode.srcIn)
+                                  AppColors.borderColor,
+                                  BlendMode.srcIn)
                               : const ColorFilter.mode(
-                                  AppColors.hintTextColor, BlendMode.srcIn),
+                                  AppColors.hintTextColor,
+                                  BlendMode.srcIn),
                         ),
                       )
                     : widget.suffixWidget
